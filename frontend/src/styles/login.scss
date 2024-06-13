@@ -1,0 +1,48 @@
+@use 'colors';
+
+.auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: colors.$deepBlack;
+
+    h1 {
+        font-size: 24px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: center;
+        background-color: colors.$formColor;
+        width: 400px;
+        height: 450px;
+        gap: 20px;
+        align-items: center;
+    }
+
+    input {
+        padding: 10px;
+        border: none;
+        border-radius: 1ch;
+        background-color: colors.$inputColor;
+        width: 200px;
+    }
+
+    button {
+        padding: 8px;
+        width: 150px;
+
+    }
+
+    a {
+        font-size: 12px;
+    }
+
+    span {
+        font-size: 12px;
+    }
+}
