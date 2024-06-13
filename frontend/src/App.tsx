@@ -1,34 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom'
+import About from './pages/About'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+import Register from './pages/Register'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import PasswordReset from './pages/PasswordReset'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const Layout = () => {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </>
+  )
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/profile/:id',
+        element: <Profile />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/register',
+        element: <Register />
+      },
+      {
+        path: '/reset',
+        element: <PasswordReset />
+      },
+      {
+        path: '/about',
+        element: <About />
+      },
+    ]
+  }
+])
+
+function App() {
+  return (
+    <div className='app'>
+      <div className='container'>
+        <RouterProvider router={router} />
+      </div>
+    </div>
   )
 }
 
