@@ -1,0 +1,55 @@
+@use 'colors';
+
+.navbar {
+    background-color: colors.$darkGrey;
+
+    .container {
+        padding: 15px 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .links {
+            margin-left: 150px;
+            display: flex;
+            gap: 20px;
+
+            h1 {
+                font-size: 34px;
+                text-decoration: underline;
+            }
+
+            a {
+                text-decoration: none;
+                color: colors.$aColor;
+            }
+
+            a:hover {
+                color: white;
+                cursor: pointer;
+            }
+
+            .link {}
+        }
+
+        .logo {
+            margin-right: 400px;
+
+            img {
+                width: 200px;
+            }
+
+        }
+
+        .userprofile {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                cursor: pointer;
+            }
+        }
+    }
+
+
+}

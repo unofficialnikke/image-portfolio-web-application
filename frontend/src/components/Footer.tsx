@@ -1,8 +1,12 @@
 import React from 'react'
+import Logo from '../img/lilalokki.png'
 
 const Footer = () => {
     return (
-        <div>Footer</div>
+        <footer className='footer'>
+            <img src={Logo} alt='logo'></img>
+            <span>In development...</span>
+        </footer>
     )
 }
 
