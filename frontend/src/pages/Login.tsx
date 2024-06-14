@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import '../styles/login.scss'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -10,12 +9,12 @@ const Login = () => {
             <h1>Login</h1>
             <form>
                 <div>
-                    <p>Email address:</p>
-                    <input type='text' placeholder='enter email...'></input>
+                    <h3>Email address:</h3>
+                    <input required type='text' placeholder='enter email...'></input>
                 </div>
                 <div>
-                    <p>Password:</p>
-                    <input type='text' placeholder='enter password...'></input>
+                    <h3>Password:</h3>
+                    <input required type='text' placeholder='enter password...'></input>
                 </div>
                 <a onClick={() => navigate('/reset')}>Forgot your password?
                 </a>

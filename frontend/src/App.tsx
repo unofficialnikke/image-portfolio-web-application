@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import PasswordReset from './pages/PasswordReset'
+import './styles/app.scss'
 
 const Layout = () => {
   return (

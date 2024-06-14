@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../styles/login.scss'
 
 const PasswordReset = () => {
     const navigate = useNavigate();
@@ -10,8 +9,8 @@ const PasswordReset = () => {
             <h1>Reset password</h1>
             <form>
                 <div>
-                    <p>Email address:</p>
-                    <input type='text' placeholder='enter email...'></input>
+                    <h3>Email address:</h3>
+                    <input required type='text' placeholder='enter email...'></input>
                 </div>
                 <button onClick={() => navigate('/login')}>Reset</button>
             </form>

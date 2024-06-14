@@ -6,10 +6,17 @@
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+    line-height: 1.5;
+    font-size: 16px;
     background-color: colors.$deepBlack;
 
     h1 {
-        font-size: 24px;
+        font-size: 20px;
+    }
+
+    h3 {
+        font-weight: 500;
+        font-size: 16px;
     }
 
     form {
@@ -40,9 +47,16 @@
 
     a {
         font-size: 12px;
+        font-weight: 500;
+        color: colors.$aColor;
+        text-decoration: inherit;
     }
 
-    span {
-        font-size: 12px;
+    a:hover {
+        color: colors.$aHover;
+        text-decoration: underline;
+        cursor: pointer;
     }
+
+
 }

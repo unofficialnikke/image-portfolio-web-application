@@ -1,0 +1,15 @@
+@use 'colors';
+@use 'auth';
+@use 'home';
+@use 'navbar';
+@use 'about';
+@use 'footer';
+
+.app {
+    display: flex;
+    justify-content: center;
+
+    .container {
+        width: 1440px;
+    }
+}

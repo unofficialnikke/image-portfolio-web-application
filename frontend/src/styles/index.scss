@@ -2,8 +2,6 @@
 
 :root {
     font-family: Verdana, Geneva, Tahoma, sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-size: 16px;
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
@@ -11,28 +9,27 @@
 
     button {
         border-radius: 10px;
-        border: 1px solid transparent;
+        border: 2px solid transparent;
         font-size: 1em;
         font-weight: 500;
         font-family: inherit;
         background-color: colors.$btnColor;
         cursor: pointer;
-        border-color: colors.$btnBorder;
+        border-color: colors.$aColor;
     }
 
     button:hover {
-        background-color: #242424;
+        background-color: colors.$aColor;
     }
 
-    a {
-        font-weight: 500;
-        color: colors.$aColor;
-        text-decoration: inherit;
-    }
 
-    a:hover {
-        color: colors.$aHover;
-        text-decoration: underline;
-        cursor: pointer;
+    span {
+        font-size: 12px;
     }
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
 }
