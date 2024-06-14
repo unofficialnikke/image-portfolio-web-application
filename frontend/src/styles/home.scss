@@ -1,0 +1,60 @@
+@use 'colors';
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: colors.$deepBlack;
+
+    a {
+        text-decoration: none;
+        color: white
+    }
+
+    a:hover {
+        color: colors.$aColor;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .profiles {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+
+        .profile {
+
+            .header {
+                display: flex;
+                flex-direction: column;
+                line-height: 0;
+            }
+
+            .category {
+                line-height: 0;
+                display: flex;
+                gap: 5px;
+
+                p {
+                    font-size: 15px;
+                }
+            }
+
+
+            .image {
+                display: flex;
+                flex-direction: row;
+                gap: 25px;
+
+                img {
+
+                    height: 250px;
+                }
+
+            }
+        }
+    }
+}

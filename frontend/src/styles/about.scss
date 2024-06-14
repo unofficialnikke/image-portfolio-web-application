@@ -1,0 +1,33 @@
+@use 'colors';
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: colors.$deepBlack;
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    input {
+        padding: 10px;
+        border: none;
+        border-radius: 1ch;
+        background-color: colors.$inputColor;
+        width: 200px;
+    }
+
+    button {
+        padding: 8px;
+        width: 150px;
+
+    }
+}
