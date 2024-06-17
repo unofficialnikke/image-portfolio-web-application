@@ -9,9 +9,9 @@ export const profiles = [
         lastname: 'Cena',
         city: 'Helsinki',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'nature', 'portrait', 'sports'
@@ -23,9 +23,9 @@ export const profiles = [
         lastname: 'Doe',
         city: 'New York',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'architecture', 'fashion', 'travel'
@@ -37,9 +37,9 @@ export const profiles = [
         lastname: 'Smith',
         city: 'London',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'street', 'event', 'food'
@@ -51,9 +51,9 @@ export const profiles = [
         lastname: 'Johnson',
         city: 'Los Angeles',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'animals', 'black and white', 'abstract'
@@ -65,9 +65,9 @@ export const profiles = [
         lastname: 'Cena',
         city: 'Helsinki',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'nature', 'portrait', 'sports'
@@ -79,9 +79,9 @@ export const profiles = [
         lastname: 'Doe',
         city: 'New York',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'architecture', 'fashion', 'travel'
@@ -93,9 +93,9 @@ export const profiles = [
         lastname: 'Smith',
         city: 'London',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'street', 'event', 'food'
@@ -107,9 +107,9 @@ export const profiles = [
         lastname: 'Johnson',
         city: 'Los Angeles',
         images: [
-            { src: Image1 },
-            { src: Image2 },
-            { src: Image3 }
+            { id: 1, src: Image1 },
+            { id: 2, src: Image2 },
+            { id: 3, src: Image3 }
         ],
         categories: [
             'animals', 'black and white', 'abstract'
