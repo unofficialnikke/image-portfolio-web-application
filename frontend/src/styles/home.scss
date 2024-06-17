@@ -3,17 +3,17 @@
 .home {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     background-color: colors.$deepBlack;
 
     a {
         text-decoration: none;
-        color: white
+        color: colors.$aColor;
     }
 
     a:hover {
-        color: colors.$aColor;
+        color: white;
         text-decoration: underline;
         cursor: pointer;
     }
@@ -21,40 +21,46 @@
     .profiles {
         display: flex;
         flex-direction: column;
-        gap: 50px;
+        gap: 20px;
         margin-top: 50px;
         margin-bottom: 50px;
 
-        .profile {
+        .header {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
 
-            .header {
-                display: flex;
-                flex-direction: column;
-                line-height: 0;
+            h4 {
+                font-size: 15px;
             }
 
-            .category {
-                line-height: 0;
-                display: flex;
-                gap: 5px;
-
-                p {
-                    font-size: 15px;
-                }
-            }
-
-
-            .image {
-                display: flex;
-                flex-direction: row;
-                gap: 25px;
-
-                img {
-
-                    height: 250px;
-                }
-
+            h2 {
+                font-size: 22px;
             }
         }
+
+        .category {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 8px;
+            margin-top: 10px;
+
+            p {
+                font-size: 15px;
+            }
+        }
+
+        .image {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+
+            img {
+
+                height: 250px;
+            }
+
+        }
+
     }
 }

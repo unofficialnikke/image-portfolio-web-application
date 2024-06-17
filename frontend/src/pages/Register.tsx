@@ -19,7 +19,6 @@ const Register = () => {
                     <input type='text' placeholder='enter password...'></input>
                 </div>
                 <div>
-                    <h3>Re-enter password:</h3>
                     <input type='text' placeholder='re-enter password...'></input>
                 </div>
                 <button onClick={() => navigate('/login')}>Register</button>
