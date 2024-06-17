@@ -10,7 +10,7 @@
         align-items: center;
 
         .links {
-            margin-left: 150px;
+            margin-left: 130px;
             display: flex;
             gap: 20px;
 
@@ -33,7 +33,7 @@
         }
 
         .logo {
-            margin-right: 400px;
+            margin-right: 250px;
 
             img {
                 width: 200px;
@@ -44,9 +44,17 @@
         .userprofile {
             display: flex;
             flex-direction: column;
+            margin-right: 130px;
+            text-align: center;
+            gap: 5px;
 
             span {
                 cursor: pointer;
+            }
+
+            a {
+                text-decoration: none;
+                color: rgba(255, 255, 255, 0.87)
             }
         }
     }
