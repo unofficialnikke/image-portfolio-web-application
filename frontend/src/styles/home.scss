@@ -28,9 +28,15 @@
     .profiles {
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        margin-top: 50px;
-        margin-bottom: 50px;
+        gap: 25px;
+        margin-top: 20px;
+
+        button {
+            width: max-content;
+            align-self: flex-end;
+            padding: 10px;
+            width: 80px;
+        }
 
         hr {
             border: none;

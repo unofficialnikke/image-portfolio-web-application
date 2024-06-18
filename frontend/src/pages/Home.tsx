@@ -6,6 +6,7 @@ const Home = () => {
     return (
         <div className='home'>
             <div className="profiles">
+                <button>Filter</button>
                 {profiles.map(profile => (
                     <div key={profile.id}>
                         <div className="header">
