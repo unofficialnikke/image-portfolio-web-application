@@ -3,31 +3,72 @@
 .about {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    height: 100vh;
+    justify-content: center;
     background-color: colors.$deepBlack;
+    min-height: 100vh;
 
-    h1 {
-        font-size: 20px;
-    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: min-content;
 
-    h3 {
-        font-weight: 500;
-        font-size: 16px;
-    }
 
-    input {
-        padding: 10px;
-        border: none;
-        border-radius: 1ch;
-        background-color: colors.$inputColor;
-        width: 200px;
-    }
+        p {
+            overflow: hidden;
+        }
 
-    button {
-        padding: 8px;
-        width: 150px;
+        h3 {
+            overflow: hidden;
+        }
 
+        h2 {
+            overflow: hidden;
+            margin-bottom: 20px;
+            margin: 0;
+        }
+
+
+        form {
+            justify-content: center;
+            flex: 10;
+            background-color: colors.$innerFormColor;
+            border-radius: 2ch;
+            border: solid 25px colors.$formColor;
+            padding: 30px;
+            line-height: 1.5;
+
+        }
+
+        .headercontent {
+            display: flex;
+            flex-direction: column;
+            flex: 10;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            form {
+                width: 720px;
+            }
+
+        }
+
+        .footercontent {
+            display: flex;
+            flex-direction: column;
+            flex: 7;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            form {
+                width: 500px;
+                text-align: center;
+            }
+        }
     }
 }
