@@ -19,6 +19,7 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
+                        <hr />
                         <div className='image'>
                             {profile.images.map(image => (
                                 <div key={image.id}>
@@ -26,9 +27,12 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
+
                     </div>
                 ))}
+
             </div>
+
         </div>
     )
 }

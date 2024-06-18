@@ -10,6 +10,7 @@ const Profile = () => {
     return (
         <div className='singlepage'>
             <div className="content">
+                <button>Edit profile</button>
                 <div className='image'>
                     <img src={Image1}></img>
                     <img src={Image2}></img>
@@ -19,7 +20,7 @@ const Profile = () => {
                     <div className='leftcontent'>
                         <div className='usercontent'>
                             <div className="username">
-                                <h2>John Cena</h2>
+                                <h3>John Cena</h3>
                                 <h4>Helsinki</h4>
                                 <p>portraits, sports, nature</p>
                             </div>

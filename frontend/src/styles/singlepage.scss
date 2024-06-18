@@ -6,12 +6,27 @@
     flex-direction: column;
     justify-content: center;
     background-color: colors.$deepBlack;
+    min-height: 100vh;
+
+    p,
+    h2,
+    h4,
+    h3 {
+        margin: 0;
+    }
+
+    button {
+        padding: 10px;
+        display: flex;
+        width: max-content;
+        align-self: flex-end;
+    }
 
     .content {
         display: flex;
         flex-direction: column;
-        gap: 35px;
-        margin-top: 70px;
+        gap: 20px;
+        margin-top: 20px;
         width: min-content;
 
         .image {
@@ -29,7 +44,6 @@
         form {
             display: flex;
             flex-direction: row;
-            flex: 10;
             background-color: colors.$formColor;
             border-radius: 2ch;
             gap: 25px;
@@ -53,8 +67,8 @@
         .leftcontent {
             display: flex;
             flex-direction: column;
-            flex: 4;
-            background-color: #383838;
+            flex: 3;
+            background-color: colors.$innerFormColor;
             border-radius: 2ch;
             padding: 20px;
 
@@ -69,7 +83,7 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
-                margin-top: 10px;
+                padding: 10px;
                 text-align: center;
 
                 .username {
@@ -97,8 +111,8 @@
 
         .rightcontent {
             flex-direction: column;
-            flex: 8.1;
-            background-color: #383838;
+            flex: 8;
+            background-color: colors.$innerFormColor;
             border-radius: 2ch;
             padding: 20px;
 

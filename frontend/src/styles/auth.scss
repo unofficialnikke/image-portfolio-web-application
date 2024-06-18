@@ -5,13 +5,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 100vh;
-    line-height: 1.5;
+    min-height: 100vh;
     font-size: 16px;
     background-color: colors.$deepBlack;
 
     h1 {
-        font-size: 20px;
+        font-size: 26px;
     }
 
     h3 {
@@ -26,9 +25,8 @@
         justify-content: center;
         background-color: colors.$formColor;
         border-radius: 2ch;
-        margin-bottom: 100px;
-        width: 500px;
-        height: 500px;
+        min-width: 500px;
+        min-height: 500px;
         gap: 20px;
         align-items: center;
         text-align: center;

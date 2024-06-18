@@ -6,6 +6,13 @@
     flex-direction: column;
     justify-content: center;
     background-color: colors.$deepBlack;
+    min-height: 100vh;
+
+    p,
+    h2,
+    h4 {
+        margin: 0;
+    }
 
     a {
         text-decoration: none;
@@ -21,9 +28,19 @@
     .profiles {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 30px;
         margin-top: 50px;
         margin-bottom: 50px;
+
+        hr {
+            border: none;
+            border-top: 2px solid colors.$aColor;
+            width: 1185px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+        }
 
         .header {
             display: flex;
