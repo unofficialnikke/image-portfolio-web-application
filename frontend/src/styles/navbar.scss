@@ -10,6 +10,15 @@
         align-items: center;
         gap: 240px;
 
+        button {
+            width: max-content;
+            align-self: flex-end;
+            width: 80px;
+            padding: 5px;
+            border: none;
+            background: none;
+        }
+
         .links {
             display: flex;
             gap: 20px;
@@ -25,7 +34,7 @@
             }
 
             a:hover {
-                color: white;
+                color: rgba(255, 255, 255, 0.87);
                 cursor: pointer;
             }
 
@@ -33,7 +42,7 @@
         }
 
         .logo {
-            margin-right: 200px;
+            margin-right: 100px;
 
             img {
                 width: 200px;
@@ -43,18 +52,39 @@
 
         .userprofile {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            gap: 5px;
+            gap: 20px;
+
+            img {
+                height: 50px;
+                width: 50px;
+                border-radius: 40px;
+
+            }
 
             span {
                 cursor: pointer;
+                font-size: 14px;
             }
 
             a {
                 text-decoration: none;
                 color: rgba(255, 255, 255, 0.87)
             }
+
+            .profile {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .authbutton {}
         }
     }
 
@@ -78,7 +108,7 @@
 
     @media screen and (max-width: 640px) {
         .container {
-            gap: 250px;
+            gap: 170px;
 
             .logo {
                 display: none;
@@ -107,5 +137,4 @@
 
         }
     }
-
 }

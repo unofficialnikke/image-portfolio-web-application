@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../img/lilalokki.png'
+import Profile from '../img/doge.jpg'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
@@ -16,10 +17,15 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className='userprofile'>
-                    <span>Username</span>
-                    <span>
-                        <Link to='/Login'>Logout</Link>
-                    </span>
+                    <div className="authbutton">
+                        <button>
+                            <Link to='/Login'>Logout</Link>
+                        </button>
+                    </div>
+                    <div className="profile">
+                        <img src={Profile} />
+                        <span>Username</span>
+                    </div>
                 </div>
             </div>
         </div>
