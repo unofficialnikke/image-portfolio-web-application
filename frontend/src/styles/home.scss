@@ -107,7 +107,7 @@
             width: 90%;
 
             button {
-                padding: 6px;
+                padding: 7px;
             }
 
             hr {
@@ -126,8 +126,6 @@
 
     @media screen and (max-width: 960px) {
         .profiles {
-
-
             .image {
                 gap: 18px;
 
@@ -140,9 +138,6 @@
 
     @media screen and (max-width: 768px) {
         .profiles {
-            button {
-                padding: 4px;
-            }
 
             .image {
                 gap: 14px;
@@ -157,6 +152,10 @@
     @media screen and (max-width: 640px) {
         .profiles {
             gap: 10px;
+
+            button {
+                padding: 4px;
+            }
 
             button {
                 align-self: center;
@@ -209,7 +208,7 @@
             gap: 7px;
 
             button {
-                padding: 2px;
+                padding: 3px;
             }
 
             hr {

@@ -166,6 +166,10 @@
         .content {
             width: 90%;
 
+            button {
+                padding: 7px;
+            }
+
             .carousel {
                 button {
                     font-size: 1.5rem;
@@ -184,9 +188,6 @@
     }
 
     @media screen and (max-width: 960px) {
-        button {
-            padding: 5px;
-        }
 
         p,
         a {
@@ -221,9 +222,6 @@
     }
 
     @media screen and (max-width: 768px) {
-        button {
-            padding: 2px;
-        }
 
         .content {
             width: 92%;
@@ -280,6 +278,10 @@
             width: 93%;
             display: flex;
 
+            button {
+                padding: 4px;
+            }
+
             form {
                 padding: 12px;
             }
@@ -321,13 +323,15 @@
     }
 
     @media screen and (max-width: 480px) {
-        button {
-            align-self: center;
-        }
 
         .content {
             width: 93%;
             display: flex;
+
+            button {
+                align-self: center;
+                padding: 3px;
+            }
 
             form {
                 padding: 10px;
