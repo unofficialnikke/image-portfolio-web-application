@@ -25,15 +25,17 @@
     .content {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         gap: 20px;
         margin-top: 20px;
         width: 85%;
 
+
         .carousel {
             display: flex;
-            align-items: center;
+            flex-direction: row;
             justify-content: center;
-            position: relative;
 
             button {
                 background-color: colors.$deepBlack;
@@ -118,9 +120,6 @@
                     gap: 15px;
                 }
             }
-
-
-
         }
 
         .rightcontent {
@@ -133,6 +132,7 @@
             p {
                 overflow: hidden;
                 margin-top: 10px;
+                line-height: 1.5;
             }
 
             h3 {
@@ -143,6 +143,285 @@
 
     }
 
+    @media screen and (max-width: 1280px) {
+        .content {
+            width: 90%;
 
+            .carousel {
+                button {
+                    font-size: 1.7rem;
+                }
 
+                .image-container {
+                    img {
+                        max-height: 250px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 1098px) {
+        .content {
+            width: 90%;
+
+            .carousel {
+                button {
+                    font-size: 1.5rem;
+                    transform: translateY(-180%);
+                }
+
+                .image-container {
+                    gap: 20px;
+
+                    img {
+                        max-height: 210px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 960px) {
+        button {
+            padding: 5px;
+        }
+
+        p,
+        a {
+            font-size: 13px;
+        }
+
+        h3 {
+            font-size: 16px;
+        }
+
+        h4 {
+            font-size: 14px;
+        }
+
+        .content {
+
+            .carousel {
+                button {
+                    font-size: 1.4rem;
+                    transform: translateY(-220%);
+                }
+
+                .image-container {
+                    gap: 18px;
+
+                    img {
+                        max-height: 185px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        button {
+            padding: 2px;
+        }
+
+        .content {
+            width: 92%;
+
+            form {
+                padding: 15px;
+            }
+
+            p,
+            a {
+                font-size: 11px;
+            }
+
+            h3 {
+                font-size: 14px;
+            }
+
+            h4 {
+                font-size: 12px;
+            }
+
+            .carousel {
+                button {
+                    font-size: 1.2rem;
+                    transform: translateY(-250%);
+                }
+
+                .image-container {
+                    gap: 15px;
+
+                    img {
+                        max-height: 148px;
+                    }
+                }
+            }
+
+            .leftcontent {
+                padding: 10px;
+
+                hr {
+                    width: 120px;
+                }
+            }
+
+            .rightcontent {
+                padding: 10px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 640px) {
+
+        .content {
+            width: 93%;
+            display: flex;
+
+            form {
+                padding: 12px;
+            }
+
+            p,
+            a {
+                font-size: 10px;
+            }
+
+            h3 {
+                font-size: 13px;
+            }
+
+            h4 {
+                font-size: 11px;
+            }
+
+            .carousel {
+                button {
+                    font-size: 0.9rem;
+                    transform: translateY(-250%);
+                }
+
+                .image-container {
+                    gap: 13px;
+
+                    img {
+                        max-height: 125px;
+                    }
+                }
+            }
+
+            .leftcontent {
+                hr {
+                    width: 50px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        button {
+            align-self: center;
+        }
+
+        .content {
+            width: 93%;
+            display: flex;
+
+            form {
+                padding: 10px;
+            }
+
+            p,
+            a {
+                font-size: 8px;
+            }
+
+            h3 {
+                font-size: 11px;
+            }
+
+            h4 {
+                font-size: 9px;
+            }
+
+            .carousel {
+                button {
+                    font-size: 1rem;
+                    transform: translateY(-50%);
+                }
+
+                .image-container {
+                    flex-direction: column;
+                    gap: 5px;
+
+                    img {
+                        max-height: 170px;
+                    }
+                }
+            }
+
+            .leftcontent {
+                padding: 10px;
+
+                hr {
+                    width: 60px;
+                }
+
+                .usercontent {
+                    .socialmedia {
+                        gap: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 384px) {
+        .content {
+            form {
+                padding: 8px;
+            }
+
+            p,
+            a {
+                font-size: 6px;
+            }
+
+            h3 {
+                font-size: 8px;
+            }
+
+            h4 {
+                font-size: 7px;
+            }
+
+            .carousel {
+                button {
+                    font-size: 1rem;
+                    transform: translateY(-50%);
+                }
+
+                .image-container {
+                    flex-direction: column;
+                    gap: 5px;
+
+                    img {
+                        max-height: 170px;
+                    }
+                }
+            }
+
+            .leftcontent {
+
+                .usercontent {
+                    .socialmedia {
+                        gap: 7px;
+
+                    }
+                }
+            }
+        }
+    }
 }

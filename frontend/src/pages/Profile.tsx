@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import useCarousel from '../hooks/useCarousel'
 import Image1 from '../img/1.jpg'
 import Image2 from '../img/2.jpg'
 import Image3 from '../img/3.jpg'
@@ -9,21 +10,7 @@ import Image6 from '../img/6.jpg'
 
 const Profile = () => {
     const images = [Image1, Image2, Image3, Image4, Image5, Image6]
-    const [currentIndex, setCurrentIndex] = useState(0)
-
-    const prevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
-        console.log(currentIndex)
-    }
-
-    const nextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-        console.log(currentIndex)
-    }
-
-    const getImageIndex = (index: number) => {
-        return (index + images.length) % images.length;
-    };
+    const { currentIndex, prevSlide, nextSlide, getImageIndex } = useCarousel(images)
 
     return (
         <div className='singlepage'>
@@ -34,15 +21,12 @@ const Profile = () => {
                     <div className="image-container">
                         <img
                             src={images[getImageIndex(currentIndex)]}
-                            className='active'
                         />
                         <img
                             src={images[getImageIndex(currentIndex + 1)]}
-                            className='active'
                         />
                         <img
                             src={images[getImageIndex(currentIndex + 2)]}
-                            className='active'
                         />
                     </div>
                     <button onClick={nextSlide}>&gt;</button>
