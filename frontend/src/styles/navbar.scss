@@ -42,7 +42,7 @@
         }
 
         .logo {
-            margin-right: 100px;
+
 
             img {
                 width: 200px;
@@ -59,13 +59,14 @@
             gap: 20px;
 
             img {
-                height: 50px;
-                width: 50px;
+                height: 55px;
+                width: 55px;
                 border-radius: 40px;
-                border: 2px solid transparent;
+                border: 3px solid transparent;
                 border-color: colors.$aHover;
                 cursor: pointer;
             }
+
 
             span {
                 cursor: pointer;
@@ -86,7 +87,11 @@
                 gap: 10px;
             }
 
-            .authbutton {}
+            .authbutton {
+                gap: 10px;
+                flex-direction: row;
+                display: flex;
+            }
         }
     }
 

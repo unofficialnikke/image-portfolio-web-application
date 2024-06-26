@@ -19,7 +19,10 @@ const Navbar = () => {
                 <div className='userprofile'>
                     <div className="authbutton">
                         <button>
-                            <Link to='/Login'>Logout</Link>
+                            <Link to='/login'>Login</Link>
+                        </button>
+                        <button>
+                            <Link to='/register'>Register</Link>
                         </button>
                     </div>
                     <div className="profile">
