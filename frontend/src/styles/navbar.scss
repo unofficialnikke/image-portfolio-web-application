@@ -8,7 +8,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 240px;
+        gap: 220px;
 
         button {
             width: max-content;
@@ -56,12 +56,12 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            gap: 20px;
+            gap: 50px;
 
             img {
                 height: 55px;
                 width: 55px;
-                border-radius: 40px;
+                border-radius: 50%;
                 border: 3px solid transparent;
                 border-color: colors.$aHover;
                 cursor: pointer;
@@ -88,9 +88,11 @@
             }
 
             .authbutton {
-                gap: 10px;
+                gap: 15px;
                 flex-direction: row;
                 display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }
@@ -98,6 +100,14 @@
     @media screen and (max-width: 1098px) {
         .container {
             gap: 150px;
+
+            .logo {
+
+                img {
+                    width: 170px;
+                }
+
+            }
         }
     }
 
@@ -115,7 +125,7 @@
 
     @media screen and (max-width: 640px) {
         .container {
-            gap: 170px;
+            gap: 40px;
 
             .logo {
                 display: none;
@@ -131,7 +141,7 @@
 
     @media screen and (max-width: 480px) {
         .container {
-            gap: 40px;
+            gap: 10px;
 
             .logo {
                 display: none;
@@ -142,6 +152,39 @@
 
             }
 
+
+            .userprofile {
+
+                .authbutton {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 384px) {
+        .container {
+            gap: 20px;
+
+            .logo {
+                display: none;
+
+                img {
+                    width: 200px;
+                }
+
+            }
+
+
+            .userprofile {
+                .profile {
+                    display: none;
+                }
+
+                .authbutton {
+                    flex-direction: column;
+                }
+            }
         }
     }
 }
