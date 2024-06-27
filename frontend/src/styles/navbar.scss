@@ -141,7 +141,7 @@
 
     @media screen and (max-width: 480px) {
         .container {
-            gap: 10px;
+            gap: 5px;
 
             .logo {
                 display: none;
@@ -154,6 +154,7 @@
 
 
             .userprofile {
+                gap: 5px;
 
                 .authbutton {
                     flex-direction: column;
