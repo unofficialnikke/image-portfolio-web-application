@@ -162,7 +162,7 @@
             }
 
             hr {
-                width: 53%;
+                width: 97%;
                 margin-bottom: 5px;
                 border-top: 1px solid colors.$aColor;
             }
@@ -193,11 +193,10 @@
             }
 
             .image {
-                flex-direction: column;
                 gap: 7px;
 
                 img {
-                    height: 200px;
+                    height: 120px;
                 }
             }
         }
@@ -205,7 +204,7 @@
 
     @media screen and (max-width: 480px) {
         .profiles {
-            gap: 7px;
+            gap: 10px;
 
             button {
                 padding: 3px;
@@ -234,6 +233,7 @@
             }
 
             .image {
+                flex-direction: column;
                 gap: 7px;
 
                 img {
@@ -257,7 +257,6 @@
             }
 
             .image {
-                gap: 6px;
 
                 img {
                     height: 130px;
