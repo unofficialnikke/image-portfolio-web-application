@@ -18,46 +18,155 @@
         font-size: 16px;
     }
 
-    form {
+    .container {
         display: flex;
-        flex-direction: column;
-        padding: 10px;
-        justify-content: center;
-        background-color: colors.$formColor;
-        border-radius: 2ch;
-        min-width: 500px;
-        min-height: 500px;
-        gap: 20px;
         align-items: center;
-        text-align: center;
+        justify-content: center;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            justify-content: center;
+            background-color: colors.$formColor;
+            border-radius: 2ch;
+            min-width: 500px;
+            min-height: 500px;
+            gap: 20px;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        input {
+            padding: 12px;
+            border: none;
+            border-radius: 1ch;
+            background-color: colors.$inputColor;
+            width: 300px;
+        }
+
+        button {
+            padding: 8px;
+            width: 150px;
+
+        }
+
+        a {
+            font-size: 12px;
+            font-weight: 500;
+            color: colors.$aColor;
+            text-decoration: inherit;
+        }
+
+        a:hover {
+            color: colors.$aHover;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     }
 
-    input {
-        padding: 12px;
-        border: none;
-        border-radius: 1ch;
-        background-color: colors.$inputColor;
-        width: 300px;
-    }
-
-    button {
-        padding: 8px;
-        width: 150px;
+    @media screen and (max-width: 1098px) {
+        .container {
+            form {
+                min-width: 450px;
+                min-height: 450px;
+                gap: 15px;
+            }
+        }
 
     }
 
-    a {
-        font-size: 12px;
-        font-weight: 500;
-        color: colors.$aColor;
-        text-decoration: inherit;
+    @media screen and (max-width: 960px) {
+        .container {
+            form {
+                min-width: 400px;
+                min-height: 400px;
+            }
+        }
+
     }
 
-    a:hover {
-        color: colors.$aHover;
-        text-decoration: underline;
-        cursor: pointer;
+    @media screen and (max-width: 768px) {
+        .container {
+            form {
+                min-width: 350px;
+                min-height: 350px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            h3 {
+                font-weight: 500;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 5px;
+                width: 100px;
+
+            }
+
+            input {
+                padding: 8px;
+                width: 250px;
+            }
+        }
+
     }
 
+    @media screen and (max-width: 640px) {
+        .container {
+            form {
+                min-width: 300px;
+                min-height: 300px;
+                gap: 15px;
+            }
 
+            h1 {
+                font-size: 18px;
+            }
+
+            h3 {
+                font-weight: 500;
+                font-size: 12px;
+            }
+
+            input {
+                width: 200px;
+                border-radius: 0.7ch;
+            }
+
+            button {
+                padding: 3px;
+                width: 100px;
+
+            }
+        }
+
+    }
+
+    @media screen and (max-width: 480px) {
+        .container {
+
+            h1 {
+                font-size: 18px;
+            }
+
+            h3 {
+                font-weight: 500;
+                font-size: 12px;
+            }
+
+            input {
+                padding: 6px;
+                width: 200px;
+            }
+        }
+
+    }
+
+    @media screen and (max-width: 384px) {}
 }

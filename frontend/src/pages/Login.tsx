@@ -7,21 +7,23 @@ const Login = () => {
     return (
         <div className='auth'>
             <h1>Login</h1>
-            <form>
-                <div>
-                    <h3>Email address:</h3>
-                    <input required type='text' placeholder='enter email...'></input>
-                </div>
-                <div>
-                    <h3>Password:</h3>
-                    <input required type='text' placeholder='enter password...'></input>
-                </div>
-                <a onClick={() => navigate('/reset')}>Forgot your password?
-                </a>
-                <button onClick={() => navigate('/')}>Login</button>
-                <span>No account yet? <Link to='/register'>Register</Link>
-                </span>
-            </form>
+            <div className="container">
+                <form>
+                    <div>
+                        <h3>Email address:</h3>
+                        <input required type='text' placeholder='enter email...'></input>
+                    </div>
+                    <div>
+                        <h3>Password:</h3>
+                        <input required type='text' placeholder='enter password...'></input>
+                    </div>
+                    <a onClick={() => navigate('/reset')}>Forgot your password?
+                    </a>
+                    <button onClick={() => navigate('/')}>Login</button>
+                    <span>No account yet? <Link to='/register'>Register</Link>
+                    </span>
+                </form>
+            </div>
         </div>
     )
 }
