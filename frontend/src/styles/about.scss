@@ -10,11 +10,12 @@
 
     .content {
         display: flex;
+        align-items: center;
         flex-direction: column;
         gap: 30px;
         margin-top: 50px;
         margin-bottom: 50px;
-        width: min-content;
+        width: 60%;
 
 
         p {
@@ -31,7 +32,6 @@
             margin: 0;
         }
 
-
         form {
             justify-content: center;
             flex: 10;
@@ -47,13 +47,10 @@
             display: flex;
             flex-direction: column;
             flex: 10;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
 
-            form {
-                width: 720px;
-            }
+            form {}
 
         }
 
@@ -61,13 +58,103 @@
             display: flex;
             flex-direction: column;
             flex: 7;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
 
             form {
-                width: 500px;
                 text-align: center;
+                width: 70%;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1098px) {
+        .content {
+            width: 70%;
+        }
+    }
+
+
+
+    @media screen and (max-width: 960px) {
+        .content {
+
+            p {
+                font-size: 12px;
+            }
+
+            h3 {
+                font-size: 16px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            form {
+                padding: 20px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .content {
+            width: 80%;
+
+            form {
+                padding: 15px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 640px) {
+        .content {
+
+            form {
+                border: solid 20px colors.$formColor;
+
+            }
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .content {
+            p {
+                font-size: 9px;
+            }
+
+            h3 {
+                font-size: 11px;
+            }
+
+            h2 {
+                font-size: 15px;
+            }
+
+            form {
+                padding: 8px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 384px) {
+        .content {
+            width: 80%;
+
+            p {
+                font-size: 7px;
+            }
+
+            h3 {
+                font-size: 9px;
+            }
+
+            h2 {
+                font-size: 13px;
+            }
+
+            form {
+                border: solid 14px colors.$formColor;
             }
         }
     }
