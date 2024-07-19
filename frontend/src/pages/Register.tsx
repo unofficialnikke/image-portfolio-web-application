@@ -16,6 +16,13 @@ const Register = () => {
                         <input type='text' placeholder='enter email...'></input>
                     </div>
                     <div>
+                        <h3>Full name:</h3>
+                        <input type='text' placeholder='enter firstname...'></input>
+                    </div>
+                    <div>
+                        <input type='text' placeholder='enter lastname...'></input>
+                    </div>
+                    <div>
                         <h3>Password:</h3>
                         <input type='text' placeholder='enter password...'></input>
                     </div>
