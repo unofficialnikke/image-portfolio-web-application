@@ -64,6 +64,11 @@
             text-decoration: underline;
             cursor: pointer;
         }
+
+        p {
+            font-size: 14px;
+            color: rgb(186, 49, 49);
+        }
     }
 
     @media screen and (max-width: 1098px) {

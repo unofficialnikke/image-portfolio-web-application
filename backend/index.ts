@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express"
+import cors from 'cors'
 import { db, connectDatabase } from "./db"
 import userroute from './routes/user'
 import categoryroute from './routes/category'
@@ -8,6 +9,7 @@ import bodyParser from "body-parser"
 const app: Express = express()
 const port = 5000
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
