@@ -10,8 +10,7 @@ export const register = (req: Request, res: Response) => {
             return res.json(err)
         }
         if (result.rows.length)
-            return res.status(409).json('User already exists')
-
+            return res.status(409).json('User already exists!')
 
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)
@@ -28,7 +27,7 @@ export const register = (req: Request, res: Response) => {
             if (err) {
                 return res.json(err)
             }
-            return res.status(200).json('User was succesfully created.')
+            return res.status(200).json('User was succesfully created!')
         })
 
     })

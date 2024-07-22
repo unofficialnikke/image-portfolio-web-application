@@ -12,8 +12,7 @@ const Register = () => {
         password: ''
     })
     const [passwordCheck, setPasswordCheck] = useState('')
-    const [error, setError] = useState<string | null>(null);
-
+    const [error, setError] = useState<string | null>(null)
     const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +22,18 @@ const Register = () => {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        await addNewUser(inputs)
+        const result = await addNewUser(inputs)
+        if (!result!.success) {
+            setError(result!.data)
+            return
+        }
+        if (passwordCheck !== inputs.password) {
+            setError('Passwords do not match!')
+            return
+        }
+        else {
+            navigate('/login')
+        }
     }
 
     return (
@@ -49,8 +59,9 @@ const Register = () => {
                     <div>
                         <input type='password' placeholder='re-enter password...' value={passwordCheck} onChange={(e) => setPasswordCheck(e.target.value)}></input>
                     </div>
-                    {error && <p>{error}</p>}
                     <button onClick={handleSubmit}>Register</button>
+                    {error && <p>{error}</p>}
+
                     <span>Already have an account? <Link to='/login'>Login</Link>
                     </span>
                 </form>

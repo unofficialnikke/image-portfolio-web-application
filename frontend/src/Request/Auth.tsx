@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { RegisterInputs } from '../type'
 
 export const addNewUser = async (inputs: RegisterInputs) => {
@@ -10,14 +9,12 @@ export const addNewUser = async (inputs: RegisterInputs) => {
         body: JSON.stringify(inputs)
     }
     try {
-        const response = await fetch('http://localhost:5000/api/auth/register', requestConfig
-
-        )
+        const response = await fetch('http://localhost:5000/api/auth/register', requestConfig)
+        const responseData = await response.json()
         if (!response.ok) {
-            console.log('Registration successful')
+            return { success: false, data: responseData }
         } else {
-            console.log('Registration successful')
-            return response.ok
+            return { success: true, data: responseData }
         }
     }
     catch (err) {
