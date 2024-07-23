@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { addNewUser } from '../request/Auth'
+import { addNewUser } from '../requests/Auth'
 import { RegisterInputs } from '../type'
+import { validRegistration } from '../functions/Validation'
 
 const Register = () => {
     const [inputs, setInputs] = useState<RegisterInputs>({
@@ -21,21 +22,16 @@ const Register = () => {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        const result = await addNewUser(inputs)
-        if (!inputs.email || !inputs.firstname || !inputs.lastname || !inputs.password || !passwordCheck) {
-            setError('All field need to be filled')
-            return
-        }
-        if (passwordCheck !== inputs.password) {
-            setError('Passwords do not match!')
-            return
-        }
-        if (!result!.success) {
-            setError(result!.data)
-            return
-        }
-        else {
-            navigate('/login')
+        if (validRegistration(inputs, passwordCheck, setError)) {
+            const result = await addNewUser(inputs)
+            if (!result.success) {
+                setError(result.data)
+                console.log(result.data)
+                return
+            } else {
+                console.log(result.data)
+                navigate('/login')
+            }
         }
     }
 
@@ -64,7 +60,6 @@ const Register = () => {
                     </div>
                     <button onClick={handleSubmit}>Register</button>
                     {error && <p>{error}</p>}
-
                     <span>Already have an account? <Link to='/login'>Login</Link>
                     </span>
                 </form>

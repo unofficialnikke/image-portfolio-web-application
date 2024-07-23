@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { LoginInputs } from '../type'
-import { loginUser } from '../request/Auth'
+import { loginUser } from '../requests/Auth'
 
 const Login = () => {
     const [inputs, setInputs] = useState<LoginInputs>({
@@ -17,18 +17,16 @@ const Login = () => {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        const result = await loginUser(inputs)
         if (!inputs.email || !inputs.password) {
             setError('All field need to be filled')
-            return
         }
-        if (!result!.success) {
-            console.log(result!.data)
-            setError(result!.data)
-            return
+        const result = await loginUser(inputs)
+        if (!result.success) {
+            setError(result.data)
+            console.log(result.data)
         }
         else {
-            console.log('Login successful')
+            console.log(result.data)
             navigate('/')
         }
     }

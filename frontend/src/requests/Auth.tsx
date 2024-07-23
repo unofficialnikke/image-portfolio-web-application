@@ -1,6 +1,6 @@
 import { LoginInputs, RegisterInputs } from '../type'
 
-export const addNewUser = async (inputs: RegisterInputs) => {
+export const addNewUser = async (inputs: RegisterInputs): Promise<{ success: boolean; data: string }> => {
     const requestConfig: RequestInit = {
         method: 'POST',
         headers: {
@@ -19,10 +19,11 @@ export const addNewUser = async (inputs: RegisterInputs) => {
     }
     catch (err) {
         console.log(err)
+        return { success: false, data: 'An error occurred' }
     }
 }
 
-export const loginUser = async (inputs: LoginInputs) => {
+export const loginUser = async (inputs: LoginInputs): Promise<{ success: boolean; data: string }> => {
     const requestConfig: RequestInit = {
         method: 'POST',
         headers: {
@@ -42,5 +43,6 @@ export const loginUser = async (inputs: LoginInputs) => {
     }
     catch (err) {
         console.log(err)
+        return { success: false, data: 'An error occurred' }
     }
 }
