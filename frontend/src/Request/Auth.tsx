@@ -28,7 +28,8 @@ export const loginUser = async (inputs: LoginInputs) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(inputs)
+        body: JSON.stringify(inputs),
+        credentials: 'include'
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}auth/login`, requestConfig)

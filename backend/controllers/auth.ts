@@ -52,10 +52,10 @@ export const login = (req: Request, res: Response) => {
 
         const token = jwt.sign({ id: result.rows[0].id }, 'jwtkey')
         const { password, ...other } = result.rows[0]
-
+        console.log(other)
         res.cookie('access_token', token, {
             httpOnly: true
-        }).status(200).json(result.rows[0])
+        }).status(200).json(other)
     })
 }
 
