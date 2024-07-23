@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { LoginInputs } from '../type'
-import { loginUser } from '../Request/Auth'
+import { loginUser } from '../request/Auth'
 
 const Login = () => {
     const [inputs, setInputs] = useState<LoginInputs>({

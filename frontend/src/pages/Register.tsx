@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { addNewUser } from '../Request/Auth'
+import { addNewUser } from '../request/Auth'
 import { RegisterInputs } from '../type'
 
 const Register = () => {
