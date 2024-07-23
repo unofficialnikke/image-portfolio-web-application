@@ -1,6 +1,11 @@
 export type RegisterInputs = {
-    firstname: String,
-    lastname: String,
-    email: String,
-    password: String
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string
+}
+
+export type LoginInputs = {
+    email: string
+    password: string
 }
