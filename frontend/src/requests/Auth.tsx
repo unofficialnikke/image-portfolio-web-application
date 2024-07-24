@@ -1,4 +1,4 @@
-import { currentUser, LoginInputs, RegisterInputs, ResultType } from '../type'
+import { currentUser, LoginInputs, RegisterInputs } from '../type'
 
 export const addNewUser = async (inputs: RegisterInputs) => {
     const requestConfig: RequestInit = {
@@ -11,10 +11,9 @@ export const addNewUser = async (inputs: RegisterInputs) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}auth/register`, requestConfig)
         const responseData: string = await response.json()
-        if (!response.ok) {
-            return { success: false, data: responseData }
-        } else {
-            return { success: true, data: responseData }
+        return {
+            success: response.ok,
+            data: responseData
         }
     }
     catch (err) {
@@ -23,7 +22,7 @@ export const addNewUser = async (inputs: RegisterInputs) => {
     }
 }
 
-export const loginUser = async (inputs: LoginInputs): Promise<ResultType> => {
+export const loginUser = async (inputs: LoginInputs) => {
     const requestConfig: RequestInit = {
         method: 'POST',
         headers: {
@@ -34,11 +33,10 @@ export const loginUser = async (inputs: LoginInputs): Promise<ResultType> => {
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}auth/login`, requestConfig)
-        const responseData: currentUser | string = await response.json()
-        if (!response.ok) {
-            return { success: false, data: responseData as string }
-        } else {
-            return { success: true, data: responseData as currentUser }
+        const responseData: string | currentUser = await response.json()
+        return {
+            success: response.ok,
+            data: responseData
         }
     }
     catch (err) {

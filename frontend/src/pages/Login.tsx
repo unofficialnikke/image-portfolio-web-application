@@ -22,10 +22,9 @@ const Login = () => {
         if (validLogin(inputs, setError)) {
             const result = await login(inputs)
             if (!result.success) {
-                setError(result.data)
+                setError(result.data as string)
                 console.log(result.data)
-            }
-            else {
+            } else {
                 console.log(result.data)
                 navigate('/')
             }

@@ -17,8 +17,3 @@ export type currentUser = {
     introduction_text: string
     lastname: string
 }
-
-export type ResultType =
-    | { success: true; data: currentUser }
-    | { success: false; data: string }
-    | { success: false; data: null };  

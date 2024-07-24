@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from '../img/lilalokki.png'
 import Profile from '../img/doge.jpg'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../context/authContext'
 
 const Navbar = () => {
+    const { currentUser } = useContext(AuthContext)
     return (
         <div className='navbar'>
             <div className="container">
@@ -27,7 +29,7 @@ const Navbar = () => {
                     </div>
                     <div className="profile">
                         <img src={Profile} />
-                        <span>Username</span>
+                        <span>{currentUser?.firstname}</span>
                     </div>
                 </div>
             </div>

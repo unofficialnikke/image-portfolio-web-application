@@ -27,7 +27,6 @@ const Register = () => {
             if (!result.success) {
                 setError(result.data)
                 console.log(result.data)
-                return
             } else {
                 console.log(result.data)
                 navigate('/login')

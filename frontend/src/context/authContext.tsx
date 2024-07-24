@@ -1,17 +1,17 @@
 import { ReactNode, useState, createContext, useEffect } from 'react'
 import { loginUser } from '../requests/Auth'
-import { LoginInputs, ResultType, currentUser } from '../type'
+import { LoginInputs, currentUser } from '../type'
 
 type AuthContextProps = {
     currentUser: currentUser | null
     setCurrentUser: (user: currentUser | null) => void
-    login: (inputs: LoginInputs) => Promise<ResultType>
+    login: (inputs: LoginInputs) => Promise<{ success: boolean; data: currentUser | string }>
 }
 
 const initialContext: AuthContextProps = {
     currentUser: null,
     setCurrentUser: () => { },
-    login: async () => ({ success: false, data: '' }),
+    login: async () => ({ success: false, data: '' })
 }
 
 type AuthProviderProps = {
@@ -34,7 +34,7 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
     const login = async (inputs: LoginInputs) => {
         const result = await loginUser(inputs)
         if (result.success) {
-            setCurrentUser(result.data)
+            setCurrentUser(result.data as currentUser)
         }
         return result
     }
