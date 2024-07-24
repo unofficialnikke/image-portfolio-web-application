@@ -40,6 +40,7 @@ const Register = () => {
             <h1>Register</h1>
             <div className="container">
                 <form>
+                    {error && <p>{error}</p>}
                     <div>
                         <h3>Email address:</h3>
                         <input required type='text' placeholder='enter email...' name='email' onChange={handleChange}></input>
@@ -59,7 +60,6 @@ const Register = () => {
                         <input required type='password' placeholder='re-enter password...' value={passwordCheck} onChange={(e) => setPasswordCheck(e.target.value)}></input>
                     </div>
                     <button onClick={handleSubmit}>Register</button>
-                    {error && <p>{error}</p>}
                     <span>Already have an account? <Link to='/login'>Login</Link>
                     </span>
                 </form>
