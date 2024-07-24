@@ -10,7 +10,15 @@ export type LoginInputs = {
     password: string
 }
 
-export type AddNewUserResult = {
-    success: boolean;
-    data: string;
-} | undefined;
+export type currentUser = {
+    email: string
+    firstname: string
+    id: number
+    introduction_text: string
+    lastname: string
+}
+
+export type ResultType =
+    | { success: true; data: currentUser }
+    | { success: false; data: string }
+    | { success: false; data: null };  

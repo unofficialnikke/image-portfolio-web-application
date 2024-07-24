@@ -1,4 +1,4 @@
-import { LoginInputs, RegisterInputs } from '../type'
+import { currentUser, LoginInputs, RegisterInputs, ResultType } from '../type'
 
 export const addNewUser = async (inputs: RegisterInputs) => {
     const requestConfig: RequestInit = {
@@ -23,7 +23,7 @@ export const addNewUser = async (inputs: RegisterInputs) => {
     }
 }
 
-export const loginUser = async (inputs: LoginInputs) => {
+export const loginUser = async (inputs: LoginInputs): Promise<ResultType> => {
     const requestConfig: RequestInit = {
         method: 'POST',
         headers: {
@@ -34,11 +34,11 @@ export const loginUser = async (inputs: LoginInputs) => {
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}auth/login`, requestConfig)
-        const responseData: string = await response.json()
+        const responseData: currentUser | string = await response.json()
         if (!response.ok) {
-            return { success: false, data: responseData }
+            return { success: false, data: responseData as string }
         } else {
-            return { success: true, data: responseData }
+            return { success: true, data: responseData as currentUser }
         }
     }
     catch (err) {
