@@ -21,9 +21,9 @@ type AuthProviderProps = {
 export const AuthContext = createContext<AuthContextProps>(initialContext)
 
 export const AuthContextProvider = ({ children }: AuthProviderProps) => {
-    const JSONParse = (item: string | null) => {
+    const JSONParse = (user: string | null) => {
         try {
-            return item ? JSON.parse(item) : null
+            return user ? JSON.parse(user) : null
         } catch (error) {
             return null
         }
@@ -40,7 +40,7 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
     }
 
     useEffect(() => {
-        localStorage.setItem('user', JSON.stringify(currentUser))
+        localStorage.setItem('user', JSON.stringify(null))
     }, [currentUser])
 
     return (

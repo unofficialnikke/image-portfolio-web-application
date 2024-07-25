@@ -20,17 +20,39 @@ const Navbar = () => {
                 </div>
                 <div className='userprofile'>
                     <div className="authbutton">
-                        <button>
-                            <Link to='/login'>Login</Link>
-                        </button>
-                        <button>
-                            <Link to='/register'>Register</Link>
-                        </button>
+                        {
+                            currentUser ? (
+                                <button>
+                                    <Link to='/login'>Logout</Link>
+                                </button>
+                            ) : (
+                                <div>
+                                    <button>
+                                        <Link to='/login'>Login</Link>
+                                    </button>
+                                    <button>
+                                        <Link to='/register'>Register</Link>
+                                    </button>
+                                </div>
+                            )
+                        }
+
                     </div>
-                    <div className="profile">
-                        <img src={Profile} />
-                        <span>{currentUser?.firstname}</span>
-                    </div>
+                    {
+                        currentUser ? (
+                            <div className="profile">
+                                <Link to={`/profile/${currentUser.id}`}>
+                                    <img src={Profile}
+                                    />
+                                </Link>
+                                <span>{currentUser.firstname}</span>
+                            </div>
+
+                        ) : (
+                            <div></div>
+                        )
+                    }
+
                 </div>
             </div>
         </div>
