@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
 
 const Navbar = () => {
-    const { currentUser } = useContext(AuthContext)
+    const { currentUser, logout } = useContext(AuthContext)
     return (
         <div className='navbar'>
             <div className="container">
@@ -22,9 +22,7 @@ const Navbar = () => {
                     <div className="authbutton">
                         {
                             currentUser ? (
-                                <button>
-                                    <Link to='/login'>Logout</Link>
-                                </button>
+                                <button onClick={logout}>Logout</button>
                             ) : (
                                 <div>
                                     <button>
