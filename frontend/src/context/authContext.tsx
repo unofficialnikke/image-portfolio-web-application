@@ -1,12 +1,12 @@
 import { ReactNode, useState, createContext, useEffect } from 'react'
 import { loginUser, logoutUser } from '../requests/Auth'
-import { LoginInputs, currentUser } from '../type'
+import { LoginInputs, User } from '../type'
 
 type AuthContextProps = {
-    currentUser: currentUser | null
-    setCurrentUser: (user: currentUser | null) => void
-    login: (inputs: LoginInputs) => Promise<{ success: boolean; data: currentUser | string }>
-    logout: () => Promise<{ success: boolean; data: currentUser | string }>
+    currentUser: User | null
+    setCurrentUser: (user: User | null) => void
+    login: (inputs: LoginInputs) => Promise<{ success: boolean; data: User | string }>
+    logout: () => Promise<{ success: boolean; data: User | string }>
 }
 
 const initialContext: AuthContextProps = {
@@ -17,7 +17,7 @@ const initialContext: AuthContextProps = {
 }
 
 type AuthProviderProps = {
-    children: ReactNode;
+    children: ReactNode
 }
 
 export const AuthContext = createContext<AuthContextProps>(initialContext)
@@ -31,12 +31,12 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
         }
     }
     const storageUser = JSONParse(localStorage.getItem('user'))
-    const [currentUser, setCurrentUser] = useState<currentUser | null>(storageUser);
+    const [currentUser, setCurrentUser] = useState<User | null>(storageUser);
 
     const login = async (inputs: LoginInputs) => {
         const result = await loginUser(inputs)
         if (result.success) {
-            setCurrentUser(result.data as currentUser)
+            setCurrentUser(result.data as User)
         }
         return result
     }

@@ -2,6 +2,35 @@ import Image1 from '../img/1.jpg'
 import Image2 from '../img/2.jpg'
 import Image3 from '../img/3.jpg'
 
+export const images = [
+    {
+        id: 1,
+        src: Image1
+    },
+    {
+        id: 2,
+        src: Image2
+    }, {
+        id: 3,
+        src: Image3
+    }
+]
+
+export const categories = [
+    {
+        id: 1,
+        name: 'nature'
+    },
+    {
+        id: 2,
+        name: 'portrait'
+    },
+    {
+        id: 3,
+        name: 'sports'
+    }
+]
+
 export const profiles = [
     {
         id: 1,

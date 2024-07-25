@@ -1,9 +1,9 @@
 export type RegisterInputs = {
-    firstname: string,
-    lastname: string,
-    email: string,
-    password: string,
-    phone: string | null,
+    firstname: string
+    lastname: string
+    email: string
+    password: string
+    phone: string | null
     city: string
 }
 
@@ -12,10 +12,12 @@ export type LoginInputs = {
     password: string
 }
 
-export type currentUser = {
-    email: string
-    firstname: string
+export type User = {
     id: number
-    introduction_text: string
+    firstname: string
     lastname: string
+    email: string
+    phone: string | null
+    city: string
+    introduction_text: string | null
 }
