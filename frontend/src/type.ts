@@ -2,7 +2,9 @@ export type RegisterInputs = {
     firstname: string,
     lastname: string,
     email: string,
-    password: string
+    password: string,
+    phone: string | null,
+    city: string
 }
 
 export type LoginInputs = {

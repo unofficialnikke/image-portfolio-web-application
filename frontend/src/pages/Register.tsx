@@ -10,7 +10,9 @@ const Register = () => {
         firstname: '',
         lastname: '',
         email: '',
-        password: ''
+        password: '',
+        phone: '',
+        city: ''
     })
     const [passwordCheck, setPasswordCheck] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -50,6 +52,14 @@ const Register = () => {
                     </div>
                     <div>
                         <input required type='text' placeholder='enter lastname...' name='lastname' onChange={handleChange}></input>
+                    </div>
+                    <div>
+                        <h3>Phone (optional):</h3>
+                        <input required type='text' placeholder='enter phone number...' name='phone' onChange={handleChange}></input>
+                    </div>
+                    <div>
+                        <h3>City:</h3>
+                        <input required type='text' placeholder='enter city...' name='city' onChange={handleChange}></input>
                     </div>
                     <div>
                         <h3>Password:</h3>

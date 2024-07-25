@@ -4,7 +4,8 @@ export const validRegistration = (
     inputs: RegisterInputs,
     passwordCheck: string,
     setError: (error: string) => void): boolean => {
-    if (!inputs.email || !inputs.firstname || !inputs.lastname || !inputs.password || !passwordCheck) {
+    if (!inputs.email || !inputs.firstname || !inputs.lastname ||
+        !inputs.city || !inputs.password || !passwordCheck) {
         setError('All fields need to be filled.')
         return false
     }

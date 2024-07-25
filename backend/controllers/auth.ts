@@ -16,12 +16,14 @@ export const register = (req: Request, res: Response) => {
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)
 
-        const q = 'INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4)'
+        const q = 'INSERT INTO users(firstname, lastname, email, password, city, phone) VALUES($1, $2, $3, $4, $5, $6)'
         const values = [
             req.body.firstname,
             req.body.lastname,
             req.body.email,
             hash,
+            req.body.city,
+            req.body.phone,
         ]
 
         db.query(q, values, (err, result) => {
@@ -59,5 +61,8 @@ export const login = (req: Request, res: Response) => {
 }
 
 export const logout = (req: Request, res: Response) => {
-
+    res.clearCookie('access_token', {
+        sameSite: 'none',
+        secure: true
+    }).status(200).json('User has been logged out!')
 }
