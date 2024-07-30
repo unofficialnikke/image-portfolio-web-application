@@ -1,7 +1,6 @@
 import express, { Express, Request, Response } from "express"
 import cors from 'cors'
 import 'dotenv/config'
-import { db, connectDatabase } from "./db"
 import userroute from './routes/user'
 import categoryroute from './routes/category'
 import authroute from './routes/auth'
@@ -30,7 +29,6 @@ app.get('/api/test', (req, res) => {
 })
 
 app.listen(port, () => {
-    connectDatabase()
     console.log(`listening on port ${port}`)
 }
 )

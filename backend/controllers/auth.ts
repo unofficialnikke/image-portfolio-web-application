@@ -1,63 +1,62 @@
 import { Response, Request } from "express"
 import { db } from "../db"
+import { createUser, findByUserEmail } from "../repositories/userRepository"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-export const register = (req: Request, res: Response) => {
-    const q = 'SELECT * FROM users WHERE email = $1'
-
-    db.query(q, [req.body.email], (err, result) => {
-        if (err) {
-            return res.json(err)
-        }
-        if (result.rows.length)
+export const register = async (req: Request, res: Response) => {
+    try {
+        const { firstname, lastname, email, city, phone } = req.body
+        const existingUser = await findByUserEmail(email)
+        if (existingUser) {
             return res.status(409).json('User already exists!')
-
+        }
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)
-
-        const q = 'INSERT INTO users(firstname, lastname, email, password, city, phone) VALUES($1, $2, $3, $4, $5, $6)'
-        const values = [
-            req.body.firstname,
-            req.body.lastname,
-            req.body.email,
-            hash,
-            req.body.city,
-            req.body.phone,
-        ]
-
-        db.query(q, values, (err, result) => {
-            if (err) {
-                return res.json(err)
-            }
-            return res.status(200).json('User was succesfully created!')
-        })
-
-    })
+        const newUser = {
+            firstname,
+            lastname,
+            email,
+            password: hash,
+            city,
+            phone: phone || null,
+        }
+        const insertedUser = await createUser(newUser)
+        return res.status(200).json(insertedUser)
+    } catch (err) {
+        console.error('Error during user registration:', err);
+        return res.status(500).json('An error occurred');
+    }
 }
 
-export const login = (req: Request, res: Response) => {
-    const q = 'SELECT * FROM users WHERE email = $1'
+export const login = async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body
+        const user = await db
+            .selectFrom('users')
+            .selectAll()
+            .where('email', '=', email)
+            .executeTakeFirst()
 
-    db.query(q, [req.body.email], (err, result) => {
-        if (err) {
-            return res.json(err)
-        }
-        if (result.rows.length === 0) {
+        if (!user) {
             return res.status(404).json('User not found!')
         }
-        const isPasswordCorrect = bcrypt.compareSync(req.body.password, result.rows[0].password)
 
+        const isPasswordCorrect = bcrypt.compareSync(password, user.password)
         if (!isPasswordCorrect) {
             return res.status(400).json('Wrong email or password!')
         }
 
-        const token = jwt.sign({ id: result.rows[0].id }, 'jwtkey')
-        const { password, ...other } = result.rows[0]
+        const token = jwt.sign({ id: user.id }, 'jwtkey')
+        const { password: _, ...other } = user
+
         res.cookie('access_token', token, {
             httpOnly: true
         }).status(200).json(other)
-    })
+    } catch (err) {
+        console.error('Error during login:', err)
+        return res.status(500).json('An error occurred')
+    }
 }
 
 export const logout = (req: Request, res: Response) => {

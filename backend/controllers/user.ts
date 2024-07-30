@@ -1,28 +1,30 @@
 import { Request, Response } from "express"
-import { db } from "../db"
+import { findAllUSers, findUserById } from "../repositories/userRepository"
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
-        const result = await db.query('SELECT * FROM users;')
-        if (result.rows.length === 0) {
+        const users = await findAllUSers()
+        if (users.length === 0) {
             return res.status(404).json('Users not found')
         }
-        res.status(200).json(result.rows)
+        res.status(200).json(users)
     } catch (err) {
-        return res.json(err)
+        console.error('Error fetching users:', err)
+        return res.status(500).json('An error occurred')
     }
 
 }
 
 export const getUserById = async (req: Request, res: Response) => {
-    const userId = req.params.id
+    const userId = parseInt(req.params.id, 10)
     try {
-        const result = await db.query('SELECT * FROM users WHERE id = $1;', [userId])
-        if (result.rows.length === 0) {
+        const user = await findUserById(userId)
+        if (!user) {
             return res.status(404).json('User not found')
         }
-        res.status(200).json(result.rows[0])
+        res.status(200).json(user)
     } catch (err) {
-        return res.json(err)
+        console.error('Error fetching user by ID:', err)
+        return res.status(500).json('An error occurred')
     }
 }
