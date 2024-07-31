@@ -1,5 +1,4 @@
 import { Response, Request } from "express"
-import { db } from "../db"
 import { createUser, findByUserEmail } from "../repositories/userRepository"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
@@ -32,12 +31,7 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body
-        const user = await db
-            .selectFrom('users')
-            .selectAll()
-            .where('email', '=', email)
-            .executeTakeFirst()
-
+        const user = await findByUserEmail(email)
         if (!user) {
             return res.status(404).json('User not found!')
         }

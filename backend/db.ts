@@ -1,6 +1,10 @@
 import { Database } from './types';
 import { Pool } from 'pg'
 import { Kysely, PostgresDialect } from 'kysely'
+import {
+    createUserQuery, createSocialMediaQuery, createCategoryQuery,
+    createImagesQuery, createUserCategoryQuery
+} from './tableQueries';
 import 'dotenv/config'
 
 const pool = new Pool({
@@ -19,6 +23,19 @@ export const db = new Kysely<Database>({
     dialect,
 })
 
+const createTables = async () => {
+    try {
+        await pool.query(createUserQuery)
+        await pool.query(createSocialMediaQuery)
+        await pool.query(createImagesQuery)
+        await pool.query(createCategoryQuery)
+        await pool.query(createUserCategoryQuery)
+        console.log('Query executed successfully');
+    } catch (err) {
+        console.error('Error executing query:', err);
+    }
+}
+
 const testConnection = async () => {
     try {
         const result = await pool.query('SELECT version();')
@@ -28,5 +45,5 @@ const testConnection = async () => {
         process.exit(1)
     }
 }
-
+createTables()
 testConnection()

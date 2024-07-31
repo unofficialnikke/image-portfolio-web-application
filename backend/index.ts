@@ -3,7 +3,10 @@ import cors from 'cors'
 import 'dotenv/config'
 import userroute from './routes/user'
 import categoryroute from './routes/category'
+import userCategoryroute from './routes/userCategory'
 import authroute from './routes/auth'
+import imageroute from './routes/image'
+import socialmedia from './routes/socialMedia'
 import bodyParser from "body-parser"
 import cookieParser from 'cookie-parser'
 
@@ -22,6 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api/user', userroute)
 app.use('/api/category', categoryroute)
+app.use('/api/usercategory', userCategoryroute)
+app.use('/api/image', imageroute)
+app.use('/api/social', socialmedia)
 app.use('/api/auth', authroute)
 
 app.get('/api/test', (req, res) => {

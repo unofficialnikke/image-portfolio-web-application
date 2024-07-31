@@ -54,6 +54,7 @@ export type ImageUpdate = Updateable<ImageTable>
 
 export interface UserCategoryTable {
     id: Generated<number>
+    category_id: number
     user_id: number
 }
 

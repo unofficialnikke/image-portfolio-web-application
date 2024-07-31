@@ -5,6 +5,7 @@ import { AuthContext } from '../context/authContext'
 import { validLogin } from '../functions/Validation'
 
 const Login = () => {
+    const { currentUser, logout } = useContext(AuthContext)
     const [inputs, setInputs] = useState<LoginInputs>({
         email: '',
         password: ''
@@ -27,6 +28,7 @@ const Login = () => {
             } else {
                 console.log(result.data)
                 navigate('/')
+                window.location.reload()
             }
         }
     }
@@ -35,22 +37,40 @@ const Login = () => {
         <div className='auth'>
             <h1>Login</h1>
             <div className="container">
-                <form>
-                    {error && <p>{error}</p>}
-                    <div>
-                        <h3>Email address:</h3>
-                        <input required type='text' placeholder='enter email...' name='email' onChange={handleChange}></input>
-                    </div>
-                    <div>
-                        <h3>Password:</h3>
-                        <input required type='password' placeholder='enter password...' name='password' onChange={handleChange}></input>
-                    </div>
-                    <a onClick={() => navigate('/reset')}>Forgot your password?
-                    </a>
-                    <button onClick={handleSubmit}>Login</button>
-                    <span>No account yet? <Link to='/register'>Register</Link>
-                    </span>
-                </form>
+                {
+                    currentUser ? (
+                        <div>
+                            <form>
+                                <div>
+                                    <h1>Hey there!</h1>
+                                    <h3>You are already signed in!</h3>
+                                    <span onClick={logout}><Link to='/login'>Do you want to logout?</Link>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    ) : (
+                        <div>
+                            <form>
+                                {error && <p>{error}</p>}
+                                <div>
+                                    <h3>Email address:</h3>
+                                    <input required type='text' placeholder='enter email...' name='email' onChange={handleChange}></input>
+                                </div>
+                                <div>
+                                    <h3>Password:</h3>
+                                    <input required type='password' placeholder='enter password...' name='password' onChange={handleChange}></input>
+                                </div>
+                                <a onClick={() => navigate('/reset')}>Forgot your password?
+                                </a>
+                                <button onClick={handleSubmit}>Login</button>
+                                <span>No account yet? <Link to='/register'>Register</Link>
+                                </span>
+                            </form>
+                        </div>
+                    )
+                }
+
             </div>
         </div>
     )
