@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { findAllUSers, findUserById } from "../repositories/userRepository"
+import { deleteUser, findAllUSers, findUserById } from "../repositories/userRepository"
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -26,5 +26,22 @@ export const getUserById = async (req: Request, res: Response) => {
     } catch (err) {
         console.error('Error fetching user by ID:', err)
         return res.status(500).json('An error occurred')
+    }
+}
+
+export const deleteSelectedUser = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid user ID');
+    }
+    try {
+        const deletedUser = await deleteUser(id)
+        if (!deletedUser) {
+            return res.status(404).json('User not found');
+        }
+        return res.status(200).json(deletedUser);
+    } catch (err) {
+        console.error('Error deleting user:', err);
+        return res.status(500).json('An error occurred');
     }
 }

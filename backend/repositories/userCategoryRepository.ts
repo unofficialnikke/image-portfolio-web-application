@@ -24,6 +24,15 @@ export const findUserCategoryById = async (userCategoryId: number) => {
         .execute()
 }
 
+export const findUserCategoryByIds = async (userId: number, categoryId: number) => {
+    return await db
+        .selectFrom('user_category')
+        .selectAll()
+        .where('user_id', '=', userId)
+        .where('category_id', '=', categoryId)
+        .executeTakeFirst()
+}
+
 export const createUserCategory = async (userCategory: NewUserCategory) => {
     return await db
         .insertInto('user_category')
@@ -31,3 +40,12 @@ export const createUserCategory = async (userCategory: NewUserCategory) => {
         .returningAll()
         .executeTakeFirstOrThrow()
 }
+
+export const deleteUserCategory = async (id: number) => {
+    return await db
+        .deleteFrom('user_category')
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirst()
+}
+

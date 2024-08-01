@@ -1,11 +1,12 @@
 import express from 'express';
-import { addNewSocialMedia, getSocialMedias, getSocialMediasById, getSocialMediasByUserId } from '../controllers/socialMedia';
+import { addNewSocialMedia, getSocialMedias, getSocialMediasById, getSocialMediasByUserId, deleteSelectedSocialMedia } from '../controllers/socialMedia';
 
 const router = express.Router();
 
-router.get('/all', getSocialMedias)
+router.get('/', getSocialMedias)
 router.get('/user/:id', getSocialMediasByUserId)
 router.get('/:id', getSocialMediasById)
 router.post('/', addNewSocialMedia)
+router.delete('/:id', deleteSelectedSocialMedia)
 
 export default router;

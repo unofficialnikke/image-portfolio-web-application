@@ -23,11 +23,11 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/api/user', userroute)
-app.use('/api/category', categoryroute)
-app.use('/api/usercategory', userCategoryroute)
-app.use('/api/image', imageroute)
-app.use('/api/social', socialmedia)
+app.use('/api/users', userroute)
+app.use('/api/categories', categoryroute)
+app.use('/api/user-categories', userCategoryroute)
+app.use('/api/images', imageroute)
+app.use('/api/social-medias', socialmedia)
 app.use('/api/auth', authroute)
 
 app.get('/api/test', (req, res) => {

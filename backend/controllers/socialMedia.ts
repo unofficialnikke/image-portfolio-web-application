@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { createSocial, findAllSocials, findBySocialId, findSocialByUserId } from "../repositories/socialMediaRepository"
+import { createSocial, findAllSocials, findBySocialId, findSocialByUserId, deleteSocial } from "../repositories/socialMediaRepository"
 import { findUserById } from "../repositories/userRepository"
 
 export const getSocialMedias = async (req: Request, res: Response) => {
@@ -60,6 +60,23 @@ export const addNewSocialMedia = async (req: Request, res: Response) => {
         return res.status(200).json(insertedSocial)
     } catch (err) {
         console.error('Error adding new Social media', err);
+        return res.status(500).json('An error occurred');
+    }
+}
+
+export const deleteSelectedSocialMedia = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid Social Media ID');
+    }
+    try {
+        const deletedSocial = await deleteSocial(id)
+        if (!deletedSocial) {
+            return res.status(404).json('Social Media not found');
+        }
+        return res.status(200).json(deletedSocial);
+    } catch (err) {
+        console.error('Error deleting Social Media:', err);
         return res.status(500).json('An error occurred');
     }
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { createImage, findAllImages, findByImageId, findImageByUserId } from "../repositories/imageRepository"
+import { createImage, findAllImages, findByImageId, findImageByUserId, deleteImage } from "../repositories/imageRepository"
 import { findUserById } from "../repositories/userRepository"
 
 export const getImages = async (req: Request, res: Response) => {
@@ -59,6 +59,23 @@ export const addNewImage = async (req: Request, res: Response) => {
         return res.status(200).json(insertedImage)
     } catch (err) {
         console.error('Error adding new image', err);
+        return res.status(500).json('An error occurred');
+    }
+}
+
+export const deleteSelectedImage = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid image ID');
+    }
+    try {
+        const deletedImage = await deleteImage(id)
+        if (!deletedImage) {
+            return res.status(404).json('Image not found');
+        }
+        return res.status(200).json(deletedImage);
+    } catch (err) {
+        console.error('Error deleting image:', err);
         return res.status(500).json('An error occurred');
     }
 }

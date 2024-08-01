@@ -32,6 +32,15 @@ export const createUser = async (user: NewUser) => {
         .executeTakeFirstOrThrow()
 }
 
+export const deleteUser = async (id: number) => {
+    return await db
+        .deleteFrom('users')
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirst()
+}
+
+
 
 
 

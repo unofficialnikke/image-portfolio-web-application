@@ -31,3 +31,11 @@ export const createSocial = async (socialMedia: NewSocialMedia) => {
         .returningAll()
         .executeTakeFirstOrThrow()
 }
+
+export const deleteSocial = async (id: number) => {
+    return await db
+        .deleteFrom('social_media')
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirst()
+}

@@ -41,3 +41,11 @@ export const createCategory = async (category: NewCategory) => {
         .executeTakeFirstOrThrow()
 }
 
+export const deleteCategory = async (id: number) => {
+    return await db
+        .deleteFrom('category')
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirst()
+}
+

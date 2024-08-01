@@ -32,3 +32,11 @@ export const createImage = async (image: NewImage) => {
         .executeTakeFirstOrThrow()
 }
 
+export const deleteImage = async (id: number) => {
+    return await db
+        .deleteFrom('image')
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirst()
+}
+
