@@ -2,7 +2,7 @@ import { User } from "../type"
 
 export const getAllUsers = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}user/all`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}users`)
         const data = await response.json()
         return data
     } catch (err) {
@@ -12,7 +12,7 @@ export const getAllUsers = async () => {
 
 export const getuserById = async (id: string) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}user/${id}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}users/${id}`)
         const data: User | null = await response.json()
         return data
     } catch (err) {

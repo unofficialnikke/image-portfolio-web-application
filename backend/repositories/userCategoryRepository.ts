@@ -8,6 +8,15 @@ export const findAllUserCategories = async () => {
         .execute()
 }
 
+export const findAllCategoriesWithUserId = async () => {
+    return await db
+        .selectFrom('category')
+        .innerJoin('user_category', 'category.id', 'user_category.category_id')
+        .selectAll()
+        .execute()
+
+}
+
 export const findUserCategoryByUserId = async (userId: number) => {
     return await db
         .selectFrom('user_category')

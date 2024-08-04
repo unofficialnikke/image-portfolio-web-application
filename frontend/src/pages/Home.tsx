@@ -19,8 +19,6 @@ const Home = () => {
         fetchCategory()
     }, [])
 
-
-
     return (
         <div className='home'>
             {
@@ -63,7 +61,6 @@ const Home = () => {
                     </div>
                 )
             }
-
         </div>
     )
 }

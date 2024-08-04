@@ -21,3 +21,31 @@ export type User = {
     city: string
     introduction_text: string | null
 }
+
+export type Category = {
+    id: number
+    name: string
+    category_id: number
+    user_id: number
+}
+
+export type UserCategory = {
+    id: number
+    user_id: number
+    category_id: number
+}
+
+export type Image = {
+    id: number
+    user_id: number
+    image_url: string
+    upload_date: Date
+}
+
+export type SocialMedia = {
+    id: number
+    user_id: number
+    instagram_url: string
+    linkedin_url: string
+    portfolio_url: string
+}

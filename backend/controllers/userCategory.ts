@@ -1,5 +1,8 @@
 import { Request, Response } from "express"
-import { findAllUserCategories, findUserCategoryByUserId, findUserCategoryById, createUserCategory, findUserCategoryByIds, deleteUserCategory } from "../repositories/userCategoryRepository"
+import {
+    findAllUserCategories, findUserCategoryByUserId, findUserCategoryById,
+    createUserCategory, findUserCategoryByIds, deleteUserCategory, findAllCategoriesWithUserId
+} from "../repositories/userCategoryRepository"
 import { findUserById } from "../repositories/userRepository"
 import { findCategoryById } from "../repositories/categoryRepository"
 
@@ -15,7 +18,20 @@ export const getUserCategories = async (req: Request, res: Response) => {
         return res.status(500).json('An error occurred')
     }
 }
-export const getUserCategoriyByUserId = async (req: Request, res: Response) => {
+export const getCategoryNamesByUserId = async (req: Request, res: Response) => {
+    try {
+        const categories = await findAllCategoriesWithUserId()
+        if (categories.length === 0) {
+            return res.status(404).json('Categories not found')
+        }
+        res.status(200).json(categories)
+    } catch (err) {
+        console.error('Error fetching categories:', err)
+        return res.status(500).json('An error occurred')
+    }
+}
+
+export const getUserCategoryByUserId = async (req: Request, res: Response) => {
     const userId = parseInt(req.params.id, 10)
     try {
         const userCategories = await findUserCategoryByUserId(userId)
@@ -29,7 +45,7 @@ export const getUserCategoriyByUserId = async (req: Request, res: Response) => {
     }
 }
 
-export const getUserCategoriyById = async (req: Request, res: Response) => {
+export const getUserCategoryById = async (req: Request, res: Response) => {
     const userCategoryId = parseInt(req.params.id, 10)
     try {
         const userCategories = await findUserCategoryById(userCategoryId)
