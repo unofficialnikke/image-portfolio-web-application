@@ -22,7 +22,7 @@ const Home = () => {
     return (
         <div className='home'>
             {
-                users ? (
+                users && users.length > 0 ? (
                     <div className="profiles">
                         <button>Filter</button>
                         {users.map((user) => {
