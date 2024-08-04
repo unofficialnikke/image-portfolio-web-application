@@ -12,24 +12,24 @@ export const findAllCategoriesWithUserId = async () => {
     return await db
         .selectFrom('category')
         .innerJoin('user_category', 'category.id', 'user_category.category_id')
-        .selectAll()
+        .select([
+            'user_category.id as id',
+            'user_category.user_id as user_id',
+            'category.name as name'
+        ])
         .execute()
-
 }
 
 export const findUserCategoryByUserId = async (userId: number) => {
     return await db
         .selectFrom('user_category')
-        .selectAll()
         .where('user_id', '=', userId)
-        .execute()
-}
-
-export const findUserCategoryById = async (userCategoryId: number) => {
-    return await db
-        .selectFrom('user_category')
-        .selectAll()
-        .where('id', '=', userCategoryId)
+        .innerJoin('category', 'category.id', 'user_category.category_id')
+        .select([
+            'user_category.id as id',
+            'user_category.user_id as user_id',
+            'category.name as name'
+        ])
         .execute()
 }
 

@@ -1,24 +1,12 @@
 import { Request, Response } from "express"
 import {
-    findAllUserCategories, findUserCategoryByUserId, findUserCategoryById,
-    createUserCategory, findUserCategoryByIds, deleteUserCategory, findAllCategoriesWithUserId
+    findUserCategoryByUserId, createUserCategory,
+    findUserCategoryByIds, deleteUserCategory, findAllCategoriesWithUserId
 } from "../repositories/userCategoryRepository"
 import { findUserById } from "../repositories/userRepository"
 import { findCategoryById } from "../repositories/categoryRepository"
 
 export const getUserCategories = async (req: Request, res: Response) => {
-    try {
-        const userCategories = await findAllUserCategories()
-        if (userCategories.length === 0) {
-            return res.status(404).json('User categories not found')
-        }
-        res.status(200).json(userCategories)
-    } catch (err) {
-        console.error('Error fetching User categories:', err)
-        return res.status(500).json('An error occurred')
-    }
-}
-export const getCategoryNamesByUserId = async (req: Request, res: Response) => {
     try {
         const categories = await findAllCategoriesWithUserId()
         if (categories.length === 0) {
@@ -41,20 +29,6 @@ export const getUserCategoryByUserId = async (req: Request, res: Response) => {
         res.status(200).json(userCategories)
     } catch (err) {
         console.error('Error fetching User categories:', err)
-        return res.status(500).json('An error occurred')
-    }
-}
-
-export const getUserCategoryById = async (req: Request, res: Response) => {
-    const userCategoryId = parseInt(req.params.id, 10)
-    try {
-        const userCategories = await findUserCategoryById(userCategoryId)
-        if (!userCategories) {
-            return res.status(404).json('User categories not found')
-        }
-        res.status(200).json(userCategories)
-    } catch (err) {
-        console.error('Error fetching User categories by ID:', err)
         return res.status(500).json('An error occurred')
     }
 }
