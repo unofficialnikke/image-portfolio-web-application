@@ -49,6 +49,20 @@
             margin-bottom: 8px;
         }
 
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 2ch;
+            min-width: 400px;
+            min-height: 400px;
+            gap: 10px;
+            text-align: center;
+            background-color: colors.$formColor;
+
+        }
+
         .header {
             display: flex;
             flex-direction: column;
