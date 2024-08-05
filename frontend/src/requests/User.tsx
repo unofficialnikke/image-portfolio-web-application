@@ -7,16 +7,18 @@ export const getAllUsers = async () => {
         return data
     } catch (err) {
         console.log(`Error getting users: ${err}`)
+        return null
     }
 }
 
 export const getuserById = async (id: string) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}users/${id}`)
-        const data: User | null = await response.json()
+        const data: User = await response.json()
         return data
     } catch (err) {
         console.log(`Error getting users: ${err}`)
         return null
+
     }
 }

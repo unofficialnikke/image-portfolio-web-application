@@ -64,7 +64,9 @@
             border-radius: 2ch;
             gap: 25px;
             padding: 20px;
+            margin-top: 20px;
             margin-bottom: 40px;
+            min-width: 98%;
         }
 
         a {
@@ -86,7 +88,7 @@
             flex: 3;
             background-color: colors.$innerFormColor;
             border-radius: 2ch;
-            padding: 20px;
+            padding: 25px;
 
             hr {
                 color: white;
@@ -99,7 +101,6 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
-                padding: 10px;
                 text-align: center;
 
                 .username {
@@ -127,7 +128,7 @@
             flex: 8;
             background-color: colors.$innerFormColor;
             border-radius: 2ch;
-            padding: 20px;
+            padding: 25px;
 
             p {
                 overflow: hidden;
@@ -137,7 +138,6 @@
 
             h3 {
                 overflow: hidden;
-                margin-top: 10px;
             }
         }
 

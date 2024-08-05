@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/userContext'
 import { images } from '../mockdata/data'
-import { getUserCategoryByUserId } from '../requests/Category'
+import { getUserCategories } from '../requests/Category'
 import { Category } from '../type'
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
 
     useEffect(() => {
         const fetchCategory = async () => {
-            const fetchedCategories = await getUserCategoryByUserId()
+            const fetchedCategories = await getUserCategories()
             if (fetchedCategories) {
                 setCategories(fetchedCategories)
             }
@@ -22,7 +22,7 @@ const Home = () => {
     return (
         <div className='home'>
             {
-                users && users.length > 0 ? (
+                users ? (
                     <div className="profiles">
                         <button>Filter</button>
                         {users.map((user) => {

@@ -24,15 +24,8 @@ export type User = {
 
 export type Category = {
     id: number
+    user_id: number
     name: string
-    category_id: number
-    user_id: number
-}
-
-export type UserCategory = {
-    id: number
-    user_id: number
-    category_id: number
 }
 
 export type Image = {
