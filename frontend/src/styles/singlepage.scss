@@ -31,6 +31,24 @@
         margin-top: 20px;
         width: 85%;
 
+        .imageupload {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-self: flex-end;
+
+            label {
+                text-decoration: none;
+                font-weight: 800;
+                color: colors.$aColor;
+            }
+
+            label:hover {
+                color: rgba(255, 255, 255, 0.87);
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
 
         .carousel {
             display: flex;
@@ -51,7 +69,7 @@
                 gap: 25px;
 
                 img {
-                    max-height: 270px;
+                    max-height: 275px;
                     max-width: 500px;
                 }
             }

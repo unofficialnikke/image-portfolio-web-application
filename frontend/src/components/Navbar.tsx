@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import Logo from '../img/lilalokki.png'
 import Profile from '../img/doge.jpg'
 import { Link } from 'react-router-dom'

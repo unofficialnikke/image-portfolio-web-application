@@ -1,27 +1,31 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react'
 import useCarousel from '../hooks/useCarousel'
-import Image1 from '../img/1.jpg'
-import Image2 from '../img/2.jpg'
-import Image3 from '../img/3.jpg'
-import Image4 from '../img/4.jpg'
-import Image5 from '../img/5.jpg'
-import Image6 from '../img/6.jpg'
 import { useParams } from 'react-router-dom'
 import { getuserById } from '../requests/User'
 import { getUserCategoriesById } from '../requests/Category'
 import { getSocialMediaById } from '../requests/SocialMedia'
-import { User, Category, SocialMedia } from '../type'
+import { User, Category, SocialMedia, Image } from '../type'
+import { uploadImage, getImagesByUserId } from '../requests/Image'
 
 const Profile = () => {
-    const images = [Image1, Image2, Image3, Image4, Image5, Image6]
-    const { currentIndex, prevSlide, nextSlide, getImageIndex } = useCarousel(images)
+    const [file, setFile] = useState<File>()
     const [user, setUser] = useState<User | null>(null)
     const [userCategory, setUserCategory] = useState<Category[]>([])
     const [socialMedia, setSocialMedia] = useState<SocialMedia | null>(null)
+    const [images, setImages] = useState<Image[]>([])
+    const imageUrls = images.map(img => img.image_url)
+    const { currentIndex, prevSlide, nextSlide, getImageIndex } = useCarousel(imageUrls)
     const { userId } = useParams() as { userId: string }
 
+    const fetchImages = async (userId: string) => {
+        const fetchedImages = await getImagesByUserId(userId)
+        if (fetchedImages) {
+            setImages(fetchedImages)
+        }
+    }
+
     useEffect(() => {
-        const fetchUsers = async () => {
+        const fetchUserData = async () => {
             const fetchedUser = await getuserById(userId)
             const fetchedUserCategory = await getUserCategoriesById(userId)
             const fetchedSocialMedias = await getSocialMediaById(userId)
@@ -35,25 +39,56 @@ const Profile = () => {
                 setSocialMedia(fetchedSocialMedias)
             }
         }
-        fetchUsers()
+        fetchUserData()
+        fetchImages(userId)
     }, [userId])
+
+    const handleUploadImage: MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault()
+        if (!file) {
+            return console.log('No File selected')
+        }
+        try {
+            const data = await uploadImage(file, userId)
+            if (data) {
+                fetchImages(userId)
+                return console.log('Image uploaded successfully:', data);
+            }
+        } catch (err) {
+            console.log('Error uplaoding image: ', err)
+        }
+    }
+
+    const selectedFile = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files![0]
+        setFile(file)
+    }
 
     return (
         <div className='singlepage'>
             <div className="content">
-                <button className='b'>Edit profile</button>
+                <div className="imageupload">
+                    <input
+                        hidden={true}
+                        type='file'
+                        id='file'
+                        name='myImage'
+                        onChange={selectedFile}
+                    >
+                    </input>
+                    <label style={{ textDecoration: 'underline', marginRight: '10px' }} htmlFor='file'>Select image</label>
+                    <button onClick={handleUploadImage}>Submit</button>
+                </div>
                 <div className='carousel'>
                     <button onClick={prevSlide}>&lt;</button>
-                    <div className="image-container">
-                        <img
-                            src={images[getImageIndex(currentIndex)]}
-                        />
-                        <img
-                            src={images[getImageIndex(currentIndex + 1)]}
-                        />
-                        <img
-                            src={images[getImageIndex(currentIndex + 2)]}
-                        />
+                    <div className='image-container'>
+                        {imageUrls.length > 0 && (
+                            <>
+                                <img src={imageUrls[getImageIndex(currentIndex)]} />
+                                <img src={imageUrls[getImageIndex(currentIndex + 1)]} />
+                                <img src={imageUrls[getImageIndex(currentIndex + 2)]} />
+                            </>
+                        )}
                     </div>
                     <button onClick={nextSlide}>&gt;</button>
                 </div>
@@ -71,11 +106,19 @@ const Profile = () => {
 
                             </div>
                             <hr />
-                            <div className="contact">
-                                <h3>Contact:</h3>
-                                <p>{user?.email}</p>
-                                <p>{user?.phone}</p>
-                            </div>
+                            {!user?.phone && !user?.email ? (
+                                <div className="contact">
+                                    <h3>Contact:</h3>
+                                    <p>No Contacts</p>
+                                </div>
+                            ) : (
+                                <div className="contact">
+                                    <h3>Contact:</h3>
+                                    <p>{user?.email}</p>
+                                    <p>{user?.phone}</p>
+                                </div>
+                            )}
+
                             <hr />
                             <h3>Social media</h3>
                             {socialMedia?.id ? (
