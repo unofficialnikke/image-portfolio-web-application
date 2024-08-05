@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
-import { deleteUser, findAllUSers, findUserById } from "../repositories/userRepository"
+import { deleteUser, findAllUSers, findUserById, updateUser } from "../repositories/userRepository"
+import { UserUpdate } from "../types"
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -16,13 +17,32 @@ export const getUsers = async (req: Request, res: Response) => {
 }
 
 export const getUserById = async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id, 10)
+    const id = parseInt(req.params.id, 10)
     try {
-        const user = await findUserById(userId)
+        const user = await findUserById(id)
         if (!user) {
             return res.status(404).json('User not found')
         }
         res.status(200).json(user)
+    } catch (err) {
+        console.error('Error fetching user by ID:', err)
+        return res.status(500).json('An error occurred')
+    }
+}
+
+export const updateSelectedUser = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid user ID');
+    }
+    const updateData: UserUpdate = req.body
+    try {
+        const user = await findUserById(id)
+        if (!user) {
+            return res.status(404).json('User not found')
+        }
+        const updatedData = await updateUser(id, updateData)
+        return res.status(200).json(updatedData)
     } catch (err) {
         console.error('Error fetching user by ID:', err)
         return res.status(500).json('An error occurred')

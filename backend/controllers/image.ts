@@ -16,9 +16,9 @@ export const getImages = async (req: Request, res: Response) => {
 }
 
 export const getImageByUserId = async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id, 10)
+    const id = parseInt(req.params.id, 10)
     try {
-        const image = await findImageByUserId(userId)
+        const image = await findImageByUserId(id)
         if (!image) {
             return res.status(404).json('Image not found')
         }
@@ -30,9 +30,9 @@ export const getImageByUserId = async (req: Request, res: Response) => {
 }
 
 export const getImageById = async (req: Request, res: Response) => {
-    const imageId = parseInt(req.params.id, 10)
+    const id = parseInt(req.params.id, 10)
     try {
-        const image = await findByImageId(imageId)
+        const image = await findByImageId(id)
         if (!image) {
             return res.status(404).json('Image not found')
         }

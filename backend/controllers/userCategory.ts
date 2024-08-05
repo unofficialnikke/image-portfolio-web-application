@@ -20,9 +20,9 @@ export const getUserCategories = async (req: Request, res: Response) => {
 }
 
 export const getUserCategoryByUserId = async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id, 10)
+    const id = parseInt(req.params.id, 10)
     try {
-        const userCategories = await findUserCategoryByUserId(userId)
+        const userCategories = await findUserCategoryByUserId(id)
         if (!userCategories) {
             return res.status(404).json('User categories not found')
         }

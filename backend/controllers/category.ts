@@ -18,9 +18,9 @@ export const getCategories = async (req: Request, res: Response) => {
 }
 
 export const getCategoryById = async (req: Request, res: Response) => {
-    const categoryId = parseInt(req.params.id, 10)
+    const id = parseInt(req.params.id, 10)
     try {
-        const category = await findCategoryById(categoryId)
+        const category = await findCategoryById(id)
         if (!category) {
             return res.status(404).json('Category not found')
         }

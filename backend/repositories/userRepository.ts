@@ -4,7 +4,15 @@ import { UserUpdate, Users, NewUser } from "../types"
 export const findAllUSers = async () => {
     return await db
         .selectFrom('users')
-        .selectAll()
+        .select([
+            'id',
+            'firstname',
+            'lastname',
+            'email',
+            'city',
+            'phone',
+            'introduction_text'
+        ])
         .execute()
 }
 
@@ -19,7 +27,15 @@ export const findByUserEmail = async (email: string) => {
 export const findUserById = async (userId: number) => {
     return await db
         .selectFrom('users')
-        .selectAll()
+        .select([
+            'id',
+            'firstname',
+            'lastname',
+            'email',
+            'city',
+            'phone',
+            'introduction_text'
+        ])
         .where('id', '=', userId)
         .executeTakeFirst()
 }
@@ -29,6 +45,23 @@ export const createUser = async (user: NewUser) => {
         .insertInto('users')
         .values(user)
         .returningAll()
+        .executeTakeFirstOrThrow()
+}
+
+export const updateUser = async (id: number, updateWith: UserUpdate) => {
+    return db
+        .updateTable('users')
+        .set(updateWith)
+        .where('id', '=', id)
+        .returning([
+            'id',
+            'firstname',
+            'lastname',
+            'email',
+            'city',
+            'phone',
+            'introduction_text'
+        ])
         .executeTakeFirstOrThrow()
 }
 
