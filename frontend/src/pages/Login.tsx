@@ -24,9 +24,7 @@ const Login = () => {
             const result = await login(inputs)
             if (!result.success) {
                 setError(result.data as string)
-                console.log(result.data)
             } else {
-                console.log(result.data)
                 navigate('/')
                 window.location.reload()
             }

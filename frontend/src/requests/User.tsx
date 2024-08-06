@@ -4,9 +4,14 @@ export const getAllUsers = async () => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}users`)
         const data = await response.json()
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
         return data
-    } catch (err) {
-        console.log(`Error getting users: ${err}`)
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            console.error(`Error getting users: ${err.message}`)
+        }
         return null
     }
 }
@@ -16,9 +21,10 @@ export const getuserById = async (id: string) => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}users/${id}`)
         const data: User = await response.json()
         return data
-    } catch (err) {
-        console.log(`Error getting users: ${err}`)
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            console.error(`Error getting users: ${err.message}`)
+        }
         return null
-
     }
 }
