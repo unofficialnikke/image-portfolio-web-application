@@ -3,12 +3,18 @@ import { useState } from 'react'
 const useCarousel = (images: string[]) => {
     const [currentIndex, setCurrentIndex] = useState(0)
 
-    const prevSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+    const nextSlide = () => {
+        setCurrentIndex(index => {
+            if (index === images.length - 1) return 0
+            return index + 1
+        })
     }
 
-    const nextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+    const prevSlide = () => {
+        setCurrentIndex(index => {
+            if (index === 0) return images.length - 1
+            return index - 1
+        })
     }
 
     const getImageIndex = (index: number) => {
@@ -17,6 +23,7 @@ const useCarousel = (images: string[]) => {
 
     return {
         currentIndex,
+        setCurrentIndex,
         prevSlide,
         nextSlide,
         getImageIndex

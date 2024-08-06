@@ -54,23 +54,96 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
+            position: relative;
 
-            button {
-                background-color: colors.$deepBlack;
-                border: none;
-                color: white;
+            .img-slider-btn {
+                all: unset;
+                display: block;
+                position: absolute;
+                transform: translateY(400%);
                 font-size: 2rem;
-                position: flex;
-                transform: translateY(-200%);
+                padding: 0.5rem;
+                cursor: pointer;
+                transition: background-color 100ms ease-in-out;
+
+                &:hover {
+                    background-color: lighten(colors.$deepBlack, 5%);
+                }
             }
 
-            .image-container {
-                display: flex;
-                gap: 25px;
+            .img-slider-btn>* {
+                stroke: white;
+                fill: black;
+                width: 2rem;
+                height: 2rem;
+            }
 
-                img {
-                    max-height: 275px;
-                    max-width: 500px;
+
+            .image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                width: 750px;
+                height: 499px;
+
+                .slider-wrapper {
+                    display: flex;
+                    transition: transform 300ms ease-in-out;
+                    width: 100%;
+
+                    .slide {
+                        flex: 0 0 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            max-width: 750px;
+                            max-height: 499px;
+                            object-fit: contain;
+                        }
+                    }
+                }
+            }
+
+            .slider-buttons {
+                position: absolute;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                justify-content: center;
+
+                button {
+                    background-color: colors.$deepBlack;
+                    border: 2px solid white;
+                    color: white;
+                    font-size: 1rem;
+                    padding: 0.5rem;
+                    cursor: pointer;
+                    transition: background-color 100ms ease-in-out;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        width: 8px;
+                        height: 8px;
+                        background-color: white;
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%);
+                        opacity: 0;
+                    }
+
+                    &.active::before {
+                        opacity: 1;
+                    }
+
+                    &:hover {
+                        background-color: lighten(colors.$deepBlack, 10%);
+                    }
                 }
             }
         }

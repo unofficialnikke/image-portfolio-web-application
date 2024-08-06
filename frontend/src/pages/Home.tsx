@@ -1,19 +1,25 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/userContext'
-import { images } from '../mockdata/data'
 import { getUserCategories } from '../requests/Category'
-import { Category } from '../type'
+import { Category, Image } from '../type'
+import { getImages } from '../requests/Image'
 
 const Home = () => {
     const { users } = useContext(UserContext);
     const [categories, setCategories] = useState<Category[]>([])
+    const [image, setImage] = useState<Image[]>([])
 
     useEffect(() => {
         const fetchCategory = async () => {
             const fetchedCategories = await getUserCategories()
+            const fetchedImages = await getImages()
             if (fetchedCategories) {
                 setCategories(fetchedCategories)
+            }
+            if (fetchedImages) {
+                setImage(fetchedImages)
+                console.log(image)
             }
         }
         fetchCategory()
@@ -26,7 +32,8 @@ const Home = () => {
                     <div className="profiles">
                         <button>Filter</button>
                         {users.map((user) => {
-                            const userCategories = categories.filter(category => category.user_id === user.id);
+                            const userCategories = categories.filter(category => category.user_id === user.id)
+                            const userImages = image.filter(i => i.user_id === user.id).slice(0, 3)
                             return (
                                 <div key={user.id}>
                                     <div className="header">
@@ -42,9 +49,9 @@ const Home = () => {
                                     </div>
                                     <hr />
                                     <div className='image'>
-                                        {images.map(image => (
-                                            <div key={image.id}>
-                                                <img src={image.src} />
+                                        {userImages.map(image => (
+                                            <div key={image.id} className="image-container">
+                                                <img src={image.image_url} alt={`Image ${image.id}`} />
                                             </div>
                                         ))}
                                     </div>

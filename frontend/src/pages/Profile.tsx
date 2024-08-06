@@ -14,7 +14,7 @@ const Profile = () => {
     const [socialMedia, setSocialMedia] = useState<SocialMedia | null>(null)
     const [images, setImages] = useState<Image[]>([])
     const imageUrls = images.map(img => img.image_url)
-    const { currentIndex, prevSlide, nextSlide, getImageIndex } = useCarousel(imageUrls)
+    const { currentIndex, setCurrentIndex, prevSlide, nextSlide } = useCarousel(imageUrls)
     const { userId } = useParams() as { userId: string }
 
     const fetchImages = async (userId: string) => {
@@ -80,17 +80,26 @@ const Profile = () => {
                     <button onClick={handleUploadImage}>Submit</button>
                 </div>
                 <div className='carousel'>
-                    <button onClick={prevSlide}>&lt;</button>
-                    <div className='image-container'>
-                        {imageUrls.length > 0 && (
-                            <>
-                                <img src={imageUrls[getImageIndex(currentIndex)]} />
-                                <img src={imageUrls[getImageIndex(currentIndex + 1)]} />
-                                <img src={imageUrls[getImageIndex(currentIndex + 2)]} />
-                            </>
-                        )}
+                    <div className='image'>
+                        <div className='slider-wrapper' style={{ transform: `translateX(${-100 * currentIndex}%)` }}>
+                            {imageUrls.map((url, index) => (
+                                <div key={index} className='slide'>
+                                    <img src={url} alt={`Slide ${index}`} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <button onClick={nextSlide}>&gt;</button>
+                    <button className='img-slider-btn' style={{ left: 0 }} onClick={prevSlide}>&lt;</button>
+                    <button className='img-slider-btn' style={{ right: 0 }} onClick={nextSlide}>&gt;</button>
+                    <div className='slider-buttons'>
+                        {imageUrls.map((_, index) => (
+                            <button
+                                key={index}
+                                className={index === currentIndex ? 'active' : ''}
+                                onClick={() => setCurrentIndex(index)}
+                            />
+                        ))}
+                    </div>
                 </div>
                 <form>
                     <div className='leftcontent'>
