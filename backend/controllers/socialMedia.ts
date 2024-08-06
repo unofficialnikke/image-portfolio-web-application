@@ -62,7 +62,7 @@ export const addNewSocialMedia = async (req: Request, res: Response) => {
             portfolio_url
         }
         const insertedSocial = await createSocialMedia(newSocial)
-        return res.status(200).json(insertedSocial)
+        return res.status(201).json(insertedSocial)
     } catch (err) {
         console.error('Error adding new Social media', err);
         return res.status(500).json('An error occurred');

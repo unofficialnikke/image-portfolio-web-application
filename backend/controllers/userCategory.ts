@@ -53,7 +53,7 @@ export const addNewUserCategory = async (req: Request, res: Response) => {
             user_id
         }
         const insertedUserCategory = await createUserCategory(newUserCategory)
-        return res.status(200).json(insertedUserCategory)
+        return res.status(201).json(insertedUserCategory)
     } catch (err) {
         console.error('Error adding new User categories', err);
         return res.status(500).json('An error occurred');

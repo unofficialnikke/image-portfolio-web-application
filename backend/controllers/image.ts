@@ -3,7 +3,7 @@ import { createImage, findAllImages, findByImageId, findImageByUserId, deleteIma
 import { findUserById } from "../repositories/userRepository"
 import crypto from 'crypto'
 import sharp from "sharp"
-import { uploadFile, getObjectSignedUrl } from "../s3"
+import { uploadFile, getObjectSignedUrl, deleteFile } from "../s3"
 
 const randomImageName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
 
@@ -12,6 +12,9 @@ export const getImages = async (req: Request, res: Response) => {
         const images = await findAllImages()
         if (images.length === 0) {
             return res.status(404).json('Images not found')
+        }
+        for (const i of images) {
+            i.image_url = await getObjectSignedUrl(i.image_url)
         }
         res.status(200).json(images)
     } catch (err) {
@@ -23,14 +26,14 @@ export const getImages = async (req: Request, res: Response) => {
 export const getImageByUserId = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
     try {
-        const image = await findImageByUserId(id)
-        if (!image) {
+        const images = await findImageByUserId(id)
+        if (!images) {
             return res.status(404).json('Image not found')
         }
-        for (const i of image) {
+        for (const i of images) {
             i.image_url = await getObjectSignedUrl(i.image_url)
         }
-        res.send(image)
+        res.send(images)
     } catch (err) {
         console.error('Error fetching image by ID:', err)
         return res.status(500).json('An error occurred')
@@ -70,7 +73,7 @@ export const addNewImage = async (req: Request, res: Response) => {
             upload_date
         }
         const insertedImage = await createImage(newImage)
-        return res.status(200).json(insertedImage)
+        return res.status(201).json(insertedImage)
     } catch (err) {
         console.error('Error adding new image', err);
         return res.status(500).json('An error occurred');
@@ -87,6 +90,7 @@ export const deleteSelectedImage = async (req: Request, res: Response) => {
         if (!deletedImage) {
             return res.status(404).json('Image not found');
         }
+        await deleteFile(deletedImage.image_url)
         return res.status(200).json(deletedImage);
     } catch (err) {
         console.error('Error deleting image:', err);

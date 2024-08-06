@@ -22,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
             introduction_text
         }
         const insertedUser = await createUser(newUser)
-        return res.status(200).json(insertedUser)
+        return res.status(201).json(insertedUser)
     } catch (err) {
         console.error('Error during user registration:', err);
         return res.status(500).json('An error occurred');

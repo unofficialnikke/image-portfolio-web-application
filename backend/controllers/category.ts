@@ -42,7 +42,7 @@ export const addNewCategory = async (req: Request, res: Response) => {
             name
         }
         const insertedCategory = await createCategory(newCategory)
-        return res.status(200).json(insertedCategory)
+        return res.status(201).json(insertedCategory)
     } catch (err) {
         console.error('Error adding new category', err);
         return res.status(500).json('An error occurred');
