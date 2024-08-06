@@ -157,7 +157,7 @@
             padding: 20px;
             margin-top: 20px;
             margin-bottom: 40px;
-            min-width: 98%;
+            max-width: 95%;
         }
 
         a {
@@ -176,7 +176,7 @@
         .leftcontent {
             display: flex;
             flex-direction: column;
-            flex: 3;
+            flex: 4;
             background-color: colors.$innerFormColor;
             border-radius: 2ch;
             padding: 25px;
@@ -216,10 +216,11 @@
 
         .rightcontent {
             flex-direction: column;
-            flex: 8;
+            flex: 6;
             background-color: colors.$innerFormColor;
             border-radius: 2ch;
             padding: 25px;
+            min-width: 65%;
 
             p {
                 overflow: hidden;
