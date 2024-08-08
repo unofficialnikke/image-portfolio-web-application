@@ -1,8 +1,10 @@
 import { db } from "../config/db"
+import { getObjectSignedUrl } from "../config/s3"
 import { UserUpdate, Users, NewUser } from "../types"
+import { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/postgres'
 
 export const findAllUSers = async () => {
-    return await db
+    const users = await db
         .selectFrom('users')
         .select([
             'id',
@@ -13,7 +15,46 @@ export const findAllUSers = async () => {
             'phone',
             'introduction_text'
         ])
+        .select((eb) => [
+            jsonArrayFrom(
+                eb.selectFrom('image')
+                    .selectAll()
+                    .whereRef('users.id', '=', 'image.user_id')
+                    .orderBy('image.id')
+            ).as('images')
+        ])
+        .select((eb) => [
+            jsonObjectFrom(
+                eb.selectFrom('social_media')
+                    .selectAll()
+                    .whereRef('users.id', '=', 'social_media.user_id')
+                    .orderBy('social_media.id')
+            ).as('social_medias')
+        ])
+        .select((eb) => [
+            jsonArrayFrom(
+                eb.selectFrom('user_category')
+                    .whereRef('users.id', '=', 'user_category.user_id')
+                    .innerJoin('category', 'category.id', 'user_category.category_id')
+                    .select([
+                        'user_category.id as id',
+                        'user_category.user_id as user_id',
+                        'category.name as name'
+                    ])
+                    .orderBy('category.name')
+            ).as('categories')
+        ])
+        .orderBy('users.id')
         .execute()
+
+    for (const user of users) {
+        if (user?.images) {
+            for (const image of user.images) {
+                image.image_url = await getObjectSignedUrl(image.image_url)
+            }
+        }
+    }
+    return users
 }
 
 export const findByUserEmail = async (email: string) => {
@@ -25,7 +66,7 @@ export const findByUserEmail = async (email: string) => {
 }
 
 export const findUserById = async (userId: number) => {
-    return await db
+    const user = await db
         .selectFrom('users')
         .select([
             'id',
@@ -36,8 +77,44 @@ export const findUserById = async (userId: number) => {
             'phone',
             'introduction_text'
         ])
+        .select((eb) => [
+            jsonArrayFrom(
+                eb.selectFrom('image')
+                    .selectAll()
+                    .whereRef('users.id', '=', 'image.user_id')
+                    .orderBy('image.id')
+            ).as('images')
+        ])
+        .select((eb) => [
+            jsonObjectFrom(
+                eb.selectFrom('social_media')
+                    .selectAll()
+                    .whereRef('users.id', '=', 'social_media.user_id')
+                    .orderBy('social_media.id')
+            ).as('social_medias')
+        ])
+        .select((eb) => [
+            jsonArrayFrom(
+                eb.selectFrom('user_category')
+                    .whereRef('users.id', '=', 'user_category.user_id')
+                    .innerJoin('category', 'category.id', 'user_category.category_id')
+                    .select([
+                        'user_category.id as id',
+                        'user_category.user_id as user_id',
+                        'category.name as name'
+                    ])
+                    .orderBy('category.name')
+            ).as('categories')
+        ])
         .where('id', '=', userId)
         .executeTakeFirst()
+
+    if (user?.images) {
+        for (const image of user.images) {
+            image.image_url = await getObjectSignedUrl(image.image_url)
+        }
+    }
+    return user
 }
 
 export const createUser = async (user: NewUser) => {

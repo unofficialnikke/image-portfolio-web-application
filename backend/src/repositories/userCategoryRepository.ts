@@ -3,13 +3,6 @@ import { UserCategoryUpdate, UserCategory, NewUserCategory } from "../types"
 
 export const findAllUserCategories = async () => {
     return await db
-        .selectFrom('user_category')
-        .selectAll()
-        .execute()
-}
-
-export const findAllCategoriesWithUserId = async () => {
-    return await db
         .selectFrom('category')
         .innerJoin('user_category', 'category.id', 'user_category.category_id')
         .select([

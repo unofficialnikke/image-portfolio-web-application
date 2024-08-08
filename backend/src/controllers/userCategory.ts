@@ -1,14 +1,14 @@
 import { Request, Response } from "express"
 import {
     findUserCategoryByUserId, createUserCategory,
-    findUserCategoryByIds, deleteUserCategory, findAllCategoriesWithUserId
+    findUserCategoryByIds, deleteUserCategory, findAllUserCategories
 } from "../repositories/userCategoryRepository"
 import { findUserById } from "../repositories/userRepository"
 import { findCategoryById } from "../repositories/categoryRepository"
 
 export const getUserCategories = async (req: Request, res: Response) => {
     try {
-        const categories = await findAllCategoriesWithUserId()
+        const categories = await findAllUserCategories()
         if (categories.length === 0) {
             return res.status(404).json('Categories not found')
         }
