@@ -67,7 +67,7 @@
                 transition: background-color 100ms ease-in-out;
 
                 &:hover {
-                    background-color: lighten(colors.$deepBlack, 5%);
+                    background-color: rgba(1, 0, 0, 0.4);
                 }
             }
 
@@ -155,8 +155,8 @@
             border-radius: 2ch;
             gap: 25px;
             padding: 20px;
-            margin-top: 20px;
-            margin-bottom: 40px;
+            margin-top: 10px;
+            margin-bottom: 30px;
             max-width: 95%;
         }
 
