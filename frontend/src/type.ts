@@ -12,16 +12,6 @@ export type LoginInputs = {
     password: string
 }
 
-export type User = {
-    id: number
-    firstname: string
-    lastname: string
-    email: string
-    phone: string | null
-    city: string
-    introduction_text: string | null
-}
-
 export type Category = {
     id: number
     user_id: number
@@ -41,4 +31,17 @@ export type SocialMedia = {
     instagram_url: string
     linkedin_url: string
     portfolio_url: string
+}
+
+export type User = {
+    id: number
+    firstname: string
+    lastname: string
+    email: string
+    phone: string | null
+    city: string
+    introduction_text: string | null
+    images: Image[]
+    social_medias: SocialMedia
+    categories: Category[]
 }

@@ -2,45 +2,27 @@ import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react'
 import useCarousel from '../hooks/useCarousel'
 import { useParams } from 'react-router-dom'
 import { getuserById } from '../requests/User'
-import { getUserCategoriesById } from '../requests/Category'
-import { getSocialMediaById } from '../requests/SocialMedia'
-import { User, Category, SocialMedia, Image } from '../type'
-import { uploadImage, getImagesByUserId } from '../requests/Image'
+import { User } from '../type'
+import { uploadImage } from '../requests/Image'
 
 const Profile = () => {
     const [file, setFile] = useState<File>()
     const [user, setUser] = useState<User | null>(null)
-    const [userCategory, setUserCategory] = useState<Category[]>([])
-    const [socialMedia, setSocialMedia] = useState<SocialMedia | null>(null)
-    const [images, setImages] = useState<Image[]>([])
-    const imageUrls = images.map(img => img.image_url)
-    const { currentIndex, setCurrentIndex, prevSlide, nextSlide } = useCarousel(imageUrls)
+    const imageUrls = user?.images.map(img => img.image_url)
+    const { currentIndex, setCurrentIndex, prevSlide, nextSlide } = useCarousel(imageUrls!)
     const { userId } = useParams() as { userId: string }
+    const socialMedias = user?.social_medias
 
-    const fetchImages = async (userId: string) => {
-        const fetchedImages = await getImagesByUserId(userId)
-        if (fetchedImages) {
-            setImages(fetchedImages)
+    const fetchUserData = async (userId: string) => {
+        const fetchedUser = await getuserById(userId)
+        if (fetchedUser) {
+            setUser(fetchedUser)
         }
     }
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            const fetchedUser = await getuserById(userId)
-            const fetchedUserCategory = await getUserCategoriesById(userId)
-            const fetchedSocialMedias = await getSocialMediaById(userId)
-            if (fetchedUser) {
-                setUser(fetchedUser)
-            }
-            if (fetchedUserCategory) {
-                setUserCategory(fetchedUserCategory)
-            }
-            if (fetchedSocialMedias) {
-                setSocialMedia(fetchedSocialMedias)
-            }
-        }
-        fetchUserData()
-        fetchImages(userId)
+        fetchUserData(userId)
+        console.log('fetch')
     }, [userId])
 
     const handleUploadImage: MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -51,8 +33,8 @@ const Profile = () => {
         try {
             const data = await uploadImage(file, userId)
             if (data) {
-                fetchImages(userId)
-                return console.log('Image uploaded successfully:', data);
+                console.log('Image uploaded successfully:', data)
+                await fetchUserData(userId)
             }
         } catch (err) {
             console.log('Error uplaoding image: ', err)
@@ -82,9 +64,9 @@ const Profile = () => {
                 <div className='carousel'>
                     <div className='image'>
                         <div className='slider-wrapper' style={{ transform: `translateX(${-100 * currentIndex}%)` }}>
-                            {imageUrls.map((url, index) => (
-                                <div key={index} className='slide'>
-                                    <img src={url} alt={`Slide ${index}`} />
+                            {user?.images.map((image, index) => (
+                                <div key={image.id} className='slide'>
+                                    <img src={image.image_url} alt={`Slide ${index}`} />
                                 </div>
                             ))}
                         </div>
@@ -92,7 +74,7 @@ const Profile = () => {
                     <button className='img-slider-btn' style={{ left: 0 }} onClick={prevSlide}>&lt;</button>
                     <button className='img-slider-btn' style={{ right: 0 }} onClick={nextSlide}>&gt;</button>
                     <div className='slider-buttons'>
-                        {imageUrls.map((_, index) => (
+                        {user?.images.map((_, index) => (
                             <button
                                 key={index}
                                 className={index === currentIndex ? 'active' : ''}
@@ -107,10 +89,10 @@ const Profile = () => {
                             <div className="username">
                                 <h3>{user?.firstname} {user?.lastname}</h3>
                                 <h4>{user?.city}</h4>
-                                {userCategory.length === 0 ? (
+                                {user?.categories.length === 0 ? (
                                     <p>No categories</p>
                                 ) : (
-                                    <p>{userCategory.map(category => category.name).join(', ')}</p>
+                                    <p>{user?.categories.map(category => category.name).join(', ')}</p>
                                 )}
 
                             </div>
@@ -130,12 +112,13 @@ const Profile = () => {
 
                             <hr />
                             <h3>Social media</h3>
-                            {socialMedia?.id ? (
+                            {socialMedias ? (
                                 <div className="socialmedia">
-                                    <a>{socialMedia.instagram_url}</a>
-                                    <a>{socialMedia.linkedin_url}</a>
-                                    <a>{socialMedia.portfolio_url}</a>
+                                    <a>{socialMedias.instagram_url}</a>
+                                    <a>{socialMedias.linkedin_url}</a>
+                                    <a>{socialMedias.portfolio_url}</a>
                                 </div>
+
                             ) : (
                                 <div className="socialmedia">
                                     <p>No Social medias</p>

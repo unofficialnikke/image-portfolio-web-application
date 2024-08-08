@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { LoginInputs } from '../type'
 import { AuthContext } from '../context/authContext'
-import { validLogin } from '../functions/Validation'
+import { validLogin } from '../utils/Validation'
 
 const Login = () => {
     const { currentUser, logout } = useContext(AuthContext)
@@ -26,7 +26,6 @@ const Login = () => {
                 setError(result.data as string)
             } else {
                 navigate('/')
-                window.location.reload()
             }
         }
     }

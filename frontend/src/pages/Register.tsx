@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { addNewUser } from '../requests/Auth'
 import { RegisterInputs } from '../type'
-import { validRegistration } from '../functions/Validation'
+import { validRegistration } from '../utils/Validation'
 import { AuthContext } from '../context/authContext'
 
 const Register = () => {
@@ -35,6 +35,7 @@ const Register = () => {
             } else {
                 console.log(result.data)
                 navigate('/login')
+                window.location.reload()
             }
         }
     }

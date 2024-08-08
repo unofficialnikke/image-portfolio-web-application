@@ -1,29 +1,9 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/userContext'
-import { getUserCategories } from '../requests/Category'
-import { Category, Image } from '../type'
-import { getImages } from '../requests/Image'
 
 const Home = () => {
     const { users } = useContext(UserContext);
-    const [categories, setCategories] = useState<Category[]>([])
-    const [image, setImage] = useState<Image[]>([])
-
-    useEffect(() => {
-        const fetchCategory = async () => {
-            const fetchedCategories = await getUserCategories()
-            const fetchedImages = await getImages()
-            if (fetchedCategories) {
-                setCategories(fetchedCategories)
-            }
-            if (fetchedImages) {
-                setImage(fetchedImages)
-                console.log(image)
-            }
-        }
-        fetchCategory()
-    }, [])
 
     return (
         <div className='home'>
@@ -32,8 +12,8 @@ const Home = () => {
                     <div className="profiles">
                         <button>Filter</button>
                         {users.map((user) => {
-                            const userCategories = categories.filter(category => category.user_id === user.id)
-                            const userImages = image.filter(i => i.user_id === user.id).slice(0, 3)
+                            const userCategories = user.categories.filter(category => category.user_id === user.id)
+                            const userImages = user.images.filter(i => i.user_id === user.id).slice(0, 3)
                             return (
                                 <div key={user.id}>
                                     <div className="header">
