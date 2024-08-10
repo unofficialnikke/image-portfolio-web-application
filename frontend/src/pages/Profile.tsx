@@ -1,12 +1,16 @@
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useCarousel from '../hooks/useCarousel'
 import { useParams } from 'react-router-dom'
 import { getuserById } from '../requests/User'
 import { User } from '../type'
-import { uploadImage } from '../requests/Image'
+import UserDialog from '../components/UserDialog'
+import IntroDialog from '../components/IntroDialog'
+import ImageDialog from '../components/ImageDialog'
 
 const Profile = () => {
-    const [file, setFile] = useState<File>()
+    const [userDialog, setUserDialog] = useState(false)
+    const [introDialog, setIntroDialog] = useState(false)
+    const [imageDialog, setImageDialog] = useState(false)
     const [user, setUser] = useState<User | null>(null)
     const imageUrls = user?.images.map(img => img.image_url)
     const { currentIndex, setCurrentIndex, prevSlide, nextSlide } = useCarousel(imageUrls!)
@@ -20,46 +24,24 @@ const Profile = () => {
         }
     }
 
+    const handleCloseUser = () => {
+        setUserDialog(false)
+    }
+
+    const handleCloseIntro = () => {
+        setIntroDialog(false)
+    }
+
     useEffect(() => {
         fetchUserData(userId)
         console.log('fetch')
     }, [userId])
 
-    const handleUploadImage: MouseEventHandler<HTMLButtonElement> = async (e) => {
-        e.preventDefault()
-        if (!file) {
-            return console.log('No File selected')
-        }
-        try {
-            const data = await uploadImage(file, userId)
-            if (data) {
-                console.log('Image uploaded successfully:', data)
-                await fetchUserData(userId)
-            }
-        } catch (err) {
-            console.log('Error uplaoding image: ', err)
-        }
-    }
-
-    const selectedFile = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files![0]
-        setFile(file)
-    }
-
     return (
         <div className='singlepage'>
             <div className="content">
                 <div className="imageupload">
-                    <input
-                        hidden={true}
-                        type='file'
-                        id='file'
-                        name='myImage'
-                        onChange={selectedFile}
-                    >
-                    </input>
-                    <label style={{ textDecoration: 'underline', marginRight: '10px' }} htmlFor='file'>Select image</label>
-                    <button onClick={handleUploadImage}>Submit</button>
+                    <button onClick={() => setImageDialog(true)}>+ Add images</button>
                 </div>
                 <div className='carousel'>
                     <div className='image'>
@@ -85,6 +67,9 @@ const Profile = () => {
                 </div>
                 <form>
                     <div className='leftcontent'>
+                        <div className="edit-button">
+                            <a onClick={() => setUserDialog(true)}>(Edit)</a>
+                        </div>
                         <div className='usercontent'>
                             <div className="username">
                                 <h3>{user?.firstname} {user?.lastname}</h3>
@@ -127,6 +112,9 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className='rightcontent'>
+                        <div className="edit-button">
+                            <a onClick={() => setIntroDialog(true)}>(Edit)</a>
+                        </div>
                         <h3>Introduction:</h3>
                         {user?.introduction_text ? (
                             <p>{user?.introduction_text}</p>
@@ -136,6 +124,10 @@ const Profile = () => {
                     </div>
                 </form>
             </div>
+            <UserDialog isOpen={userDialog} onClose={handleCloseUser} />
+            <IntroDialog isOpen={introDialog} onClose={handleCloseIntro} />
+            <ImageDialog isOpen={imageDialog} setImageDialog={setImageDialog} fetchUserData={fetchUserData} userId={userId}
+            />
         </div>
     )
 }

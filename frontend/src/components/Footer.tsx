@@ -1,4 +1,4 @@
-import Logo from '../public/lilalokki.png'
+import Logo from '../../public/lilalokki.png'
 
 const Footer = () => {
     return (

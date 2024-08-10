@@ -24,21 +24,19 @@
             gap: 20px;
 
             h1 {
-                font-size: 34px;
-                text-decoration: underline;
+                font-size: 36px;
+            }
+
+            h1:hover {
+                color: colors.$aHover;
+                cursor: pointer;
+                color: colors.$aHoverWhite;
             }
 
             a {
                 text-decoration: none;
                 color: colors.$aColor;
             }
-
-            a:hover {
-                color: rgba(255, 255, 255, 0.87);
-                cursor: pointer;
-            }
-
-            .link {}
         }
 
         .logo {

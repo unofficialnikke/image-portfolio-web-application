@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import Logo from '../public/lilalokki.png'
-import Profile from '../public/doge.jpg'
+import Logo from '../../public/lilalokki.png'
+import Profile from '../../public/doge.jpg'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
 
