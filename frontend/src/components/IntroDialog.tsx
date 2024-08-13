@@ -1,11 +1,11 @@
 import React from 'react'
 
 type FilterProps = {
-    onClose: () => void;
-    isOpen: boolean;
+    setIntroDialog: React.Dispatch<React.SetStateAction<boolean>>
+    isOpen: boolean
 };
 
-const IntroDialog = ({ isOpen, onClose }: FilterProps) => {
+const IntroDialog = ({ isOpen, setIntroDialog }: FilterProps) => {
     return (
         <>
             {isOpen && (
@@ -13,7 +13,9 @@ const IntroDialog = ({ isOpen, onClose }: FilterProps) => {
                     <div className='backshadow'>
                         <div className="custom-modal">
                             <p>Introduction edit</p>
-                            <button onClick={onClose}>Close</button>
+                            <div className='close-button'>
+                                <button onClick={() => setIntroDialog(false)}>Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>

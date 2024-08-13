@@ -1,11 +1,11 @@
 import React from 'react'
 
 type FilterProps = {
-    onClose: () => void;
-    isOpen: boolean;
+    setUserDialog: React.Dispatch<React.SetStateAction<boolean>>
+    isOpen: boolean
 };
 
-const UserDialog = ({ isOpen, onClose }: FilterProps) => {
+const UserDialog = ({ isOpen, setUserDialog }: FilterProps) => {
     return (
         <>
             {isOpen && (
@@ -13,7 +13,9 @@ const UserDialog = ({ isOpen, onClose }: FilterProps) => {
                     <div className='backshadow'>
                         <div className="custom-modal">
                             <p>User info edit</p>
-                            <button onClick={onClose}>Close</button>
+                            <div className='close-button'>
+                                <button onClick={() => setUserDialog(false)}>Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>

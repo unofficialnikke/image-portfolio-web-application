@@ -1,6 +1,4 @@
 import { useContext } from 'react'
-import Logo from '../../public/lilalokki.png'
-import Profile from '../../public/doge.jpg'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
 
@@ -15,7 +13,7 @@ const Navbar = () => {
                 </div>
                 <div className="logo">
                     <Link to={'/'}>
-                        <img src={Logo} alt='logo' />
+                        <img src='/lilalokki.png' alt='logo' />
                     </Link>
                 </div>
                 <div className='userprofile'>
@@ -40,7 +38,7 @@ const Navbar = () => {
                         currentUser ? (
                             <div className="profile">
                                 <Link to={`/profile/${currentUser.id}`}>
-                                    <img src={Profile}
+                                    <img src='/doge.jpg'
                                     />
                                 </Link>
                                 <span>{currentUser.firstname}</span>
