@@ -13,7 +13,7 @@ const Home = () => {
                         <button>Filter</button>
                         {users.map((user) => {
                             const userCategories = user.categories.filter(category => category.user_id === user.id)
-                            const userImages = user.images.filter(i => i.user_id === user.id).slice(0, 3)
+                            const userImages = user.images.filter(i => i.user_id === user.id)
                             return (
                                 <div key={user.id}>
                                     <div className="header">
@@ -29,7 +29,7 @@ const Home = () => {
                                     </div>
                                     <hr />
                                     <div className='image'>
-                                        {userImages.map(image => (
+                                        {userImages.filter(image => image.is_favorite === true).map(image => (
                                             <div key={image.id} className="image-container">
                                                 <img src={image.image_url} alt={`Image ${image.id}`} />
                                             </div>

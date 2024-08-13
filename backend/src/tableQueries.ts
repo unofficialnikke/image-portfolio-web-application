@@ -29,6 +29,7 @@ export const createImagesQuery =
             user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
             image_url TEXT NOT NULL,
             upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            is_favorite boolean,
             CONSTRAINT fk_user 
                 FOREIGN KEY (user_id) 
                 REFERENCES users(id) 

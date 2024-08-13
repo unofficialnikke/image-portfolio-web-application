@@ -1,23 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import useCarousel from '../hooks/useCarousel'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getuserById } from '../requests/User'
 import { Image, User } from '../type'
 import UserDialog from '../components/UserDialog'
 import IntroDialog from '../components/IntroDialog'
 import ImageDialog from '../components/ImageDialog'
 import { deleteImage, updateImage } from '../requests/Image'
+import { UserContext } from '../context/userContext'
 
 const Profile = () => {
     const [userDialog, setUserDialog] = useState(false)
-    const [error, setError] = useState<string | null>(null)
     const [introDialog, setIntroDialog] = useState(false)
     const [imageDialog, setImageDialog] = useState(false)
+    const { setUserFetch } = useContext(UserContext)
+    const [error, setError] = useState<string | null>(null)
     const [user, setUser] = useState<User | null>(null)
     const imageUrls = user?.images.map(img => img.image_url)
     const { currentIndex, setCurrentIndex, prevSlide, nextSlide } = useCarousel(imageUrls!)
     const { userId } = useParams() as { userId: string }
     const socialMedias = user?.social_medias
+    const navigate = useNavigate();
 
     const fetchUserData = async (userId: string) => {
         const fetchedUser = await getuserById(userId)
@@ -35,6 +38,7 @@ const Profile = () => {
         try {
             await deleteImage(id)
             fetchUserData(userId)
+            setUserFetch(true)
             if (currentIndex + 1 === imageUrls!.length) {
                 setCurrentIndex(currentIndex - 1)
             }
@@ -54,6 +58,7 @@ const Profile = () => {
             if (!result.success) {
                 setError(result.data)
             } else {
+                setUserFetch(true)
                 setError(null)
                 console.log('Image updated succesfully!')
                 fetchUserData(userId)
@@ -67,8 +72,9 @@ const Profile = () => {
     return (
         <div className='singlepage'>
             <div className="content">
-                <div className="imageupload">
-                    <button onClick={() => setImageDialog(true)}>+ Add images</button>
+                <div className="button-row">
+                    <button className='back-button' onClick={() => navigate('/')}>Back</button>
+                    <button className='imageupload' onClick={() => setImageDialog(true)}>+ Add images</button>
                 </div>
                 {error && <p className='error'>{error}</p>}
                 <div className='carousel'>

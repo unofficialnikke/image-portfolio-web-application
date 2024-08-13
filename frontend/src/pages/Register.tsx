@@ -5,6 +5,7 @@ import { addNewUser } from '../requests/Auth'
 import { RegisterInputs } from '../type'
 import { validRegistration } from '../utils/Validation'
 import { AuthContext } from '../context/authContext'
+import { UserContext } from '../context/userContext'
 
 const Register = () => {
     const { currentUser, logout } = useContext(AuthContext)
@@ -19,6 +20,7 @@ const Register = () => {
     })
     const [passwordCheck, setPasswordCheck] = useState('')
     const [error, setError] = useState<string | null>(null)
+    const { setUserFetch } = useContext(UserContext)
     const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,8 +36,8 @@ const Register = () => {
                 console.log(result.data)
             } else {
                 console.log(result.data)
+                setUserFetch(true)
                 navigate('/login')
-                window.location.reload()
             }
         }
     }

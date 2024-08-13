@@ -44,22 +44,18 @@
             align-items: center;
         }
 
-        .imageupload {
+        .button-row {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-self: flex-end;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
 
-            label {
-                text-decoration: underline;
-                margin-right: 10px;
-                font-weight: 800;
-                color: colors.$aColor;
+            .imageupload {
+                align-self: flex-end;
             }
 
-            label:hover {
-                color: rgba(255, 255, 255, 0.87);
-                cursor: pointer;
+            .back-button {
+                align-items: flex-start;
             }
         }
 
@@ -121,8 +117,8 @@
                         .button-base {
                             position: absolute;
                             top: 10px;
-                            padding: 7px 10px;
-                            font-size: 18px;
+                            padding: 5px 10px;
+                            font-size: 16px;
                             cursor: pointer;
                             z-index: 2;
                             border-radius: 8px;
@@ -134,16 +130,16 @@
                             @extend .button-base;
                             left: 10px;
 
-                            color: rgb(11, 170, 11);
+                            color: colors.$brightColor;
 
                             &:hover {
-                                background-color: rgb(11, 170, 11);
+                                background-color: colors.$brightColor;
                                 color: colors.$aHoverWhite;
                             }
                         }
 
                         .favorite_active {
-                            background-color: rgb(11, 170, 11);
+                            background-color: colors.$brightColor;
                             color: colors.$aHoverWhite;
                         }
 

@@ -1,5 +1,6 @@
-import { ChangeEvent, MouseEventHandler, useState } from 'react'
+import { ChangeEvent, MouseEventHandler, useContext, useState } from 'react'
 import { uploadImage } from '../requests/Image';
+import { UserContext } from '../context/userContext';
 
 type FilterProps = {
     setImageDialog: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +12,7 @@ type FilterProps = {
 const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterProps) => {
     const [file, setFile] = useState<File | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const { setUserFetch } = useContext(UserContext)
 
     const onClose = () => {
         setFile(null)
@@ -29,6 +31,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                 setError(result.data as string)
 
             } else {
+                setUserFetch(true)
                 console.log('Image uploaded successfully:', result)
                 await fetchUserData(userId)
                 setFile(null)
