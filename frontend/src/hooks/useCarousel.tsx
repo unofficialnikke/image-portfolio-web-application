@@ -17,16 +17,11 @@ const useCarousel = (images: string[]) => {
         })
     }
 
-    const getImageIndex = (index: number) => {
-        return (index + images.length) % images.length;
-    };
-
     return {
         currentIndex,
         setCurrentIndex,
         prevSlide,
-        nextSlide,
-        getImageIndex
+        nextSlide
     }
 }
 

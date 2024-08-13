@@ -10,6 +10,13 @@ type FilterProps = {
 
 const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterProps) => {
     const [file, setFile] = useState<File | null>(null)
+    const [error, setError] = useState<string | null>(null)
+
+    const onClose = () => {
+        setFile(null)
+        setError(null)
+        setImageDialog(false)
+    }
 
     const handleUploadImage: MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault()
@@ -17,9 +24,12 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
             return console.log('No File selected')
         }
         try {
-            const data = await uploadImage(file, userId)
-            if (data) {
-                console.log('Image uploaded successfully:', data)
+            const result = await uploadImage(file, userId)
+            if (!result.success) {
+                setError(result.data as string)
+
+            } else {
+                console.log('Image uploaded successfully:', result)
                 await fetchUserData(userId)
                 setFile(null)
             }
@@ -40,8 +50,9 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                 <div className='modal'>
                     <div className='backshadow'>
                         <div className="custom-modal">
-                            <h3>Upload new image</h3>
                             <div className='image-container'>
+                                <h3>Upload new image</h3>
+                                {error && <p>{error}</p>}
                                 {file ? (
                                     <img src={URL.createObjectURL(file)} alt="Preview" />
                                 ) : (
@@ -59,11 +70,11 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                                     onChange={selectedFile}
                                 >
                                 </input>
-                                {file && <> <a onClick={() => setFile(null)}>Delete</a>
+                                {file && <> <a className='delete-button' onClick={() => setFile(null)}>Delete</a>
                                     <button className='button' onClick={handleUploadImage}>Add image</button></>}
                             </div>
                             <div className='close-button'>
-                                <button onClick={() => setImageDialog(false)}>Close</button>
+                                <button onClick={onClose}>Close</button>
                             </div>
                         </div>
                     </div>

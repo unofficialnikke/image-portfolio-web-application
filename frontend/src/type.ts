@@ -23,6 +23,7 @@ export type Image = {
     user_id: number
     image_url: string
     upload_date: Date
+    is_favorite: boolean
 }
 
 export type SocialMedia = {

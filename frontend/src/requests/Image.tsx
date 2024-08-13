@@ -1,3 +1,4 @@
+import { Image } from "../type"
 
 export const uploadImage = async (file: File, userId: string) => {
     const formData = new FormData()
@@ -11,12 +12,54 @@ export const uploadImage = async (file: File, userId: string) => {
             body: formData
         })
         const data: string = await response.json()
-        return data
+        return {
+            success: response.ok,
+            data: data
+        }
     } catch (err: unknown) {
         if (err instanceof Error) {
             console.error(`Error getting categories: ${err.message}`)
         }
-        return null
+        return { success: false, data: 'An error occurred' }
+    }
+}
+
+export const deleteImage = async (id: number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}images/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        if (response.ok) {
+            console.log('Image deleted successfully')
+        } else {
+            console.error('Failed to delete image')
+        }
+    } catch (err) {
+        console.error('Error deletin image: ', err)
+    }
+}
+
+export const updateImage = async (id: number, updateData: Partial<Image>) => {
+    const requestConfig: RequestInit = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    }
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}images/${id}`, requestConfig)
+        const responseData: string = await response.json()
+        return {
+            success: response.ok,
+            data: responseData
+        }
+    } catch (err) {
+        console.log(`An error occurred: ${err}`)
+        return { success: false, data: 'An error occurred' }
     }
 }
 

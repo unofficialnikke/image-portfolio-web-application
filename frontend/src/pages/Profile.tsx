@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react'
 import useCarousel from '../hooks/useCarousel'
 import { useParams } from 'react-router-dom'
 import { getuserById } from '../requests/User'
-import { User } from '../type'
+import { Image, User } from '../type'
 import UserDialog from '../components/UserDialog'
 import IntroDialog from '../components/IntroDialog'
 import ImageDialog from '../components/ImageDialog'
+import { deleteImage, updateImage } from '../requests/Image'
 
 const Profile = () => {
     const [userDialog, setUserDialog] = useState(false)
+    const [error, setError] = useState<string | null>(null)
     const [introDialog, setIntroDialog] = useState(false)
     const [imageDialog, setImageDialog] = useState(false)
     const [user, setUser] = useState<User | null>(null)
@@ -24,18 +26,43 @@ const Profile = () => {
         }
     }
 
-    const handleCloseUser = () => {
-        setUserDialog(false)
-    }
-
-    const handleCloseIntro = () => {
-        setIntroDialog(false)
-    }
-
     useEffect(() => {
         fetchUserData(userId)
         console.log('fetch')
     }, [userId])
+
+    const deleteSelectedImage = async (id: number) => {
+        try {
+            await deleteImage(id)
+            fetchUserData(userId)
+            if (currentIndex + 1 === imageUrls!.length) {
+                setCurrentIndex(currentIndex - 1)
+            }
+        } catch (err) {
+            console.error('Error deleting image:', err);
+        }
+    }
+
+    const updateSelectedImage = async (id: number, isFavorite: boolean) => {
+        console.log('update')
+        try {
+            const updateData: Partial<Image> = {
+                user_id: Number(userId),
+                is_favorite: !isFavorite,
+            }
+            const result = await updateImage(id, updateData)
+            if (!result.success) {
+                setError(result.data)
+            } else {
+                setError(null)
+                console.log('Image updated succesfully!')
+                fetchUserData(userId)
+            }
+
+        } catch (err) {
+            console.error('Error updating image:', err);
+        }
+    }
 
     return (
         <div className='singlepage'>
@@ -43,11 +70,17 @@ const Profile = () => {
                 <div className="imageupload">
                     <button onClick={() => setImageDialog(true)}>+ Add images</button>
                 </div>
+                {error && <p className='error'>{error}</p>}
                 <div className='carousel'>
                     <div className='image'>
                         <div className='slider-wrapper' style={{ transform: `translateX(${-100 * currentIndex}%)` }}>
                             {user?.images.map((image, index) => (
                                 <div key={image.id} className='slide'>
+                                    <a onClick={() => updateSelectedImage(image.id, image.is_favorite)}
+                                        className={`favorite-button ${image.is_favorite ? 'favorite_active' : ''}`}>
+                                        {image.is_favorite ? 'Unfavorite' : 'Favorite'}
+                                    </a>
+                                    <a onClick={() => deleteSelectedImage(image.id)} className='delete-button'>Delete</a>
                                     <img src={image.image_url} alt={`Slide ${index}`} />
                                 </div>
                             ))}
@@ -124,8 +157,8 @@ const Profile = () => {
                     </div>
                 </form>
             </div>
-            <UserDialog isOpen={userDialog} onClose={handleCloseUser} />
-            <IntroDialog isOpen={introDialog} onClose={handleCloseIntro} />
+            <UserDialog isOpen={userDialog} setUserDialog={setUserDialog} />
+            <IntroDialog isOpen={introDialog} setIntroDialog={setIntroDialog} />
             <ImageDialog isOpen={imageDialog} setImageDialog={setImageDialog} fetchUserData={fetchUserData} userId={userId}
             />
         </div>
