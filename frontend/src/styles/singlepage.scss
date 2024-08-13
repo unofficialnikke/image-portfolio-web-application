@@ -31,6 +31,11 @@
         margin-top: 20px;
         width: 85%;
 
+        .error {
+            font-size: 14px;
+            color: rgb(186, 49, 49);
+        }
+
         .button-group {
             display: flex;
             flex-direction: row;
@@ -105,12 +110,54 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        position: relative;
 
                         img {
                             max-width: 750px;
                             max-height: 499px;
                             object-fit: contain;
                         }
+
+                        .button-base {
+                            position: absolute;
+                            top: 10px;
+                            padding: 7px 10px;
+                            font-size: 18px;
+                            cursor: pointer;
+                            z-index: 2;
+                            border-radius: 8px;
+                            text-decoration: none;
+                            background-color: rgba(0, 0, 0, 0.5);
+                        }
+
+                        .favorite-button {
+                            @extend .button-base;
+                            left: 10px;
+
+                            color: rgb(11, 170, 11);
+
+                            &:hover {
+                                background-color: rgb(11, 170, 11);
+                                color: colors.$aHoverWhite;
+                            }
+                        }
+
+                        .favorite_active {
+                            background-color: rgb(11, 170, 11);
+                            color: colors.$aHoverWhite;
+                        }
+
+                        .delete-button {
+                            @extend .button-base;
+                            right: 10px;
+                            color: rgb(223, 16, 16);
+
+                            &:hover {
+                                background-color: rgb(223, 16, 16);
+                                color: colors.$aHoverWhite;
+                            }
+                        }
+
                     }
                 }
             }

@@ -17,7 +17,7 @@
         align-items: center;
 
         .custom-modal {
-            width: 600px;
+            width: 950px;
             height: 550px;
             background-color: white;
             background-color: colors.$formColor;
@@ -39,6 +39,12 @@
                 align-items: center;
                 text-align: center;
                 justify-content: center;
+                gap: 20px;
+
+                p {
+                    font-size: 14px;
+                    color: rgb(186, 49, 49);
+                }
 
                 img {
                     height: 300px;
@@ -90,7 +96,7 @@
                 a {
                     text-decoration: underline;
                     font-weight: 800;
-                    color: colors.$aColor;
+                    color: colors.$brightColor;
                 }
 
                 a:hover {
