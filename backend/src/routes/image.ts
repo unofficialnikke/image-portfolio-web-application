@@ -1,5 +1,5 @@
 import express from 'express';
-import { addNewImage, getImageById, getImageByUserId, getImages, deleteSelectedImage } from '../controllers/image';
+import { addNewImage, getImageById, getImageByUserId, getImages, deleteSelectedImage, updateSelectedImage } from '../controllers/image';
 import multer from 'multer';
 
 const router = express.Router();
@@ -11,6 +11,7 @@ router.get('/', getImages)
 router.get('/user/:id', getImageByUserId)
 router.get('/:id', getImageById)
 router.post('/', upload.single('image'), addNewImage)
+router.patch('/:id', updateSelectedImage)
 router.delete('/:id', deleteSelectedImage)
 
 export default router;

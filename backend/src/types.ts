@@ -46,6 +46,7 @@ export interface ImageTable {
     user_id: number
     image_url: string
     upload_date: ColumnType<Date, string>
+    is_favorite: boolean
 }
 
 export type Image = Selectable<ImageTable>

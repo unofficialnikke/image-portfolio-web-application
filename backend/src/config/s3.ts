@@ -33,7 +33,7 @@ export function deleteFile(fileName: string) {
     return s3Client.send(new DeleteObjectCommand(deleteParams))
 }
 
-export async function getObjectSignedUrl(key: string, expiresInSeconds = 7200) {
+export async function getObjectSignedUrl(key: string, expiresInSeconds = 14400) {
     const params = {
         Bucket: bucketName,
         Key: key
