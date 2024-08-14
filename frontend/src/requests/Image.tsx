@@ -32,13 +32,16 @@ export const deleteImage = async (id: number) => {
                 'Content-Type': 'application/json',
             },
         })
+        const data: string = await response.json()
         if (response.ok) {
-            console.log('Image deleted successfully')
-        } else {
-            console.error('Failed to delete image')
+            return {
+                success: response.ok,
+                data: data
+            }
         }
     } catch (err) {
-        console.error('Error deletin image: ', err)
+        console.error('Error deleting image: ', err)
+        return { success: false, data: 'An error occurred' }
     }
 }
 

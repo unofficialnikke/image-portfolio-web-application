@@ -12,9 +12,19 @@ export type LoginInputs = {
     password: string
 }
 
-export type Category = {
+export type UserCategory = {
     id: number
     user_id: number
+    name: string
+}
+
+export type AddUserCategory = {
+    user_id: number
+    category_id: number
+}
+
+export type Category = {
+    id: number
     name: string
 }
 
@@ -44,5 +54,17 @@ export type User = {
     introduction_text: string | null
     images: Image[]
     social_medias: SocialMedia
-    categories: Category[]
+    categories: UserCategory[]
+}
+
+export type UserEditInputs = {
+    firstname: string
+    lastname: string
+    city: string
+}
+
+export type SocialmediaInputs = {
+    instagram_url: string,
+    linkedin_url: string,
+    portfolio_url: string
 }

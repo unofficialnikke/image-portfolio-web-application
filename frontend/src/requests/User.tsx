@@ -16,15 +16,21 @@ export const getAllUsers = async () => {
     }
 }
 
-export const getuserById = async (id: string) => {
+export const getuserById = async (id: number) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}users/${id}`)
         const data: User = await response.json()
-        return data
+        return {
+            success: response.ok,
+            data: data
+        }
     } catch (err: unknown) {
         if (err instanceof Error) {
             console.error(`Error getting users: ${err.message}`)
         }
-        return null
+        return {
+            success: false,
+            data: 'An error occurred'
+        }
     }
 }
