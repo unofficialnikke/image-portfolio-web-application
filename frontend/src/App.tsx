@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom'
+import ErrorBoundary from './pages/ErrorBoundary'
 import About from './pages/About'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: '/',
