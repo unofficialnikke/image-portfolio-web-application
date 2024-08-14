@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import PasswordReset from './pages/PasswordReset'
+import ErrorPage from './pages/ErrorPage'
 import './styles/app.scss'
 
 const Layout = () => {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/about',
         element: <About />
+      },
+      {
+        path: '/*',
+        element: <ErrorPage />
       },
     ]
   }
