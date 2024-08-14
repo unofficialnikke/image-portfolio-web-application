@@ -37,7 +37,14 @@ export type Image = {
 }
 
 export type SocialMedia = {
-    id: number
+    id?: number
+    user_id: number
+    instagram_url: string
+    linkedin_url: string
+    portfolio_url: string
+}
+
+export type NewSocialMedia = {
     user_id: number
     instagram_url: string
     linkedin_url: string
@@ -55,16 +62,4 @@ export type User = {
     images: Image[]
     social_medias: SocialMedia
     categories: UserCategory[]
-}
-
-export type UserEditInputs = {
-    firstname: string
-    lastname: string
-    city: string
-}
-
-export type SocialmediaInputs = {
-    instagram_url: string,
-    linkedin_url: string,
-    portfolio_url: string
 }

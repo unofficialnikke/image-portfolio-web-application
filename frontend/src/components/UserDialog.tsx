@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { SocialMedia, SocialmediaInputs, User } from '../type';
+import React, { MouseEventHandler, useContext, useEffect, useState } from 'react'
+import { NewSocialMedia, SocialMedia, User } from '../type';
 import { CategoryContext } from '../context/categoryContext';
 import { addNewUserCategory, deleteUserCategory } from '../requests/Category';
+import { UserContext } from '../context/userContext';
+import { addSocialMedia } from '../requests/SocialMedia';
 
 type FilterProps = {
     setUserDialog: React.Dispatch<React.SetStateAction<boolean>>
@@ -14,7 +16,8 @@ type FilterProps = {
 };
 
 const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, userId }: FilterProps) => {
-    const [socialMediaInputs, setSocialMediaInputs] = useState<SocialmediaInputs>({
+    const [socialMediaInputs, setSocialMediaInputs] = useState<NewSocialMedia>({
+        user_id: 0,
         instagram_url: '',
         linkedin_url: '',
         portfolio_url: ''
@@ -24,16 +27,42 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
     const [deleteCategoryId, setDeleteCategoryId] = useState('')
     const [newCategoryId, setNewCategoryId] = useState('')
     const [error, setError] = useState<string | null>(null)
+    const { setUserFetch } = useContext(UserContext)
+
 
     useEffect(() => {
         if (socialMedias) {
-            setSocialMediaInputs(socialMedias)
+            setSocialMediaInputs({
+                user_id: socialMedias.user_id,
+                instagram_url: socialMedias.instagram_url,
+                linkedin_url: socialMedias.linkedin_url,
+                portfolio_url: socialMedias.portfolio_url
+            })
         }
     }, [socialMedias, user])
 
     const handleSocialMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSocialMediaInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
         console.log(socialMediaInputs)
+    }
+
+    const handleAddSocialMedia: MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault()
+        console.log(socialMediaInputs)
+        if (socialMedias?.id) {
+            try {
+                const result = await addSocialMedia(socialMediaInputs, socialMedias.id)
+                if (!result.success) {
+                    console.log(result.data)
+                } else {
+                    console.log(result.data)
+                    fetchUserData(Number(userId))
+                    onClose()
+                }
+            } catch (err) {
+                console.log('Error adding social medias: ', err)
+            }
+        }
     }
 
     const deleteCategory = async (id: number) => {
@@ -83,6 +112,12 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
         }
     }
 
+    const onClose = () => {
+        setUserDialog(false)
+        setUserFetch(true)
+        setError(null)
+    }
+
     return (
         <>
             {isOpen && (
@@ -126,10 +161,10 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                     <input value={socialMediaInputs.linkedin_url} name='linkedin_url' onChange={handleSocialMediaChange}></input>
                                     <h3>Portfolio site URL:</h3>
                                     <input value={socialMediaInputs.portfolio_url} name='portfolio_url' onChange={handleSocialMediaChange}></input>
-                                    <button>Save</button>
+                                    <button className='save-button' onClick={handleAddSocialMedia}>Save</button>
                                 </form>
                                 <div className='close-button'>
-                                    <button onClick={() => setUserDialog(false)}>Close</button>
+                                    <button onClick={onClose}>Close</button>
                                 </div>
                             </div>
                         </div>

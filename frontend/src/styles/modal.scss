@@ -56,7 +56,7 @@
                         flex: 1;
                         display: flex;
                         flex-direction: column;
-                        gap: 10px;
+                        gap: 15px;
 
                         .custom-select {
                             position: relative;
@@ -87,7 +87,6 @@
 
                             button:hover {
                                 color: rgba(255, 255, 255, 0.87);
-                                cursor: pointer;
                             }
 
                             select {
@@ -133,6 +132,18 @@
                 h3 {
                     font-weight: 500;
                     font-size: 16px;
+                }
+            }
+
+            .save-button {
+                font-size: 14px;
+                padding: 8px 12px;
+                font-weight: 600;
+                color: colors.$aHover;
+
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.87);
                 }
             }
 
@@ -211,7 +222,15 @@
                 }
 
                 button {
-                    padding: 6px;
+                    font-size: 14px;
+                    padding: 4px;
+                    font-weight: 600;
+                    color: colors.$aHover;
+                    align-self: center;
+                }
+
+                button:hover {
+                    color: rgba(255, 255, 255, 0.87);
                 }
 
                 .invisible {

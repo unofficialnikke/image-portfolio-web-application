@@ -16,13 +16,13 @@ const Profile = () => {
     const [userDialog, setUserDialog] = useState(false)
     const [introDialog, setIntroDialog] = useState(false)
     const [imageDialog, setImageDialog] = useState(false)
-    const { setUserFetch } = useContext(UserContext)
     const [error, setError] = useState<string | null>(null)
     const [user, setUser] = useState<User | null>(null)
+    const { setUserFetch } = useContext(UserContext)
+    const { currentUser } = useContext(AuthContext)
     const imageUrls = user?.images.map(img => img.image_url)
     const { currentIndex, setCurrentIndex, prevSlide, nextSlide } = useCarousel(imageUrls || [])
     const { userId } = useParams() as { userId: string }
-    const { currentUser } = useContext(AuthContext)
     const socialMedias = user?.social_medias || null
     const navigate = useNavigate();
 
@@ -80,7 +80,6 @@ const Profile = () => {
         <>
             {user ? (
                 <div className='singlepage'>
-
                     <div className="content">
                         <div className="button-row">
                             <button className='back-button' onClick={() => navigate('/')}>Back</button>
@@ -153,7 +152,7 @@ const Profile = () => {
 
                                     <hr />
                                     <h3>Social media</h3>
-                                    {socialMedias ? (
+                                    {socialMedias && (isValidUrl(socialMedias.instagram_url) || isValidUrl(socialMedias.linkedin_url) || isValidUrl(socialMedias.portfolio_url)) ? (
                                         <div className="socialmedia">
                                             {isValidUrl(socialMedias.instagram_url) &&
                                                 <a href={socialMedias.instagram_url}>Instagram</a>}
@@ -184,7 +183,8 @@ const Profile = () => {
                         </form>
 
                     </div>
-                    <UserDialog isOpen={userDialog} setUserDialog={setUserDialog} user={user || null} setUser={setUser} socialMedias={socialMedias || null} fetchUserData={fetchUserData} userId={userId} />
+                    <UserDialog isOpen={userDialog} setUserDialog={setUserDialog} user={user || null} setUser={setUser}
+                        socialMedias={socialMedias || null} fetchUserData={fetchUserData} userId={userId} />
                     <IntroDialog isOpen={introDialog} setIntroDialog={setIntroDialog} />
                     <ImageDialog isOpen={imageDialog} setImageDialog={setImageDialog} fetchUserData={fetchUserData} userId={currentUser?.id.toString() || ''}
                     />

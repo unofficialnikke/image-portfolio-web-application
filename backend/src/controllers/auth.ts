@@ -2,6 +2,7 @@ import { Response, Request } from "express"
 import { createUser, findByUserEmail } from "../repositories/userRepository"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { createSocialMedia } from "../repositories/socialMediaRepository"
 
 export const register = async (req: Request, res: Response) => {
     try {
@@ -22,6 +23,13 @@ export const register = async (req: Request, res: Response) => {
             introduction_text
         }
         const insertedUser = await createUser(newUser)
+        const newSocialMedia = {
+            user_id: insertedUser.id,
+            instagram_url: '',
+            linkedin_url: '',
+            portfolio_url: ''
+        }
+        await createSocialMedia(newSocialMedia)
         return res.status(201).json(insertedUser)
     } catch (err) {
         console.error('Error during user registration:', err);

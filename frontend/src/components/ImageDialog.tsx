@@ -18,6 +18,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
         setFile(null)
         setError(null)
         setImageDialog(false)
+        setUserFetch(true)
     }
 
     const handleUploadImage: MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -31,7 +32,6 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                 setError(result.data as string)
 
             } else {
-                setUserFetch(true)
                 console.log('Image uploaded successfully:', result)
                 await fetchUserData(Number(userId))
                 setFile(null)
@@ -73,7 +73,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                                     >
                                     </input>
                                     {file && <> <a className='delete-button' onClick={() => setFile(null)}>Delete</a>
-                                        <button onClick={handleUploadImage}>Add image</button></>}
+                                        <button onClick={handleUploadImage}>+ Add image</button></>}
                                 </div>
                             </div>
                             <div className='close-button'>
