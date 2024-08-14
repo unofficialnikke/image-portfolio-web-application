@@ -18,6 +18,9 @@ export const getUsers = async (req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid category ID');
+    }
     try {
         const user = await findUserById(id)
         if (!user) {

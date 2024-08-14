@@ -26,6 +26,9 @@ export const getImages = async (req: Request, res: Response) => {
 
 export const getImageByUserId = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid category ID');
+    }
     try {
         const images = await findImageByUserId(id)
         if (!images) {
@@ -43,6 +46,9 @@ export const getImageByUserId = async (req: Request, res: Response) => {
 
 export const getImageById = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid category ID');
+    }
     try {
         const image = await findByImageId(id)
         if (!image) {
@@ -122,7 +128,7 @@ export const deleteSelectedImage = async (req: Request, res: Response) => {
             return res.status(404).json('Image not found');
         }
         await deleteFile(deletedImage.image_url)
-        return res.status(200).json(deletedImage);
+        return res.status(200).json('Image deleted succesfully!');
     } catch (err) {
         console.error('Error deleting image:', err);
         return res.status(500).json('An error occurred');

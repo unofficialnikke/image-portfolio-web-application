@@ -21,6 +21,9 @@ export const getUserCategories = async (req: Request, res: Response) => {
 
 export const getUserCategoryByUserId = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid category ID');
+    }
     try {
         const userCategories = await findUserCategoryByUserId(id)
         if (!userCategories) {
@@ -36,6 +39,9 @@ export const getUserCategoryByUserId = async (req: Request, res: Response) => {
 export const addNewUserCategory = async (req: Request, res: Response) => {
     try {
         const { category_id, user_id } = req.body
+        if (isNaN(category_id)) {
+            return res.status(400).json('Invalid user category ID');
+        }
         const user = await findUserById(user_id)
         const category = await findCategoryById(category_id)
         const checkExistence = await findUserCategoryByIds(user_id, category_id)

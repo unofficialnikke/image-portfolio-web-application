@@ -18,6 +18,9 @@ export const getSocialMedias = async (req: Request, res: Response) => {
 
 export const getSocialMediasByUserId = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid category ID');
+    }
     try {
         const socials = await findSocialMediaByUserId(id)
         if (!socials) {
@@ -32,6 +35,9 @@ export const getSocialMediasByUserId = async (req: Request, res: Response) => {
 
 export const getSocialMediasById = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    if (isNaN(id)) {
+        return res.status(400).json('Invalid category ID');
+    }
     try {
         const socials = await findBySocialMediaId(id)
         if (!socials) {
