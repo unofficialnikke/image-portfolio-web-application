@@ -12,9 +12,11 @@ const IntroDialog = ({ isOpen, setIntroDialog }: FilterProps) => {
                 <div className='modal'>
                     <div className='backshadow'>
                         <div className="custom-modal">
-                            <p>Introduction edit</p>
-                            <div className='close-button'>
-                                <button onClick={() => setIntroDialog(false)}>Close</button>
+                            <div className="intro-dialog">
+                                <p>Introduction edit</p>
+                                <div className='close-button'>
+                                    <button onClick={() => setIntroDialog(false)}>Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>

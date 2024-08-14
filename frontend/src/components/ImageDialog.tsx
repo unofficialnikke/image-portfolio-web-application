@@ -5,7 +5,7 @@ import { UserContext } from '../context/userContext';
 type FilterProps = {
     setImageDialog: React.Dispatch<React.SetStateAction<boolean>>;
     isOpen: boolean
-    fetchUserData: (userId: string) => Promise<void>
+    fetchUserData: (userId: number) => Promise<void>
     userId: string
 };
 
@@ -33,7 +33,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
             } else {
                 setUserFetch(true)
                 console.log('Image uploaded successfully:', result)
-                await fetchUserData(userId)
+                await fetchUserData(Number(userId))
                 setFile(null)
             }
         } catch (err) {
@@ -54,7 +54,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                     <div className='backshadow'>
                         <div className="custom-modal">
                             <div className='image-container'>
-                                <h3>Upload new image</h3>
+                                <h2>Upload new image</h2>
                                 {error && <p>{error}</p>}
                                 {file ? (
                                     <img src={URL.createObjectURL(file)} alt="Preview" />
@@ -63,18 +63,18 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                                         <label htmlFor='file'>Select image</label>
                                     </div>
                                 )}
-                            </div>
-                            <div className='button-group'>
-                                <input
-                                    hidden={true}
-                                    type='file'
-                                    id='file'
-                                    name='myImage'
-                                    onChange={selectedFile}
-                                >
-                                </input>
-                                {file && <> <a className='delete-button' onClick={() => setFile(null)}>Delete</a>
-                                    <button className='button' onClick={handleUploadImage}>Add image</button></>}
+                                <div className='button-group'>
+                                    <input
+                                        hidden={true}
+                                        type='file'
+                                        id='file'
+                                        name='myImage'
+                                        onChange={selectedFile}
+                                    >
+                                    </input>
+                                    {file && <> <a className='delete-button' onClick={() => setFile(null)}>Delete</a>
+                                        <button onClick={handleUploadImage}>Add image</button></>}
+                                </div>
                             </div>
                             <div className='close-button'>
                                 <button onClick={onClose}>Close</button>

@@ -323,6 +323,20 @@
 
     }
 
+    .error {
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: colors.$formColor;
+            border-radius: 2ch;
+            min-width: 550px;
+            min-height: 550px;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
     @media screen and (max-width: 1280px) {
         .content {
             width: 90%;
