@@ -33,9 +33,6 @@ const Profile = () => {
 
     useEffect(() => {
         fetchUserData(Number(userId))
-        setIntroText({
-            introduction_text: user?.introduction_text
-        })
         console.log('fetch')
     }, [user?.introduction_text, userId])
 
@@ -61,6 +58,13 @@ const Profile = () => {
     const handleIntroTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setIntroText({ ...introText, introduction_text: e.target.value });
     };
+
+    const openEditIntroduction = () => {
+        setEditIntroduction(true)
+        setIntroText({
+            introduction_text: user?.introduction_text
+        })
+    }
 
     return (
         <>
@@ -133,7 +137,7 @@ const Profile = () => {
                                             </div>
                                         ) : (
                                             <div>
-                                                <a onClick={() => setEditIntroduction(true)}>(Edit)</a>
+                                                <a onClick={openEditIntroduction}>(Edit)</a>
                                             </div>
                                         )}
                                     </div>}
