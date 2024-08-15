@@ -22,6 +22,21 @@
     }
 
 
+    textarea {
+        font-family: Verdana, Geneva, Tahoma, sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
+        width: 100%;
+        min-height: 250px;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: colors.$formColor;
+        color: colors.$aHoverWhite;
+        resize: vertical;
+        box-sizing: border-box;
+        font-size: 16px;
+        overflow: auto;
+        line-height: 1.5;
+    }
+
     span {
         font-size: 12px;
     }

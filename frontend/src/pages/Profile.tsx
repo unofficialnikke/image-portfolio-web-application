@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getuserById, updateUser } from '../requests/User'
 import { User } from '../type'
@@ -146,7 +146,12 @@ const Profile = () => {
                                     <textarea value={introText?.introduction_text || ''} onChange={handleIntroTextChange}></textarea>
                                 ) : (
                                     (user?.introduction_text ? (
-                                        <p>{user?.introduction_text}</p>
+                                        <p>{user?.introduction_text.split('\n').map((item, key) => (
+                                            <Fragment key={key}>
+                                                {item}
+                                                <br />
+                                            </Fragment>
+                                        ))}</p>
                                     ) : (
                                         <p>{user?.firstname} have not introduced themselves yet</p>
                                     ))
