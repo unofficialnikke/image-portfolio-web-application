@@ -202,6 +202,7 @@
         form {
             display: flex;
             flex-direction: row;
+            justify-content: center;
             background-color: colors.$formColor;
             border-radius: 2ch;
             gap: 25px;
@@ -263,8 +264,6 @@
                 gap: 10px;
                 text-align: center;
 
-
-
                 .username {
                     display: flex;
                     flex-direction: column;
@@ -298,6 +297,11 @@
                 justify-content: end;
                 margin-bottom: 20px;
 
+                .save {
+                    display: flex;
+                    gap: 25px;
+                }
+
                 a {
                     font-weight: 600;
                     font-size: 18px;
@@ -321,20 +325,6 @@
             }
         }
 
-    }
-
-    .error {
-        form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background-color: colors.$formColor;
-            border-radius: 2ch;
-            min-width: 550px;
-            min-height: 550px;
-            align-items: center;
-            text-align: center;
-        }
     }
 
     @media screen and (max-width: 1280px) {
@@ -499,11 +489,19 @@
                     transform: translateY(-200%);
                 }
 
-                .image-container {
+                .image {
                     gap: 13px;
+                    width: 350px;
+                    height: 399px;
 
-                    img {
-                        max-height: 125px;
+                    .slider-wrapper {
+                        .slide {
+
+                            img {
+                                max-width: 350px;
+                                max-height: 399px;
+                            }
+                        }
                     }
                 }
             }
@@ -519,7 +517,7 @@
     @media screen and (max-width: 480px) {
 
         .content {
-            width: 93%;
+            width: 100%;
             display: flex;
 
             button {
@@ -544,24 +542,38 @@
                 font-size: 9px;
             }
 
+
+
             .carousel {
                 button {
                     font-size: 1rem;
-                    transform: translateY(-50%);
+                    transform: translateY(-200%);
                 }
 
-                .image-container {
-                    flex-direction: column;
-                    gap: 5px;
+                .image {
+                    gap: 13px;
+                    width: 350px;
+                    height: 399px;
 
-                    img {
-                        max-height: 170px;
+                    .slider-wrapper {
+                        .slide {
+
+                            img {
+                                max-width: 350px;
+                                max-height: 399px;
+                            }
+                        }
                     }
                 }
             }
 
+            form {
+                width: 80%;
+            }
+
             .leftcontent {
                 padding: 10px;
+                width: 80%;
 
                 hr {
                     width: 60px;
@@ -572,6 +584,10 @@
                         gap: 10px;
                     }
                 }
+            }
+
+            .rightcontent {
+                width: 100%;
             }
         }
     }
@@ -620,6 +636,7 @@
                     }
                 }
             }
+
         }
     }
 }
