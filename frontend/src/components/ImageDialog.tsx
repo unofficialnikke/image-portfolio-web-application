@@ -2,14 +2,14 @@ import { ChangeEvent, MouseEventHandler, useContext, useState } from 'react'
 import { uploadImage } from '../requests/Image';
 import { UserContext } from '../context/userContext';
 
-type FilterProps = {
+type ImageProps = {
     setImageDialog: React.Dispatch<React.SetStateAction<boolean>>;
     isOpen: boolean
     fetchUserData: (userId: number) => Promise<void>
     userId: string
 };
 
-const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterProps) => {
+const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImageProps) => {
     const [file, setFile] = useState<File | null>(null)
     const [error, setError] = useState<string | null>(null)
     const { setUserFetch } = useContext(UserContext)
@@ -72,7 +72,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: FilterPr
                                         onChange={selectedFile}
                                     >
                                     </input>
-                                    {file && <> <a className='delete-button' onClick={() => setFile(null)}>Delete</a>
+                                    {file && <> <a onClick={() => setFile(null)}>Delete</a>
                                         <button onClick={handleUploadImage}>+ Add image</button></>}
                                 </div>
                             </div>

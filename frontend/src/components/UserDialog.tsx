@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NewSocialMedia, SocialMedia, User } from '../type';
 import { CategoryContext } from '../context/categoryContext';
 import { addNewUserCategory, deleteUserCategory } from '../requests/Category';
@@ -46,12 +46,11 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
         console.log(socialMediaInputs)
     }
 
-    const handleAddSocialMedia: MouseEventHandler<HTMLButtonElement> = async (e) => {
-        e.preventDefault()
+    const handleAddSocialMedia = async (inputs: NewSocialMedia, id: number | null) => {
         console.log(socialMediaInputs)
-        if (socialMedias?.id) {
+        if (id) {
             try {
-                const result = await addSocialMedia(socialMediaInputs, socialMedias.id)
+                const result = await addSocialMedia(inputs, id)
                 if (!result.success) {
                     console.log(result.data)
                 } else {
@@ -161,7 +160,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                     <input value={socialMediaInputs.linkedin_url} name='linkedin_url' onChange={handleSocialMediaChange}></input>
                                     <h3>Portfolio site URL:</h3>
                                     <input value={socialMediaInputs.portfolio_url} name='portfolio_url' onChange={handleSocialMediaChange}></input>
-                                    <button className='save-button' onClick={handleAddSocialMedia}>Save</button>
+                                    <button className='save-button' onClick={() => handleAddSocialMedia(socialMediaInputs, socialMedias?.id || null)}>Save</button>
                                 </form>
                                 <div className='close-button'>
                                     <button onClick={onClose}>Close</button>

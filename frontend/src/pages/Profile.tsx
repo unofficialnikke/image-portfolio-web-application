@@ -1,30 +1,28 @@
 import { useContext, useEffect, useState } from 'react'
-import useCarousel from '../hooks/useCarousel'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getuserById } from '../requests/User'
-import { Image, User } from '../type'
+import { getuserById, updateUser } from '../requests/User'
+import { User } from '../type'
 import UserDialog from '../components/UserDialog'
-import IntroDialog from '../components/IntroDialog'
 import ImageDialog from '../components/ImageDialog'
-import { deleteImage, updateImage } from '../requests/Image'
 import { UserContext } from '../context/userContext'
 import { AuthContext } from '../context/authContext'
 import { isValidUrl } from '../utils/Validation'
 import ErrorPage from './ErrorPage'
+import { ImageSlider } from './ImageSlider'
 
 const Profile = () => {
     const [userDialog, setUserDialog] = useState(false)
-    const [introDialog, setIntroDialog] = useState(false)
     const [imageDialog, setImageDialog] = useState(false)
-    const [error, setError] = useState<string | null>(null)
     const [user, setUser] = useState<User | null>(null)
     const { setUserFetch } = useContext(UserContext)
     const { currentUser } = useContext(AuthContext)
-    const imageUrls = user?.images.map(img => img.image_url)
-    const { currentIndex, setCurrentIndex, prevSlide, nextSlide } = useCarousel(imageUrls || [])
     const { userId } = useParams() as { userId: string }
     const socialMedias = user?.social_medias || null
     const navigate = useNavigate();
+    const [editIntroduction, setEditIntroduction] = useState(false)
+    const [introText, setIntroText] = useState<Partial<User> | null>({
+        introduction_text: ''
+    })
 
     const fetchUserData = async (userId: number) => {
         const fetchedUser = await getuserById(Number(userId))
@@ -35,46 +33,34 @@ const Profile = () => {
 
     useEffect(() => {
         fetchUserData(Number(userId))
+        setIntroText({
+            introduction_text: user?.introduction_text
+        })
         console.log('fetch')
-    }, [userId])
+    }, [user?.introduction_text, userId])
 
-    const deleteSelectedImage = async (id: number) => {
-        try {
-            const result = await deleteImage(id)
-            if (result) {
-                console.log(result.data)
-                fetchUserData(Number(userId))
-                setUserFetch(true)
+    const handleUpdateUser = async (introText: Partial<User> | null, id: number) => {
+        if (introText && id) {
+            try {
+                const result = await updateUser(id, introText)
+                if (!result.success) {
+                    console.log(result.data)
+                } else {
+                    setUserFetch(true)
+                    setEditIntroduction(false)
+                    console.log(result.data)
+                    fetchUserData(Number(userId))
+                }
+
+            } catch (err) {
+                console.error('Error updating image:', err);
             }
-            if (currentIndex + 1 === imageUrls!.length) {
-                setCurrentIndex(currentIndex - 1)
-            }
-        } catch (err) {
-            console.error('Error deleting image: ', err);
         }
     }
 
-    const updateSelectedImage = async (id: number, isFavorite: boolean) => {
-        console.log('update')
-        try {
-            const updateData: Partial<Image> = {
-                user_id: currentUser?.id,
-                is_favorite: !isFavorite,
-            }
-            const result = await updateImage(id, updateData)
-            if (!result.success) {
-                setError(result.data)
-            } else {
-                setUserFetch(true)
-                setError(null)
-                console.log('Image updated succesfully!')
-                fetchUserData(Number(userId))
-            }
-
-        } catch (err) {
-            console.error('Error updating image:', err);
-        }
-    }
+    const handleIntroTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setIntroText({ ...introText, introduction_text: e.target.value });
+    };
 
     return (
         <>
@@ -87,38 +73,7 @@ const Profile = () => {
                                 <button className='imageupload' onClick={() => setImageDialog(true)}>+ Add images</button>
                             }
                         </div>
-                        {error && <p className='error'>{error}</p>}
-                        <div className='carousel'>
-                            <div className='image'>
-                                <div className='slider-wrapper' style={{ transform: `translateX(${-100 * currentIndex}%)` }}>
-                                    {user?.images.map((image, index) => (
-                                        <div key={image.id} className='slide'>
-                                            {currentUser?.id === Number(userId) &&
-                                                <div>
-                                                    <a onClick={() => updateSelectedImage(image.id, image.is_favorite)}
-                                                        className={`favorite-button ${image.is_favorite ? 'favorite_active' : ''}`}>
-                                                        {image.is_favorite ? 'Unfavorite' : 'Favorite'}
-                                                    </a>
-                                                    <a onClick={() => deleteSelectedImage(image.id)} className='delete-button'>Delete</a>
-                                                </div>}
-
-                                            <img src={image.image_url} alt={`Slide ${index}`} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <button className='img-slider-btn' style={{ left: 0 }} onClick={prevSlide}>&lt;</button>
-                            <button className='img-slider-btn' style={{ right: 0 }} onClick={nextSlide}>&gt;</button>
-                            <div className='slider-buttons'>
-                                {user?.images.map((_, index) => (
-                                    <button
-                                        key={index}
-                                        className={index === currentIndex ? 'active' : ''}
-                                        onClick={() => setCurrentIndex(index)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                        <ImageSlider fetchUserData={fetchUserData} userId={userId} user={user} />
                         <form>
                             <div className='leftcontent'>
                                 {currentUser?.id === Number(userId) &&
@@ -171,25 +126,37 @@ const Profile = () => {
                             <div className='rightcontent'>
                                 {currentUser?.id === Number(userId) &&
                                     <div className="edit-button">
-                                        <a onClick={() => setIntroDialog(true)}>(Edit)</a>
+                                        {editIntroduction ? (
+                                            <div className='save'>
+                                                <a onClick={() => setEditIntroduction(false)}>(Cancel)</a>
+                                                <a onClick={() => handleUpdateUser(introText, Number(userId))}>(Save)</a>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                <a onClick={() => setEditIntroduction(true)}>(Edit)</a>
+                                            </div>
+                                        )}
                                     </div>}
                                 <h3>Introduction:</h3>
-                                {user?.introduction_text ? (
-                                    <p>{user?.introduction_text}</p>
+                                {editIntroduction ? (
+                                    <textarea value={introText?.introduction_text || ''} onChange={handleIntroTextChange}></textarea>
                                 ) : (
-                                    <p>{user?.firstname} have not introduced themselves yet</p>
+                                    (user?.introduction_text ? (
+                                        <p>{user?.introduction_text}</p>
+                                    ) : (
+                                        <p>{user?.firstname} have not introduced themselves yet</p>
+                                    ))
                                 )}
+
                             </div>
                         </form>
 
                     </div>
                     <UserDialog isOpen={userDialog} setUserDialog={setUserDialog} user={user || null} setUser={setUser}
                         socialMedias={socialMedias || null} fetchUserData={fetchUserData} userId={userId} />
-                    <IntroDialog isOpen={introDialog} setIntroDialog={setIntroDialog} />
                     <ImageDialog isOpen={imageDialog} setImageDialog={setImageDialog} fetchUserData={fetchUserData} userId={currentUser?.id.toString() || ''}
                     />
                 </div>
-
             ) : (
                 <ErrorPage />
             )}

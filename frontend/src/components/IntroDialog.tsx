@@ -1,11 +1,11 @@
 import React from 'react'
 
-type FilterProps = {
+type IntroProps = {
     setIntroDialog: React.Dispatch<React.SetStateAction<boolean>>
     isOpen: boolean
 };
 
-const IntroDialog = ({ isOpen, setIntroDialog }: FilterProps) => {
+const IntroDialog = ({ isOpen, setIntroDialog }: IntroProps) => {
     return (
         <>
             {isOpen && (
@@ -14,6 +14,7 @@ const IntroDialog = ({ isOpen, setIntroDialog }: FilterProps) => {
                         <div className="custom-modal">
                             <div className="intro-dialog">
                                 <p>Introduction edit</p>
+                                <textarea></textarea>
                                 <div className='close-button'>
                                     <button onClick={() => setIntroDialog(false)}>Close</button>
                                 </div>
