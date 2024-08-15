@@ -146,7 +146,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                             <div className='custom-select'>
                                                 <select value={newCategoryId} onChange={(e) => setNewCategoryId(e.target.value)} aria-placeholder='Select category'>
                                                     <option>Select category</option>
-                                                    {categories.map((category) => (
+                                                    {categories?.map((category) => (
                                                         <option value={category.id} key={category.id}>{category.name}</option>
                                                     ))}
                                                 </select>
