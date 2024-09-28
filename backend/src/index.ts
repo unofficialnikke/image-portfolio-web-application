@@ -14,10 +14,8 @@ const app: Express = express()
 const port = 5000
 
 const corsOptions = {
-    origin: [
-        process.env.API_URL!,
-        process.env.APP_URL!,
-    ],
+    origin:
+        process.env.API_URL,
     credentials: true,
 };
 
