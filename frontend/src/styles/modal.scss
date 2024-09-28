@@ -13,34 +13,41 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.7);
-        position: fixed;
         top: 0;
         left: 0;
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2000;
+        position: fixed;
 
         .custom-modal {
             background-color: colors.$formColor;
             display: flex;
-            justify-content: center;
             align-items: center;
             border-radius: 2ch;
             text-align: center;
             justify-content: center;
             flex-direction: column;
             position: relative;
-            gap: 20px;
+            overflow: hidden;
+            max-width: 600px;
+            max-height: 90vh;
+            top: 0;
+            left: 0;
 
             .user-dialog {
-                width: 550px;
-                height: 650px;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 10px;
-                gap: 30px;
+                padding: 20px;
+                border-radius: 10px;
+                width: 90vw;
+                height: auto;
+                max-width: 600px;
+                max-height: 90vh;
+                overflow: auto;
 
                 p {
                     font-size: 14px;
@@ -112,11 +119,10 @@
                 form {
                     display: flex;
                     flex-direction: column;
-                    padding: 10px;
+                    padding: 15px;
                     gap: 20px;
                     align-items: center;
                     text-align: center;
-                    margin-bottom: 40px;
                 }
 
                 input {
@@ -125,7 +131,8 @@
                     border: none;
                     border-radius: 1ch;
                     background-color: colors.$inputColor;
-                    width: 350px;
+                    width: 100%;
+                    max-width: 28rem;
                 }
 
                 h3 {
@@ -136,10 +143,9 @@
 
             .save-button {
                 font-size: 14px;
-                padding: 8px 12px;
+                padding: 10px 12px;
                 font-weight: 600;
                 color: colors.$aHover;
-
 
                 &:hover {
                     color: rgba(255, 255, 255, 0.87);
@@ -147,8 +153,8 @@
             }
 
             .image-container {
-                min-height: 550px;
-                min-width: 550px;
+                min-height: 35rem;
+                min-width: 35rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -252,7 +258,7 @@
             .close-button {
                 display: flex;
                 justify-content: flex-start;
-                bottom: 20px;
+                top: 20px;
                 right: 20px;
                 position: absolute;
 
@@ -265,4 +271,18 @@
         }
 
     }
+
+    @media screen and (max-width: 1280px) {}
+
+    @media screen and (max-width: 1098px) {}
+
+    @media screen and (max-width: 960px) {}
+
+    @media screen and (max-width: 768px) {}
+
+    @media screen and (max-width: 640px) {}
+
+    @media screen and (max-width: 480px) {}
+
+    @media screen and (max-width: 384px) {}
 }

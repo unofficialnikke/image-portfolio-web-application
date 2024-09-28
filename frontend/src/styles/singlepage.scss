@@ -329,8 +329,6 @@
 
     @media screen and (max-width: 1280px) {
         .content {
-            width: 90%;
-
             .carousel {
                 button {
                     font-size: 1.7rem;
@@ -348,8 +346,6 @@
 
     @media screen and (max-width: 1098px) {
         .content {
-            width: 90%;
-
             button {
                 padding: 7px;
             }
@@ -367,6 +363,15 @@
                         max-height: 210px;
                     }
                 }
+            }
+
+            .leftcontent {
+                flex: 2;
+            }
+
+            .rightcontent {
+                flex: 5;
+                min-width: 40%;
             }
         }
     }
@@ -443,15 +448,9 @@
             }
 
             .leftcontent {
-                padding: 10px;
-
                 hr {
-                    width: 120px;
+                    width: 150px;
                 }
-            }
-
-            .rightcontent {
-                padding: 10px;
             }
         }
     }
@@ -468,6 +467,7 @@
 
             form {
                 padding: 12px;
+                gap: 15px;
             }
 
             p,
@@ -568,25 +568,20 @@
             }
 
             form {
-                width: 80%;
+                width: 90%;
+                gap: 10px;
             }
 
             .leftcontent {
-                padding: 10px;
-                width: 80%;
+                padding: 18px;
 
                 hr {
                     width: 60px;
                 }
-
-                .usercontent {
-                    .socialmedia {
-                        gap: 10px;
-                    }
-                }
             }
 
             .rightcontent {
+                padding: 18px;
                 width: 100%;
             }
         }
@@ -628,13 +623,29 @@
             }
 
             .leftcontent {
+                padding: 14px;
 
                 .usercontent {
+                    gap: 5px;
+
                     .socialmedia {
-                        gap: 7px;
+                        gap: 5px;
+                    }
+
+                    .username {
+                        gap: 5px;
+
+                    }
+
+                    .contact {
+                        gap: 5px;
 
                     }
                 }
+            }
+
+            .rightcontent {
+                padding: 14px;
             }
 
         }

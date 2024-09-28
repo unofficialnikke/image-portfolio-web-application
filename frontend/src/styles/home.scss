@@ -223,37 +223,34 @@
 
     @media screen and (max-width: 480px) {
         .profiles {
-            gap: 10px;
 
             button {
                 padding: 3px;
             }
 
             hr {
-                width: 60%;
-                margin-bottom: 4px;
+                display: none;
             }
 
             .header {
 
                 h2 {
-                    font-size: 14px;
+                    font-size: 20px;
                 }
 
                 h4 {
-                    font-size: 9px;
+                    font-size: 12px;
                 }
             }
 
             .category {
                 p {
-                    font-size: 7px;
+                    font-size: 12px;
                 }
             }
 
             .image {
                 flex-direction: column;
-                gap: 7px;
 
                 img {
                     height: 180px;
