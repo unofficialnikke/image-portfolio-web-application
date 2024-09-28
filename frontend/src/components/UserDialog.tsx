@@ -46,7 +46,8 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
         console.log(socialMediaInputs)
     }
 
-    const handleAddSocialMedia = async (inputs: NewSocialMedia, id: number | null) => {
+    const handleAddSocialMedia = async (e: React.FormEvent, inputs: NewSocialMedia, id: number | null) => {
+        e.preventDefault()
         console.log(socialMediaInputs)
         if (id) {
             try {
@@ -154,13 +155,15 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                             </div>
                                         </div>
                                     </div>
+                                </form>
+                                <form onSubmit={(e) => handleAddSocialMedia(e, socialMediaInputs, socialMedias?.id || null)}>
                                     <h3>Instagram URL:</h3>
                                     <input value={socialMediaInputs.instagram_url} name='instagram_url' onChange={handleSocialMediaChange}></input>
                                     <h3>LinkedIn URL:</h3>
                                     <input value={socialMediaInputs.linkedin_url} name='linkedin_url' onChange={handleSocialMediaChange}></input>
                                     <h3>Portfolio site URL:</h3>
                                     <input value={socialMediaInputs.portfolio_url} name='portfolio_url' onChange={handleSocialMediaChange}></input>
-                                    <button className='save-button' onClick={() => handleAddSocialMedia(socialMediaInputs, socialMedias?.id || null)}>Save</button>
+                                    <button className='save-button' type='submit'>Save</button>
                                 </form>
                                 <div className='close-button'>
                                     <button onClick={onClose}>Close</button>
