@@ -67,7 +67,7 @@ export const addNewImage = async (req: Request, res: Response) => {
     const fileBuffer = await sharp(req.file?.buffer)
         .resize({})
         .toBuffer()
-    await uploadFile(fileBuffer, imageName, file!.mimetype)
+    //await uploadFile(fileBuffer, imageName, file!.mimetype)
     try {
         const { user_id, upload_date, is_favorite } = req.body
         const user = await findUserById(user_id)
