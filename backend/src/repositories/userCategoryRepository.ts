@@ -51,3 +51,13 @@ export const deleteUserCategory = async (id: number) => {
         .executeTakeFirst()
 }
 
+export const countUserCategories = async (id: number) => {
+    const result = await db
+        .selectFrom('user_category')
+        .select(db.fn.count('id').as('count'))
+        .where('user_id', '=', id)
+        .executeTakeFirst()
+
+    return Number(result?.count)
+}
+

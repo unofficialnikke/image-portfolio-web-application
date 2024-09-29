@@ -1,5 +1,5 @@
 import { Response, Request } from "express"
-import { createUser, findByUserEmail } from "../repositories/userRepository"
+import { createUser, findByUserEmail, countUsers } from "../repositories/userRepository"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { createSocialMedia } from "../repositories/socialMediaRepository"
@@ -10,6 +10,10 @@ export const register = async (req: Request, res: Response) => {
         const existingUser = await findByUserEmail(email)
         if (existingUser) {
             return res.status(409).json('User already exists!')
+        }
+        const userCount = await countUsers()
+        if (userCount >= 100) {
+            return res.status(403).json('User limit of this app reached. No new registrations are currently allowed.')
         }
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)

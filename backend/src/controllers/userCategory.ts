@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
 import {
     findUserCategoryByUserId, createUserCategory,
-    findUserCategoryByIds, deleteUserCategory, findAllUserCategories
+    findUserCategoryByIds, deleteUserCategory, findAllUserCategories,
+    countUserCategories
 } from "../repositories/userCategoryRepository"
 import { findUserById } from "../repositories/userRepository"
 import { findCategoryById } from "../repositories/categoryRepository"
@@ -45,6 +46,7 @@ export const addNewUserCategory = async (req: Request, res: Response) => {
         const user = await findUserById(user_id)
         const category = await findCategoryById(category_id)
         const checkExistence = await findUserCategoryByIds(user_id, category_id)
+        const userCategories = await countUserCategories(user_id)
         if (!user) {
             return res.status(404).json('User does not exist')
         }
@@ -53,6 +55,9 @@ export const addNewUserCategory = async (req: Request, res: Response) => {
         }
         if (checkExistence) {
             return res.status(409).json('The selected category already exists!')
+        }
+        if (userCategories >= 5) {
+            return res.status(403).json('You cannot add more than 5 categories.')
         }
         const newUserCategory = {
             category_id,

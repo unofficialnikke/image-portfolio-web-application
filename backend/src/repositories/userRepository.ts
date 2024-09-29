@@ -150,6 +150,15 @@ export const deleteUser = async (id: number) => {
         .executeTakeFirst()
 }
 
+export const countUsers = async () => {
+    const result = await db
+        .selectFrom('users')
+        .select(db.fn.count('id').as('count'))
+        .executeTakeFirst()
+
+    return Number(result?.count)
+}
+
 
 
 
