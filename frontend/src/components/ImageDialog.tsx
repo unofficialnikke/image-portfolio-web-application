@@ -46,7 +46,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImagePro
         setFile(selectedFile)
         if (!ImgeUploadValidation(selectedFile)) {
             setFile(null)
-            setError('Invalid file type or size. Please upload a JPEG or JPG image with size up to 10 MB.')
+            setError('Invalid file type or size. Please upload a JPEG or JPG image with size up to 15 MB.')
         } else {
             setError('')
             console.log('Selected file:', selectedFile)
