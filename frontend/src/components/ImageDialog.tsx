@@ -1,6 +1,7 @@
 import { ChangeEvent, MouseEventHandler, useContext, useState } from 'react'
-import { uploadImage } from '../requests/Image';
-import { UserContext } from '../context/userContext';
+import { uploadImage } from '../requests/Image'
+import { UserContext } from '../context/userContext'
+import { ImgeUploadValidation } from '../utils/ImgeUploadValidation'
 
 type ImageProps = {
     setImageDialog: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,7 +31,6 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImagePro
             const result = await uploadImage(file, userId)
             if (!result.success) {
                 setError(result.data as string)
-
             } else {
                 console.log('Image uploaded successfully:', result)
                 await fetchUserData(Number(userId))
@@ -42,9 +42,15 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImagePro
     }
 
     const selectedFile = (event: ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = event.target.files![0];
-        setFile(selectedFile);
-        console.log('Selected file:', selectedFile);
+        const selectedFile = event.target.files![0]
+        setFile(selectedFile)
+        if (!ImgeUploadValidation(selectedFile)) {
+            setFile(null)
+            setError('Invalid file type or size. Please upload a JPEG or JPG image with size up to 10 MB.')
+        } else {
+            setError('')
+            console.log('Selected file:', selectedFile)
+        }
     }
 
     return (

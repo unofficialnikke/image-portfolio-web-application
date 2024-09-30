@@ -65,6 +65,7 @@ export const addNewImage = async (req: Request, res: Response) => {
     const file = req.file
     const imageName = randomImageName()
     const fileBuffer = await sharp(req.file?.buffer)
+        .rotate()
         .resize({})
         .toBuffer()
     await uploadFile(fileBuffer, imageName, file!.mimetype)
