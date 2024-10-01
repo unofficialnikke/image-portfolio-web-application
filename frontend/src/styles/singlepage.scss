@@ -204,7 +204,7 @@
             flex-direction: row;
             justify-content: center;
             background-color: colors.$formColor;
-            border-radius: 2ch;
+            border-radius: 1ch;
             gap: 25px;
             padding: 20px;
             margin-top: 10px;
@@ -231,7 +231,7 @@
             flex-direction: column;
             flex: 4;
             background-color: colors.$innerFormColor;
-            border-radius: 2ch;
+            border-radius: 1ch;
             padding: 25px;
 
             hr {
@@ -280,6 +280,14 @@
                     display: flex;
                     flex-direction: column;
                     gap: 15px;
+
+                    a {
+                        color: colors.$brightColor;
+                    }
+
+                    a:hover {
+                        color: colors.$aHoverWhite;
+                    }
                 }
             }
         }
@@ -288,7 +296,7 @@
             flex-direction: column;
             flex: 6;
             background-color: colors.$innerFormColor;
-            border-radius: 2ch;
+            border-radius: 1ch;
             padding: 25px;
             min-width: 65%;
 

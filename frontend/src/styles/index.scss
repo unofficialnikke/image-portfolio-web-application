@@ -12,13 +12,14 @@
         font-size: 1em;
         font-weight: 500;
         font-family: inherit;
-        background-color: colors.$btnColor;
+        padding: 8px 12px;
+        background-color: colors.$aColor;
         cursor: pointer;
         border-color: colors.$aColor;
     }
 
     button:hover {
-        background-color: colors.$aColor;
+        background-color: colors.$btnColor;
     }
 
 
