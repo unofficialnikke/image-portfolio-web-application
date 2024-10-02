@@ -150,7 +150,7 @@
 
             .image-container {
                 min-height: 35rem;
-                min-width: 35rem;
+                width: 35rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -162,11 +162,14 @@
                 p {
                     font-size: 14px;
                     color: rgb(186, 49, 49);
+                    overflow: hidden;
                 }
 
                 img {
-                    height: 300px;
+                    max-height: 300px;
                     border: 2px solid rgb(223, 223, 223);
+                    max-width: 100%;
+                    object-fit: contain;
                 }
 
                 .grey-box {
@@ -233,18 +236,6 @@
                 }
             }
 
-            .intro-dialog {
-                width: 550px;
-                height: 550px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 40px;
-                gap: 30px;
-
-            }
-
             .close-button {
                 display: flex;
                 justify-content: flex-start;
@@ -275,7 +266,35 @@
 
     @media screen and (max-width: 640px) {}
 
-    @media screen and (max-width: 480px) {}
+    @media screen and (max-width: 480px) {
+        .backshadow {
+            button {
+                padding: 8px 10px;
+            }
+
+            .custom-modal {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .image-container {
+                width: 90%;
+                max-width: 100%;
+                padding: 20px;
+
+                img {
+                    max-height: 200px;
+                }
+
+                .button-group {
+                    button {
+                        padding: 8px 10px;
+                    }
+                }
+            }
+        }
+
+    }
 
     @media screen and (max-width: 384px) {}
 }
