@@ -28,7 +28,7 @@
         justify-content: center;
         align-items: center;
         gap: 20px;
-        padding: 25px;
+        padding: 25px 0px;
         width: 85%;
 
         .error {
@@ -347,11 +347,7 @@
                     font-size: 1.7rem;
                 }
 
-                .image-container {
-                    img {
-                        max-height: 250px;
-                    }
-                }
+
             }
 
         }
@@ -369,13 +365,7 @@
                     transform: translateY(-200%);
                 }
 
-                .image-container {
-                    gap: 20px;
 
-                    img {
-                        max-height: 210px;
-                    }
-                }
             }
 
             .leftcontent {
@@ -412,13 +402,7 @@
                     transform: translateY(-200%);
                 }
 
-                .image-container {
-                    gap: 18px;
 
-                    img {
-                        max-height: 185px;
-                    }
-                }
             }
         }
     }
@@ -451,13 +435,6 @@
                     transform: translateY(-160%);
                 }
 
-                .image-container {
-                    gap: 15px;
-
-                    img {
-                        max-height: 148px;
-                    }
-                }
             }
 
             .leftcontent {

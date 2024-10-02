@@ -10,7 +10,7 @@ const Home = () => {
             {
                 users ? (
                     <div className="profiles">
-                        <button>Filter</button>
+                        <button className='filterbutton'>Filter</button>
                         {users.map((user) => {
                             const userCategories = user.categories.filter(category => category.user_id === user.id)
                             const userImages = user.images.filter(i => i.user_id === user.id)
