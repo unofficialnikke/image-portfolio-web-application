@@ -5,8 +5,7 @@ This image portfolio app is a platform for every photographer who are willing to
 This platform is for both photographers and potential customers seekins a photographer. 
 
 
-
-Database of the application:
+Database of the application: <br/>
 ![portfolio_database](https://github.com/user-attachments/assets/0049a657-caa1-445b-8a74-0f1f24e95e14)
 
 
