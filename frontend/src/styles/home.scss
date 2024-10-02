@@ -176,12 +176,7 @@
                 padding: 4px;
             }
 
-            button {
-                align-self: center;
-            }
-
             hr {
-                width: 97%;
                 margin-bottom: 5px;
                 border-top: 1px solid colors.$aColor;
             }
@@ -191,7 +186,6 @@
             }
 
             .header {
-                align-items: center;
 
                 h2 {
                     font-size: 18px;
@@ -203,7 +197,6 @@
             }
 
             .category {
-                justify-content: center;
                 margin-top: 3px;
 
                 p {
@@ -215,7 +208,7 @@
                 gap: 7px;
 
                 img {
-                    height: 120px;
+                    height: 200px;
                 }
             }
         }
@@ -223,6 +216,7 @@
 
     @media screen and (max-width: 480px) {
         .profiles {
+            gap: 10px;
 
             button {
                 padding: 3px;
@@ -250,10 +244,9 @@
             }
 
             .image {
-                flex-direction: column;
 
                 img {
-                    height: 180px;
+                    height: 140px;
                 }
             }
         }
