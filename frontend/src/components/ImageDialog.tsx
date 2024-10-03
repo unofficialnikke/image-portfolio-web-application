@@ -32,7 +32,6 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImagePro
             if (!result.success) {
                 setError(result.data as string)
             } else {
-                console.log('Image uploaded successfully:', result)
                 await fetchUserData(Number(userId))
                 setFile(null)
             }
@@ -49,7 +48,6 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImagePro
             setError('Invalid file type or size. Please upload a JPEG or JPG image with size up to 15 MB.')
         } else {
             setError('')
-            console.log('Selected file:', selectedFile)
         }
     }
 

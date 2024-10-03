@@ -31,7 +31,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
 
 
     useEffect(() => {
-        if (socialMedias) {
+        if (socialMedias && isOpen) {
             setSocialMediaInputs({
                 user_id: socialMedias.user_id,
                 instagram_url: socialMedias.instagram_url,
@@ -39,7 +39,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                 portfolio_url: socialMedias.portfolio_url
             })
         }
-    }, [socialMedias, user])
+    }, [socialMedias, isOpen])
 
     const handleSocialMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSocialMediaInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -48,7 +48,6 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
 
     const handleAddSocialMedia = async (e: React.FormEvent, inputs: NewSocialMedia, id: number | null) => {
         e.preventDefault()
-        console.log(socialMediaInputs)
         if (id) {
             try {
                 const result = await addSocialMedia(inputs, id)

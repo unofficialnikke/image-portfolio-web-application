@@ -32,7 +32,6 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
                 setUserFetch(false)
             }
         }
-        console.log('users fetched')
         fetchUsers()
     }, [userFetch, setUserFetch])
 

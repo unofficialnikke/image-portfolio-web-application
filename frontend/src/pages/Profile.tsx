@@ -33,7 +33,6 @@ const Profile = () => {
 
     useEffect(() => {
         fetchUserData(Number(userId))
-        console.log('fetch')
     }, [user?.introduction_text, userId])
 
     const handleUpdateUser = async (introText: Partial<User> | null, id: number) => {
