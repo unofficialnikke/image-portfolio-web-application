@@ -1,4 +1,4 @@
-import { AddUserCategory } from "../type";
+import { AddUserCategory, DeletedCategory } from "../type";
 
 export const getCategories = async () => {
     try {
@@ -16,6 +16,23 @@ export const getCategories = async () => {
     }
 }
 
+export const getCategoryById = async (id: number) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}categories/${id}`)
+        const data = await response.json()
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        return data
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            console.error(`Error getting users: ${err.message}`)
+        }
+        return null
+    }
+}
+
+
 export const deleteUserCategory = async (id: number) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}user-categories/${id}`, {
@@ -24,7 +41,7 @@ export const deleteUserCategory = async (id: number) => {
                 'Content-Type': 'application/json',
             },
         })
-        const data: string = await response.json()
+        const data: DeletedCategory = await response.json()
         return {
             success: response.ok,
             data: data

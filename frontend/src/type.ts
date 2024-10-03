@@ -63,3 +63,15 @@ export type User = {
     social_medias: SocialMedia
     categories: UserCategory[]
 }
+
+
+export type DeletedCategory = {
+    id: number
+    category_id: number
+    user_id: number
+}
+
+export type Result = {
+    success: boolean
+    data: DeletedCategory | string
+}

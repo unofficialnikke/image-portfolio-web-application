@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { NewSocialMedia, SocialMedia, User } from '../type';
+import { Category, DeletedCategory, NewSocialMedia, SocialMedia, User } from '../type';
 import { CategoryContext } from '../context/categoryContext';
-import { addNewUserCategory, deleteUserCategory } from '../requests/Category';
+import { addNewUserCategory, deleteUserCategory, getCategoryById } from '../requests/Category';
 import { UserContext } from '../context/userContext';
 import { addSocialMedia } from '../requests/SocialMedia';
 
@@ -27,6 +27,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
     const [deleteCategoryId, setDeleteCategoryId] = useState('')
     const [newCategoryId, setNewCategoryId] = useState('')
     const [error, setError] = useState<string | null>(null)
+    const [message, setMessage] = useState<string | null>(null)
     const { setUserFetch } = useContext(UserContext)
 
 
@@ -66,18 +67,22 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
 
     const deleteCategory = async (id: number) => {
         if (!id) {
+            setMessage(null)
             setError('Please select a category first!')
         } else {
             try {
                 const result = await deleteUserCategory(id)
                 if (!result.success) {
-                    setError(result.data)
-                    console.log(result.data)
+                    setError(result.data.toString())
                 } else {
-                    console.log(result.data)
-                    setError(null)
-                    setDeleteCategoryId('')
-                    fetchUserData(Number(userId))
+                    if (typeof result.data !== 'string') {
+                        const { category_id } = result.data as DeletedCategory
+                        const deletedCategory: Category = await (getCategoryById(category_id))
+                        setMessage(`Deleted category: ${deletedCategory.name}`)
+                        setError(null)
+                        setDeleteCategoryId('')
+                        fetchUserData(Number(userId))
+                    }
                 }
             } catch (err) {
                 console.error('Error deleting category: ', err);
@@ -87,6 +92,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
 
     const addCategory = async (id: number, userId: number) => {
         if (!id) {
+            setMessage(null)
             setError('Please select a category first!')
         } else {
             const inputs = ({
@@ -97,9 +103,12 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                 const result = await addNewUserCategory(inputs)
                 console.log(newCategoryId)
                 if (!result.success) {
+                    setMessage(null)
                     setError(result.data)
                     console.log(result.data)
                 } else {
+                    const addedCategory: Category = await getCategoryById(id)
+                    setMessage(`Added new category: ${addedCategory.name}`)
                     console.log(result.data)
                     setError(null)
                     setNewCategoryId('')
@@ -125,8 +134,9 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                         <div className='custom-modal'>
                             <div className='user-dialog'>
                                 <form>
-                                    <h2>User info edit</h2>
-                                    <h4>Delete and add categories</h4>
+                                    <h2>User information</h2>
+                                    <h2>Delete and  categories</h2>
+                                    {message && <p className='message'>{message}</p>}
                                     {error && <p>{error}</p>}
                                     <div className='category-container'>
                                         <div className='column'>

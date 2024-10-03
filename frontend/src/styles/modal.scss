@@ -51,7 +51,13 @@
 
                 p {
                     font-size: 14px;
+                    font-weight: 600;
                     color: rgb(186, 49, 49);
+                }
+
+                .message {
+                    font-weight: 600;
+                    color: colors.$aHoverWhite;
                 }
 
                 .category-container {
