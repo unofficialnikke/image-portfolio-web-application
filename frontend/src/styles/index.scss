@@ -5,6 +5,7 @@
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background-color: colors.$bgColor;
+    color: colors.$aHoverWhite;
 
     button {
         border-radius: 10px;
@@ -23,6 +24,13 @@
         background-color: colors.$btnColor;
     }
 
+    input {
+        color: colors.$aHoverWhite;
+    }
+
+    select {
+        color: colors.$aHoverWhite;
+    }
 
     textarea {
         font-family: Verdana, Geneva, Tahoma, sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;

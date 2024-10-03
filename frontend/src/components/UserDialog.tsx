@@ -73,6 +73,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
             try {
                 const result = await deleteUserCategory(id)
                 if (!result.success) {
+                    setMessage(null)
                     setError(result.data.toString())
                 } else {
                     if (typeof result.data !== 'string') {
