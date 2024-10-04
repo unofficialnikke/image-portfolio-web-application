@@ -4,6 +4,7 @@ import { CategoryUpdate, Category, NewCategory } from "../types"
 export const findAllCategories = async () => {
     return await db
         .selectFrom('category')
+        .orderBy('category.name')
         .selectAll()
         .execute()
 }
