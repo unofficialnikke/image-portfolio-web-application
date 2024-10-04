@@ -23,6 +23,7 @@ export const findUserCategoryByUserId = async (userId: number) => {
             'user_category.user_id as user_id',
             'category.name as name'
         ])
+        .orderBy('name')
         .execute()
 }
 
