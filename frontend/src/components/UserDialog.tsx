@@ -136,12 +136,12 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                             <div className='user-dialog'>
                                 <form>
                                     <h2>User information</h2>
-                                    <h2>Delete and  categories</h2>
+                                    <h2>Delete & add categories</h2>
                                     {message && <p className='message'>{message}</p>}
                                     {error && <p>{error}</p>}
                                     <div className='category-container'>
                                         <div className='column'>
-                                            <h3>Your categories</h3>
+                                            <h3>Your current categories</h3>
                                             <div className='custom-select'>
                                                 <select value={deleteCategoryId} onChange={(e) => setDeleteCategoryId(e.target.value)} aria-placeholder='Select category'>
                                                     <option>Select category</option>
