@@ -141,13 +141,20 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                     {error && <p>{error}</p>}
                                     <div className='category-container'>
                                         <div className='column'>
-                                            <h3>Your current categories</h3>
+                                            <h3>Current categories</h3>
                                             <div className='custom-select'>
                                                 <select value={deleteCategoryId} onChange={(e) => setDeleteCategoryId(e.target.value)} aria-placeholder='Select category'>
-                                                    <option>Select category</option>
-                                                    {user?.categories.map((category) => (
-                                                        <option value={category.id} key={category.id}>{category.name}</option>
-                                                    ))}
+                                                    {user?.categories && user.categories.length > 0 ? (
+                                                        <>
+                                                            <option>Select category</option>
+                                                            {user?.categories.map((category) => (
+                                                                <option value={category.id} key={category.id}>{category.name}</option>
+                                                            ))}
+                                                        </>
+                                                    ) : (
+                                                        <option>No Categories</option>
+                                                    )}
+
                                                 </select>
                                                 <a onClick={() => deleteCategory(Number(deleteCategoryId))}>Delete category</a>
                                             </div>
@@ -156,10 +163,16 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                             <h3>Available categories</h3>
                                             <div className='custom-select'>
                                                 <select value={newCategoryId} onChange={(e) => setNewCategoryId(e.target.value)} aria-placeholder='Select category'>
-                                                    <option>Select category</option>
-                                                    {categories?.map((category) => (
-                                                        <option value={category.id} key={category.id}>{category.name}</option>
-                                                    ))}
+                                                    {categories && categories.length > 0 ? (
+                                                        <>
+                                                            <option>Select category</option>
+                                                            {categories?.map((category) => (
+                                                                <option value={category.id} key={category.id}>{category.name}</option>
+                                                            ))}
+                                                        </>
+                                                    ) : (
+                                                        <option>No Categories</option>
+                                                    )}
                                                 </select>
                                                 <button type='button' onClick={() => addCategory(Number(newCategoryId), Number(userId))}>+ Add category</button>
                                             </div>

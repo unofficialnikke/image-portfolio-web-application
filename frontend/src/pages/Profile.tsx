@@ -102,7 +102,7 @@ const Profile = () => {
                                         </div>
                                     ) : (
                                         <div className="contact">
-                                            <h3>Contact:</h3>
+                                            <h3>Contact</h3>
                                             <p>{user?.email}</p>
                                             <p>{user?.phone}</p>
                                         </div>
