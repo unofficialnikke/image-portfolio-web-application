@@ -11,7 +11,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
         })
     }
     try {
-        const decoded = jwt.verify(token, 'jwtPrivateKey')
+        const decoded = jwt.verify(token, process.env.JWT_SECRET as string)
         req.user = decoded as User
     } catch (err) {
         return res.status(401).send({
