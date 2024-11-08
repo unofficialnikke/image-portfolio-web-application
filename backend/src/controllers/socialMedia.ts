@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { createSocialMedia, findAllSocialMedias, findBySocialMediaId, findSocialMediaByUserId, deleteSocial, updateSocialMedia } from "../repositories/socialMediaRepository"
 import { findUserById } from "../repositories/userRepository"
-import { SocialMediaUpdate } from "../types/types"
+import { SocialMediaUpdate } from "../types"
 
 export const getSocialMedias = async (req: Request, res: Response) => {
     try {

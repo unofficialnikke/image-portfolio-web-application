@@ -4,7 +4,7 @@ import { findUserById } from "../repositories/userRepository"
 import crypto from 'crypto'
 import sharp from "sharp"
 import { uploadFile, getObjectSignedUrl, deleteFile } from "../config/s3"
-import { ImageUpdate } from "../types/types"
+import { ImageUpdate } from "../types"
 
 const randomImageName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
 

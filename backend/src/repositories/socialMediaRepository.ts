@@ -1,5 +1,5 @@
 import { db } from "../config/db"
-import { SocialMediaUpdate, NewSocialMedia } from "../types/types"
+import { SocialMediaUpdate, NewSocialMedia } from "../types"
 
 export const findAllSocialMedias = async () => {
     return await db

@@ -1,5 +1,5 @@
 import { db } from "../config/db"
-import { NewCategory } from "../types/types"
+import { NewCategory } from "../types"
 
 export const findAllCategories = async () => {
     return await db

@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { deleteUser, findAllUSers, findUserById, updateUser } from "../repositories/userRepository"
-import { UserUpdate } from "../types/types"
+import { UserUpdate } from "../types"
 
 export const getUsers = async (req: Request, res: Response) => {
     try {

@@ -1,6 +1,6 @@
 import { db } from "../config/db"
 import { getObjectSignedUrl } from "../config/s3"
-import { UserUpdate, NewUser } from "../types/types"
+import { UserUpdate, NewUser } from "../types"
 import { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/postgres'
 
 export const findAllUSers = async () => {

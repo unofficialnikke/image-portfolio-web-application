@@ -1,5 +1,5 @@
 import { db } from "../config/db";
-import { ImageUpdate, NewImage } from "../types/types";
+import { ImageUpdate, NewImage } from "../types";
 
 export const findAllImages = async () => {
     return await db
