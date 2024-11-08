@@ -7,7 +7,7 @@ type ImageProps = {
     setImageDialog: React.Dispatch<React.SetStateAction<boolean>>;
     isOpen: boolean
     fetchUserData: (userId: number) => Promise<void>
-    userId: string
+    userId: number
 };
 
 const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImageProps) => {
@@ -28,7 +28,7 @@ const ImageDialog = ({ isOpen, setImageDialog, fetchUserData, userId }: ImagePro
             return console.log('No File selected')
         }
         try {
-            const result = await uploadImage(file, userId)
+            const result = await uploadImage(file, userId.toString())
             if (!result.success) {
                 setError(result.data as string)
             } else {

@@ -23,6 +23,7 @@ export interface UserTable {
     city: string
     phone: string | null
     introduction_text: string | null
+    is_admin: boolean
 }
 
 export type Users = Selectable<UserTable>

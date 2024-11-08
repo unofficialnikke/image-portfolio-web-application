@@ -162,7 +162,7 @@ const Profile = () => {
                     </div>
                     <UserDialog isOpen={userDialog} setUserDialog={setUserDialog} user={user || null} setUser={setUser}
                         socialMedias={socialMedias || null} fetchUserData={fetchUserData} userId={userId} />
-                    <ImageDialog isOpen={imageDialog} setImageDialog={setImageDialog} fetchUserData={fetchUserData} userId={currentUser?.id.toString() || ''}
+                    <ImageDialog isOpen={imageDialog} setImageDialog={setImageDialog} fetchUserData={fetchUserData} userId={currentUser?.id || 0}
                     />
                 </div>
             ) : (

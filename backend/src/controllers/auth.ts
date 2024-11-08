@@ -6,7 +6,7 @@ import { createSocialMedia } from "../repositories/socialMediaRepository"
 
 export const register = async (req: Request, res: Response) => {
     try {
-        const { firstname, lastname, email, city, phone, introduction_text } = req.body
+        const { firstname, lastname, email, city, phone, introduction_text, is_admin } = req.body
         const existingUser = await findByUserEmail(email)
         if (existingUser) {
             return res.status(409).json('User already exists!')
@@ -24,7 +24,8 @@ export const register = async (req: Request, res: Response) => {
             password: hash,
             city,
             phone: phone || null,
-            introduction_text
+            introduction_text,
+            is_admin: is_admin === true
         }
         const insertedUser = await createUser(newUser)
         const newSocialMedia = {
@@ -54,12 +55,13 @@ export const login = async (req: Request, res: Response) => {
             return res.status(400).json('Wrong email or password!')
         }
 
-        const token = jwt.sign({ id: user.id }, 'jwtkey')
-        const { password: _, ...other } = user
-
+        const token = jwt.sign({ id: user.id, is_admin: user.is_admin }, 'jwtPrivateKey')
         res.cookie('access_token', token, {
             httpOnly: true
-        }).status(200).json(other)
+        }).status(200).send({
+            id: user.id,
+            token: token
+        })
     } catch (err) {
         console.error('Error during login:', err)
         return res.status(500).json('An error occurred')

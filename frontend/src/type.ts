@@ -59,6 +59,7 @@ export type User = {
     phone: string | null
     city: string
     introduction_text: string | null
+    is_admin: boolean
     images: Image[]
     social_medias: SocialMedia
     categories: UserCategory[]

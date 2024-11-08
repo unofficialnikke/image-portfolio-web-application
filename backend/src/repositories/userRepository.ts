@@ -1,6 +1,6 @@
 import { db } from "../config/db"
 import { getObjectSignedUrl } from "../config/s3"
-import { UserUpdate, Users, NewUser } from "../types"
+import { UserUpdate, NewUser } from "../types/types"
 import { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/postgres'
 
 export const findAllUSers = async () => {
@@ -13,7 +13,8 @@ export const findAllUSers = async () => {
             'email',
             'city',
             'phone',
-            'introduction_text'
+            'introduction_text',
+            'is_admin'
         ])
         .select((eb) => [
             jsonArrayFrom(
@@ -75,7 +76,8 @@ export const findUserById = async (userId: number) => {
             'email',
             'city',
             'phone',
-            'introduction_text'
+            'introduction_text',
+            'is_admin'
         ])
         .select((eb) => [
             jsonArrayFrom(
