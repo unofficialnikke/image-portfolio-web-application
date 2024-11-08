@@ -1,6 +1,5 @@
 import { Response, Request, NextFunction } from 'express'
-import jwt from 'jsonwebtoken'
-import { User } from '../types/express'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.header('x-auth-token')
@@ -12,7 +11,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET as string)
-        req.user = decoded as User
+        req.user = decoded as JwtPayload
     } catch (err) {
         return res.status(401).send({
             success: false,
