@@ -56,12 +56,10 @@ export const login = async (req: Request, res: Response) => {
         }
 
         const token = jwt.sign({ id: user.id, is_admin: user.is_admin }, process.env.JWT_SECRET as string)
+        const { password: _, ...userData } = user
         res.cookie('access_token', token, {
             httpOnly: true
-        }).status(200).send({
-            id: user.id,
-            token: token
-        })
+        }).status(200).json({ token, ...userData })
     } catch (err) {
         console.error('Error during login:', err)
         return res.status(500).json('An error occurred')
