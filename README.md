@@ -21,11 +21,11 @@ This platform is for both photographers and potential customers seekins a photog
 • CRUD operations for user profiles, categories, social media and images
 
 ## Used technologies
-- Frontend: React
-- Styling: Sass (for styling the frontend)
-- Backend: Node.js, Express
-- Database: PostgreSQL
-- File Storage: AWS S3 for images
+- **Frontend:** React
+- **Styling:** Sass (for styling the frontend)
+- **Backend:** Node.js, Express
+- **Database:** PostgreSQL
+- **File Storage:** AWS S3 for images
 
 ## Database of the application: <br/>
 
