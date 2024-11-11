@@ -1,12 +1,12 @@
-## Image Portfolio Platform
+## Image Portfolio Platform :camera:
 This Image portfolio web-application called Lokki portfolio is a full stack web-application where user can showcase their photographs. This is a project part of my thesis topic. 
 
 The Lokki portfolio is a platform for every photographer who are willing to showcase their photographs. Users can expand their network by finding new interesting Photography accounts to follow in Instagram or find new contact. 
 This platform is for both photographers and potential customers seekins a photographer. 
 
-![sovellus_etusivu](https://github.com/user-attachments/assets/4f259be4-75ff-420a-91ab-95bc709a4e70)
+![sovellus_etusivu2](https://github.com/user-attachments/assets/c76cc072-284a-43d7-8596-9f7ea2d38df6)
 
-## Features
+## Features :mag:
 
 ### User Authentication
 • Register and login with email and password.
@@ -22,7 +22,9 @@ This platform is for both photographers and potential customers seekins a photog
 ### CRUD operations
 • CRUD operations for user profiles, categories, social media and images
 
-## Used technologies
+![sovellus_profiili](https://github.com/user-attachments/assets/dd73273d-da62-4e84-94f3-6e215a7a44ff)
+
+## Used technologies :hammer:
 • **Frontend:** React  
 • **Styling:** Sass (for styling the frontend)  
 • **Backend:** Node.js, Express  
@@ -30,7 +32,7 @@ This platform is for both photographers and potential customers seekins a photog
 • **Database:** PostgreSQL  
 • **File Storage:** AWS S3 for images
 
-## Database of the application: <br/>
+## Database of the application: :wrench:
 
 ![portfolioalusta_tietokanta](https://github.com/user-attachments/assets/28e3872e-24c0-4498-939c-8e0d783bd607)
 
