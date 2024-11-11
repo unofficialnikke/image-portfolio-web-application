@@ -6,6 +6,7 @@ This platform is for both photographers and potential customers seekins a photog
 
 
 ## Database of the application: <br/>
-![portfolio_database](https://github.com/user-attachments/assets/0049a657-caa1-445b-8a74-0f1f24e95e14)
+
+![portfolioalusta_tietokanta](https://github.com/user-attachments/assets/28e3872e-24c0-4498-939c-8e0d783bd607)
 
 
