@@ -33,8 +33,9 @@ https://github.com/user-attachments/assets/06b819c6-5999-421c-b773-421c3b21bf51
 - **Cloud Platform:** AWS (Application is hosted and running on AWS)
 - **File Storage:** AWS S3 for images
 
-## Database: :wrench:
+## Database :wrench:
 
-![portfolioalusta_tietokanta](https://github.com/user-attachments/assets/28e3872e-24c0-4498-939c-8e0d783bd607)
+![portfolioalusta_tietokanta](https://github.com/user-attachments/assets/f04d5bea-b350-4a03-be1c-a4053e43f195)
+
 
 
