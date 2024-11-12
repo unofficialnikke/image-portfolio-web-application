@@ -33,7 +33,7 @@ This platform is for both photographers and potential customers seekins a photog
 - **Cloud Platform:** AWS (Application is hosted and running on AWS)
 - **File Storage:** AWS S3 for images
 
-## Database of the application: :wrench:
+## Database: :wrench:
 
 ![portfolioalusta_tietokanta](https://github.com/user-attachments/assets/28e3872e-24c0-4498-939c-8e0d783bd607)
 
