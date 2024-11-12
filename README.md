@@ -22,7 +22,7 @@ This platform is for both photographers and potential customers seekins a photog
 ### CRUD operations
 - CRUD (create, read, update, delete) operations for user profiles, categories, social media and images
 
-![sovellus_profiili](https://github.com/user-attachments/assets/dd73273d-da62-4e84-94f3-6e215a7a44ff)
+https://github.com/user-attachments/assets/06b819c6-5999-421c-b773-421c3b21bf51
 
 ## Used technologies :hammer:
 - **Frontend:** React  
