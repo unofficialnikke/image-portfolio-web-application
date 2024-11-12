@@ -24,7 +24,7 @@ This platform is for both photographers and potential customers seekins a photog
 
 https://github.com/user-attachments/assets/06b819c6-5999-421c-b773-421c3b21bf51
 
-## Used technologies :hammer:
+## Technologies :hammer:
 - **Frontend:** React  
 - **Styling:** Sass (for styling the frontend)  
 - **Backend:** Node.js, Express  
