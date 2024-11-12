@@ -29,7 +29,8 @@ This platform is for both photographers and potential customers seekins a photog
 - **Styling:** Sass (for styling the frontend)  
 - **Backend:** Node.js, Express  
 - **Authentication:** JSON Web Tokens (JWT)  
-- **Database:** PostgreSQL  
+- **Database:** PostgreSQL
+- **Cloud Platform:** AWS (Application is hosted and running on AWS)
 - **File Storage:** AWS S3 for images
 
 ## Database of the application: :wrench:
