@@ -63,6 +63,7 @@ export type User = {
     images: Image[]
     social_medias: SocialMedia
     categories: UserCategory[]
+    expiration: number
 }
 
 

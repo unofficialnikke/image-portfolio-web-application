@@ -52,6 +52,11 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
 
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(currentUser))
+        if (currentUser) {
+            if (currentUser?.expiration <= Date.now()) {
+                logout()
+            }
+        }
     }, [currentUser])
 
     return (
