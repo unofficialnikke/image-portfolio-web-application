@@ -14,7 +14,7 @@ const app: Express = express()
 const port = 5000
 
 const corsOptions = {
-    origin: ['https://main.d3lbpwh76dvehb.amplifyapp.com/', 'http://localhost:5173'],
+    origin: process.env.API_URL,
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
