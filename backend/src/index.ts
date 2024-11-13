@@ -16,7 +16,7 @@ const port = 5000
 const corsOptions = {
     origin: process.env.API_URL,
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Set-Cookie'],
     credentials: true,
 };
 
