@@ -64,6 +64,7 @@ export type User = {
     social_medias: SocialMedia
     categories: UserCategory[]
     expiration: number
+    token: string
 }
 
 

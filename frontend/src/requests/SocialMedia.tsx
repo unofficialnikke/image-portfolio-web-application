@@ -1,10 +1,12 @@
 import { NewSocialMedia } from '../type'
 
 export const addSocialMedia = async (inputs: NewSocialMedia, id: number) => {
+    const token = localStorage.getItem('access_token')
     const requestConfig: RequestInit = {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `${token}`
         },
         body: JSON.stringify(inputs),
         credentials: 'include'

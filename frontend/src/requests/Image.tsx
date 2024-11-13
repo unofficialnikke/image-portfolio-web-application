@@ -1,6 +1,7 @@
 import { Image } from "../type"
 
 export const uploadImage = async (file: File, userId: string) => {
+    const token = localStorage.getItem('access_token')
     const formData = new FormData()
     if (file) {
         formData.append('image', file)
@@ -9,6 +10,9 @@ export const uploadImage = async (file: File, userId: string) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}images`, {
             method: 'POST',
+            headers: {
+                Authorization: `${token}`
+            },
             body: formData,
             credentials: 'include'
         })
@@ -26,11 +30,13 @@ export const uploadImage = async (file: File, userId: string) => {
 }
 
 export const deleteImage = async (id: number) => {
+    const token = localStorage.getItem('access_token')
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}images/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `${token}`
             },
             credentials: 'include'
         })
@@ -48,10 +54,12 @@ export const deleteImage = async (id: number) => {
 }
 
 export const updateImage = async (id: number, updateData: Partial<Image>) => {
+    const token = localStorage.getItem('access_token')
     const requestConfig: RequestInit = {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `${token}`
         },
         body: JSON.stringify(updateData),
         credentials: 'include'

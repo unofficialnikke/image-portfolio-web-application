@@ -36,10 +36,13 @@ export const getuserById = async (id: number) => {
 }
 
 export const updateUser = async (id: number, updateData: Partial<User>) => {
+    const token = localStorage.getItem('access_token')
     const requestConfig: RequestInit = {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `${token}`
+
         },
         body: JSON.stringify(updateData),
         credentials: 'include'

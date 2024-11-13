@@ -34,11 +34,13 @@ export const getCategoryById = async (id: number) => {
 
 
 export const deleteUserCategory = async (id: number) => {
+    const token = localStorage.getItem('access_token')
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}user-categories/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `${token}`
             },
             credentials: 'include'
         })
@@ -54,10 +56,12 @@ export const deleteUserCategory = async (id: number) => {
 }
 
 export const addNewUserCategory = async (inputs: AddUserCategory) => {
+    const token = localStorage.getItem('access_token')
     const requestConfig: RequestInit = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `${token}`
         },
         body: JSON.stringify(inputs),
         credentials: 'include'

@@ -62,7 +62,7 @@ export const login = async (req: Request, res: Response) => {
             secure: true,
             sameSite: 'none',
             maxAge: tokenExpiration,
-        }).status(200).json({ ...userData, expiration: Date.now() + tokenExpiration })
+        }).status(200).json({ ...userData, token, expiration: Date.now() + tokenExpiration })
     } catch (err) {
         console.error('Error during login:', err)
         return res.status(500).json('An error occurred')
