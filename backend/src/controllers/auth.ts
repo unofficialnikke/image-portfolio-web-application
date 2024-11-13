@@ -60,7 +60,7 @@ export const login = async (req: Request, res: Response) => {
         res.cookie('accessToken', token, {
             httpOnly: true,
             secure: false,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: tokenExpiration,
         }).status(200).json({ ...userData, expiration: Date.now() + tokenExpiration })
     } catch (err) {
