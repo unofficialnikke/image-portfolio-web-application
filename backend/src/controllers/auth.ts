@@ -59,9 +59,9 @@ export const login = async (req: Request, res: Response) => {
         const { password: _, ...userData } = user
         res.cookie('access_token', token, {
             httpOnly: true,
+            secure: true,
             maxAge: 2400 * 60 * 60 * 1000,
-            sameSite: 'strict'
-        }).status(200).json(userData)
+        }).status(200).json({ ...userData, token })
     } catch (err) {
         console.error('Error during login:', err)
         return res.status(500).json('An error occurred')
