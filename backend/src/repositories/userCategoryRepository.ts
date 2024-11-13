@@ -44,6 +44,13 @@ export const createUserCategory = async (userCategory: NewUserCategory) => {
         .executeTakeFirstOrThrow()
 }
 
+export const findOneUserCategory = async (id: number) => {
+    return await db
+        .selectFrom('user_category')
+        .selectAll()
+        .where('id', '=', id)
+        .executeTakeFirst()
+}
 export const deleteUserCategory = async (id: number) => {
     return await db
         .deleteFrom('user_category')

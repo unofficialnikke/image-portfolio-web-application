@@ -6,7 +6,8 @@ export const addSocialMedia = async (inputs: NewSocialMedia, id: number) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(inputs)
+        body: JSON.stringify(inputs),
+        credentials: 'include'
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}social-medias/${id}`, requestConfig)

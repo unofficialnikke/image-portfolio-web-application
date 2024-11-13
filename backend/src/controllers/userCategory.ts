@@ -2,7 +2,8 @@ import { Request, Response } from "express"
 import {
     findUserCategoryByUserId, createUserCategory,
     findUserCategoryByIds, deleteUserCategory, findAllUserCategories,
-    countUserCategories
+    countUserCategories,
+    findOneUserCategory
 } from "../repositories/userCategoryRepository"
 import { findUserById } from "../repositories/userRepository"
 import { findCategoryById } from "../repositories/categoryRepository"
@@ -40,6 +41,9 @@ export const getUserCategoryByUserId = async (req: Request, res: Response) => {
 export const addNewUserCategory = async (req: Request, res: Response) => {
     try {
         const { category_id, user_id } = req.body
+        if (req.user?.id !== user_id && !req.user?.is_admin) {
+            return res.status(403).json('Access denied');
+        }
         if (isNaN(category_id)) {
             return res.status(400).json('Invalid user category ID');
         }
@@ -73,8 +77,16 @@ export const addNewUserCategory = async (req: Request, res: Response) => {
 
 export const deleteSelectedUserCategory = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    const userId = req.user?.id
+    const category = await findOneUserCategory(id)
     if (isNaN(id)) {
         return res.status(400).json('Invalid user category ID');
+    }
+    if (!category) {
+        return res.status(404).json('Category not found');
+    }
+    if (category.user_id !== userId && !req.user?.is_admin) {
+        return res.status(403).json('Access denied');
     }
     try {
         const deletedUserCategory = await deleteUserCategory(id)

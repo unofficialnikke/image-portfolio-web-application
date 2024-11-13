@@ -41,7 +41,8 @@ export const updateUser = async (id: number, updateData: Partial<User>) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updateData)
+        body: JSON.stringify(updateData),
+        credentials: 'include'
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}users/${id}`, requestConfig)

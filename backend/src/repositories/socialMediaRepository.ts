@@ -36,7 +36,7 @@ export const updateSocialMedia = async (id: number, updateWith: SocialMediaUpdat
     return db
         .updateTable('social_media')
         .set(updateWith)
-        .where('id', '=', id)
+        .where('user_id', '=', id)
         .returningAll()
         .executeTakeFirstOrThrow()
 }

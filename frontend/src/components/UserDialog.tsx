@@ -3,6 +3,7 @@ import { Category, DeletedCategory, NewSocialMedia, SocialMedia, User } from '..
 import { CategoryContext } from '../context/categoryContext';
 import { addNewUserCategory, deleteUserCategory, getCategoryById } from '../requests/Category';
 import { UserContext } from '../context/userContext';
+import { AuthContext } from '../context/authContext'
 import { addSocialMedia } from '../requests/SocialMedia';
 
 type FilterProps = {
@@ -22,7 +23,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
         linkedin_url: '',
         portfolio_url: ''
     })
-
+    const { currentUser } = useContext(AuthContext)
     const { categories } = useContext(CategoryContext)
     const [deleteCategoryId, setDeleteCategoryId] = useState('')
     const [newCategoryId, setNewCategoryId] = useState('')
@@ -44,7 +45,6 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
 
     const handleSocialMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSocialMediaInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
-        console.log(socialMediaInputs)
     }
 
     const handleAddSocialMedia = async (e: React.FormEvent, inputs: NewSocialMedia, id: number | null) => {
@@ -55,7 +55,6 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                 if (!result.success) {
                     console.log(result.data)
                 } else {
-                    console.log(result.data)
                     fetchUserData(Number(userId))
                     onClose()
                 }
@@ -102,7 +101,6 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
             })
             try {
                 const result = await addNewUserCategory(inputs)
-                console.log(newCategoryId)
                 if (!result.success) {
                     setMessage(null)
                     setError(result.data)
@@ -110,7 +108,6 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                 } else {
                     const addedCategory: Category = await getCategoryById(id)
                     setMessage(`Added new category: ${addedCategory.name}`)
-                    console.log(result.data)
                     setError(null)
                     setNewCategoryId('')
                     fetchUserData(userId)
@@ -179,7 +176,7 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                         </div>
                                     </div>
                                 </form>
-                                <form onSubmit={(e) => handleAddSocialMedia(e, socialMediaInputs, socialMedias?.id || null)}>
+                                <form onSubmit={(e) => handleAddSocialMedia(e, socialMediaInputs, currentUser?.id || null)}>
                                     <h3>Instagram URL:</h3>
                                     <input value={socialMediaInputs.instagram_url} name='instagram_url' onChange={handleSocialMediaChange}></input>
                                     <h3>LinkedIn URL:</h3>

@@ -25,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
             city,
             phone: phone || null,
             introduction_text,
-            is_admin: is_admin === true
+            is_admin: false
         }
         const insertedUser = await createUser(newUser)
         const newSocialMedia = {
@@ -55,11 +55,14 @@ export const login = async (req: Request, res: Response) => {
             return res.status(400).json('Wrong email or password!')
         }
 
-        const token = jwt.sign({ id: user.id, is_admin: user.is_admin }, process.env.JWT_SECRET as string)
+        const token = jwt.sign({ id: user.id, is_admin: user.is_admin }, process.env.JWT_SECRET as string, { expiresIn: 2400 * 60 * 60 * 1000 })
         const { password: _, ...userData } = user
         res.cookie('access_token', token, {
-            httpOnly: true
-        }).status(200).json({ token, ...userData })
+            httpOnly: true,
+            secure: true,
+            maxAge: 2400 * 60 * 60 * 1000,
+            sameSite: 'strict'
+        }).status(200).json(userData)
     } catch (err) {
         console.error('Error during login:', err)
         return res.status(500).json('An error occurred')

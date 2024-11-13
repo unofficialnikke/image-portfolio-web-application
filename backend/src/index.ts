@@ -14,8 +14,9 @@ const app: Express = express()
 const port = 5000
 
 const corsOptions = {
-    origin:
-        process.env.API_URL,
+    origin: ['https://main.d3lbpwh76dvehb.amplifyapp.com/', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 };
 
@@ -24,12 +25,12 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use('/api/auth', authroute)
 app.use('/api/users', userroute)
 app.use('/api/categories', categoryroute)
 app.use('/api/user-categories', userCategoryroute)
 app.use('/api/images', imageroute)
 app.use('/api/social-medias', socialmedia)
-app.use('/api/auth', authroute)
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)

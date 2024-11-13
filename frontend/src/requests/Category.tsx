@@ -40,6 +40,7 @@ export const deleteUserCategory = async (id: number) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include'
         })
         const data: DeletedCategory = await response.json()
         return {
@@ -58,7 +59,8 @@ export const addNewUserCategory = async (inputs: AddUserCategory) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(inputs)
+        body: JSON.stringify(inputs),
+        credentials: 'include'
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}user-categories`, requestConfig)

@@ -82,7 +82,7 @@ export const updateSelectedSocialMedia = async (req: Request, res: Response) => 
     }
     const updateData: SocialMediaUpdate = req.body
     try {
-        const existingSocialMedia = await findBySocialMediaId(id)
+        const existingSocialMedia = await findSocialMediaByUserId(id)
         if (!existingSocialMedia) {
             return res.status(404).json('Social Media does not exist');
         }

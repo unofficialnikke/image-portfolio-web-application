@@ -62,15 +62,20 @@ export const getImageById = async (req: Request, res: Response) => {
 }
 
 export const addNewImage = async (req: Request, res: Response) => {
-    const file = req.file
-    const imageName = randomImageName()
-    const fileBuffer = await sharp(req.file?.buffer)
-        .rotate()
-        .resize({})
-        .toBuffer()
-    await uploadFile(fileBuffer, imageName, file!.mimetype)
+
     try {
+        const file = req.file
+        const imageName = randomImageName()
+        const fileBuffer = await sharp(req.file?.buffer)
+            .rotate()
+            .resize({})
+            .toBuffer()
+        await uploadFile(fileBuffer, imageName, file!.mimetype)
+
         const { user_id, upload_date, is_favorite } = req.body
+        if (req.user?.id !== parseInt(user_id) && !req.user?.is_admin) {
+            return res.status(403).json('Access denied');
+        }
         const user = await findUserById(user_id)
         const imageCount = await countUserImages(user_id)
         if (!user) {
@@ -95,6 +100,11 @@ export const addNewImage = async (req: Request, res: Response) => {
 
 export const updateSelectedImage = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    const userId = req.user?.id
+    const images = await findByImageId(id)
+    if (images?.user_id !== userId && !req.user?.is_admin) {
+        return res.status(403).json('Access denied');
+    }
     if (isNaN(id)) {
         return res.status(400).json('Invalid image ID');
     }
@@ -120,8 +130,13 @@ export const updateSelectedImage = async (req: Request, res: Response) => {
 
 export const deleteSelectedImage = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id, 10)
+    const userId = req.user?.id
+    const images = await findByImageId(id)
     if (isNaN(id)) {
         return res.status(400).json('Invalid image ID');
+    }
+    if (images?.user_id !== userId && !req.user?.is_admin) {
+        return res.status(403).json('Access denied');
     }
     try {
         const deletedImage = await deleteImage(id)

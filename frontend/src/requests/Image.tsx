@@ -9,7 +9,8 @@ export const uploadImage = async (file: File, userId: string) => {
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}images`, {
             method: 'POST',
-            body: formData
+            body: formData,
+            credentials: 'include'
         })
         const data: string = await response.json()
         return {
@@ -31,6 +32,7 @@ export const deleteImage = async (id: number) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include'
         })
         const data: string = await response.json()
         if (response.ok) {
@@ -51,7 +53,8 @@ export const updateImage = async (id: number, updateData: Partial<Image>) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updateData)
+        body: JSON.stringify(updateData),
+        credentials: 'include'
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}images/${id}`, requestConfig)

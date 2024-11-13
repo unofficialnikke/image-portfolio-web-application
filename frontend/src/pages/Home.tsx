@@ -4,14 +4,14 @@ import { UserContext } from '../context/userContext'
 
 const Home = () => {
     const { users } = useContext(UserContext);
-
+    const filteredUsers = users?.filter(user => user.firstname !== 'admin')
     return (
         <div className='home'>
             {
-                users ? (
+                filteredUsers ? (
                     <div className="profiles">
                         <button className='filterbutton'>Filter</button>
-                        {users.map((user) => {
+                        {filteredUsers.map((user) => {
                             const userCategories = user.categories.filter(category => category.user_id === user.id)
                             const userImages = user.images.filter(i => i.user_id === user.id)
                             return (
