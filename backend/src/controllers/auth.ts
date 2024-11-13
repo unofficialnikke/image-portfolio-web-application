@@ -57,9 +57,10 @@ export const login = async (req: Request, res: Response) => {
 
         const token = jwt.sign({ id: user.id, is_admin: user.is_admin }, process.env.JWT_SECRET as string, { expiresIn: 2400 * 60 * 60 * 1000 })
         const { password: _, ...userData } = user
-        res.cookie('access_token', token, {
+        res.cookie('accessToken', token, {
             httpOnly: true,
             secure: true,
+            sameSite: 'none',
             maxAge: 2400 * 60 * 60 * 1000,
         }).status(200).json({ ...userData, token })
     } catch (err) {
@@ -69,7 +70,7 @@ export const login = async (req: Request, res: Response) => {
 }
 
 export const logout = (req: Request, res: Response) => {
-    res.clearCookie('access_token', {
+    res.clearCookie('accessToken', {
         sameSite: 'none',
         secure: true
     }).status(200).json('User has been logged out!')
