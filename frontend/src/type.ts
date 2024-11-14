@@ -64,9 +64,12 @@ export type User = {
     social_medias: SocialMedia
     categories: UserCategory[]
     expiration: number
-    token: string
 }
 
+export type LoginResponse = {
+    token: string
+    expiration: number
+}
 
 export type DeletedCategory = {
     id: number

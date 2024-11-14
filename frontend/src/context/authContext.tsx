@@ -1,11 +1,12 @@
 import { ReactNode, useState, createContext, useEffect } from 'react'
 import { loginUser, logoutUser } from '../requests/Auth'
-import { LoginInputs, User } from '../type'
+import { LoginInputs, LoginResponse, User } from '../type'
+import { jwtDecode } from "jwt-decode"
 
 type AuthContextProps = {
     currentUser: User | null
     setCurrentUser: (user: User | null) => void
-    login: (inputs: LoginInputs) => Promise<{ success: boolean; data: User | string }>
+    login: (inputs: LoginInputs) => Promise<{ success: boolean; data: LoginResponse | string }>
     logout: () => Promise<{ success: boolean; data: User | string }>
 }
 
@@ -32,16 +33,16 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
     }
     const storageUser = JSONParse(localStorage.getItem('user'))
     const storedToken = localStorage.getItem('access_token')
-    const [currentUser, setCurrentUser] = useState<User | null>(
-        storageUser && storedToken
-            ? { ...storageUser, token: storedToken }
-            : null
-    )
+    const [currentToken, setCurrentToken] = useState<string | null>(storedToken)
+    const [currentUser, setCurrentUser] = useState<User | null>(storageUser)
 
     const login = async (inputs: LoginInputs) => {
         const result = await loginUser(inputs)
         if (result.success) {
-            setCurrentUser(result.data as User)
+            const data = result.data as LoginResponse
+            const decoded = jwtDecode(data.token)
+            setCurrentUser(decoded as User)
+            setCurrentToken(data.token as string)
         }
         return result
     }
@@ -56,15 +57,14 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
     }
 
     useEffect(() => {
-        if (currentUser) {
-            const { token, ...userData } = currentUser
-            localStorage.setItem('user', JSON.stringify(userData))
-            localStorage.setItem('access_token', token)
+        if (currentUser && currentToken) {
+            localStorage.setItem('user', JSON.stringify(currentUser))
+            localStorage.setItem('access_token', currentToken)
             if (currentUser?.expiration <= Date.now()) {
                 logout()
             }
         }
-    }, [currentUser])
+    }, [currentUser, currentToken])
 
     return (
         <AuthContext.Provider value={{ currentUser, setCurrentUser, login, logout }}>

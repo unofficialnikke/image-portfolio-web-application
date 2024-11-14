@@ -1,4 +1,4 @@
-import { User, LoginInputs, RegisterInputs } from '../type'
+import { LoginInputs, RegisterInputs, LoginResponse } from '../type'
 
 export const addNewUser = async (inputs: RegisterInputs) => {
     if (!inputs.phone) {
@@ -36,7 +36,7 @@ export const loginUser = async (inputs: LoginInputs) => {
     }
     try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}auth/login`, requestConfig)
-        const responseData: string | User = await response.json()
+        const responseData: string | LoginResponse = await response.json()
         return {
             success: response.ok,
             data: responseData

@@ -54,15 +54,15 @@ export const login = async (req: Request, res: Response) => {
         if (!isPasswordCorrect) {
             return res.status(400).json('Wrong email or password!')
         }
-        const tokenExpiration = 7 * 24 * 60 * 60 * 1000
-        const token = jwt.sign({ id: user.id, is_admin: user.is_admin }, process.env.JWT_SECRET as string, { expiresIn: tokenExpiration / 1000 })
         const { password: _, ...userData } = user
+        const tokenExpiration = 7 * 24 * 60 * 60 * 1000
+        const token = jwt.sign({ ...userData }, process.env.JWT_SECRET as string, { expiresIn: tokenExpiration / 1000 })
         res.cookie('accessToken', token, {
             httpOnly: true,
             secure: true,
             sameSite: 'none',
             maxAge: tokenExpiration,
-        }).status(200).json({ ...userData, token, expiration: Date.now() + tokenExpiration })
+        }).status(200).json({ token, expiration: Date.now() + tokenExpiration })
     } catch (err) {
         console.error('Error during login:', err)
         return res.status(500).json('An error occurred')
