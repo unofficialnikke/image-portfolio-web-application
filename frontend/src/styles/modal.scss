@@ -258,6 +258,84 @@
                 }
             }
 
+            .filter-dialog {
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+                border-radius: 10px;
+                width: 60vw;
+                height: auto;
+                max-width: 250px;
+                min-height: 250px;
+                max-height: 90vh;
+                align-items: center;
+                justify-content: center;
+                overflow: auto;
+
+                .category-container {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 50px;
+
+                    .custom-select {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                        align-items: center;
+
+                        a {
+                            font-size: 14px;
+                            text-decoration: underline;
+                            font-weight: 600;
+                            color: colors.$brightColor;
+                        }
+
+                        a:hover {
+                            color: rgba(255, 255, 255, 0.87);
+                            cursor: pointer;
+                        }
+
+                        button {
+                            font-size: 14px;
+                            padding: 4px;
+                            align-self: center;
+                        }
+
+                        button:hover {
+                            color: rgba(255, 255, 255, 0.87);
+                        }
+
+                        select {
+                            padding: 8px 16px;
+                            font-size: 15px;
+                            border-radius: 4px;
+                            border: 1px solid #636363;
+                            background-color: colors.$inputColor;
+                            cursor: pointer;
+                            outline: none;
+
+                            &:hover {
+                                border-color: colors.$aHover
+                            }
+                        }
+
+
+                        h4 {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 15px;
+                    gap: 20px;
+                    align-items: center;
+                    text-align: center;
+                }
+            }
         }
 
     }

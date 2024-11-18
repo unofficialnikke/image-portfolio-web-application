@@ -7,6 +7,7 @@
     justify-content: center;
     background-color: colors.$deepBlack;
     min-height: 100vh;
+    padding: 25px 0px;
 
     p,
     h2,
@@ -28,7 +29,6 @@
         justify-content: center;
         align-items: center;
         gap: 20px;
-        padding: 25px 0px;
         width: 85%;
 
         .error {
