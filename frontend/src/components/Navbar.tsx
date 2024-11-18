@@ -1,11 +1,20 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
 
 const Navbar = () => {
     const { currentUser, logout } = useContext(AuthContext)
+    const [sticky, setSticky] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setSticky(window.scrollY > 0)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
     return (
-        <div className='navbar'>
+        <div className={`navbar ${sticky ? 'sticky' : ''}`}>
             <div className="container">
                 <div className="links">
                     <Link to='/'><h1>Home</h1></Link>
