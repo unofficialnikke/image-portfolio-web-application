@@ -46,7 +46,7 @@ const Home = () => {
                             })
                         ) : (
                             <form>
-                                <h3>No profiles for selected category</h3>
+                                <h3>No profiles found with category: {category}</h3>
                             </form>
                         )}
                     </div>
