@@ -25,12 +25,12 @@ This platform is for both photographers and potential customers seekins a photog
 https://github.com/user-attachments/assets/cdead6c0-b93c-4fb3-9323-b8c13f48fe79
 
 ## Technologies :hammer:
-- **Frontend:** React  
-- **Styling:** Sass (for styling the frontend)  
-- **Backend:** Node.js, Express  
+- **Frontend:** React with TypeScript
+- **Styling:** SCSS
+- **Backend:** Node, Express with TypeScript
 - **Authentication:** JSON Web Tokens (JWT)  
 - **Database:** PostgreSQL
-- **Cloud Platform:** AWS (Application is hosted and running on AWS)
+- **Cloud Platform:** AWS
 - **File Storage:** AWS S3 for images
 
 ## Database :wrench:
