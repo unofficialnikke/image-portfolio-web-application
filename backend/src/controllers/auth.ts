@@ -25,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
             city,
             phone: phone || null,
             introduction_text,
-            is_admin: is_admin === true
+            is_admin: false
         }
         const insertedUser = await createUser(newUser)
         const newSocialMedia = {
