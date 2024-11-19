@@ -8,10 +8,6 @@ This platform is for both photographers and potential customers seekins a photog
 
 ## Features :mag:
 
-### User Authentication
-- Register and login with email and password.
-- JWT tokens for session management.
-- Role-based access control (Admin vs. User).
 ### Image Upload
 - Upload images with restrictions on the number of images per user (max 10 images).
 - Images are processed using sharp for resizing and rotation before being uploaded to AWS S3.
@@ -19,6 +15,10 @@ This platform is for both photographers and potential customers seekins a photog
 ### Profile Management
 - Users can update their profile information, including profile text, categories and social media links.
 - Users can assign up to 5 categories to their profiles.
+### User Authentication
+- Register and login with email and password.
+- JWT tokens for session management.
+- Role-based access control (Admin vs. User).
 ### CRUD operations
 - CRUD (create, read, update, delete) operations for user profiles, categories, social media and images
 
