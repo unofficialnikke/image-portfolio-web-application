@@ -16,7 +16,7 @@ const allowedOrigins = process.env.API_URL
 const allowedOriginsArray = allowedOrigins?.split(",").map(item => item.trim())
 
 const corsOptions = {
-    origin: process.env.API_URL,
+    origin: allowedOriginsArray,
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Set-Cookie'],
     credentials: true,
