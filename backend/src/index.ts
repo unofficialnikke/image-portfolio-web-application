@@ -12,6 +12,8 @@ import cookieParser from 'cookie-parser'
 
 const app: Express = express()
 const port = 5000
+const allowedOrigins = process.env.API_URL
+const allowedOriginsArray = allowedOrigins?.split(",").map(item => item.trim())
 
 const corsOptions = {
     origin: process.env.API_URL,
