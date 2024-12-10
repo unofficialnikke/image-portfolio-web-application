@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
-
+import { useTheme } from '../context/themeContext'
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 const Navbar = () => {
     const { currentUser, logout } = useContext(AuthContext)
+    const { theme, toggleTheme } = useTheme();
     const [sticky, setSticky] = useState(false)
 
     useEffect(() => {
@@ -26,6 +28,15 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className='userprofile'>
+                    <div>
+                        <button className='theme-button ' onClick={toggleTheme}>
+                            {theme === 'dark' ? (
+                                <BsFillMoonFill />
+                            ) : (
+                                <BsFillSunFill />
+                            )}
+                        </button>
+                    </div>
                     <div className="authbutton">
                         {
                             currentUser ? (
@@ -33,10 +44,10 @@ const Navbar = () => {
                             ) : (
                                 <div>
                                     <button>
-                                        <Link to='/login'>Login</Link>
+                                        <Link className='auth-link' to='/login'>Login</Link>
                                     </button>
                                     <button>
-                                        <Link to='/register'>Register</Link>
+                                        <Link className='auth-link' to='/register'>Register</Link>
                                     </button>
                                 </div>
                             )
@@ -47,7 +58,7 @@ const Navbar = () => {
                         currentUser ? (
                             <div className="profile">
                                 <Link to={`/profile/${currentUser.id}`}>
-                                    <img src='/doge.jpg'
+                                    <img src='/profile.jpg'
                                     />
                                 </Link>
                                 <span>{currentUser.firstname}</span>
