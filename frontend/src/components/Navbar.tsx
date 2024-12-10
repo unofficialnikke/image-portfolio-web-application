@@ -1,11 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
-import { useTheme } from '../context/themeContext'
-import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
+
 const Navbar = () => {
     const { currentUser, logout } = useContext(AuthContext)
-    const { theme, toggleTheme } = useTheme();
     const [sticky, setSticky] = useState(false)
 
     useEffect(() => {
@@ -28,15 +26,6 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className='userprofile'>
-                    <div>
-                        <button className='theme-button ' onClick={toggleTheme}>
-                            {theme === 'dark' ? (
-                                <BsFillMoonFill />
-                            ) : (
-                                <BsFillSunFill />
-                            )}
-                        </button>
-                    </div>
                     <div className="authbutton">
                         {
                             currentUser ? (
@@ -44,10 +33,10 @@ const Navbar = () => {
                             ) : (
                                 <div>
                                     <button>
-                                        <Link className='auth-link' to='/login'>Login</Link>
+                                        <Link to='/login'>Login</Link>
                                     </button>
                                     <button>
-                                        <Link className='auth-link' to='/register'>Register</Link>
+                                        <Link to='/register'>Register</Link>
                                     </button>
                                 </div>
                             )
