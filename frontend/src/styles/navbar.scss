@@ -1,7 +1,7 @@
 @use 'colors';
 
 .navbar {
-    background-color: var(--navbarColor);
+    background-color: colors.$darkGrey;
     padding: 0 100px;
 
     &.sticky {
@@ -41,14 +41,14 @@
             }
 
             h1:hover {
-                color: var(--aHover);
+                color: colors.$aHover;
                 cursor: pointer;
-                color: var(--pTextColor);
+                color: colors.$aHoverWhite;
             }
 
             a {
                 text-decoration: none;
-                color: var(--h1Color);
+                color: colors.$aColor;
             }
         }
 
@@ -76,13 +76,13 @@
                 width: 55px;
                 border-radius: 50%;
                 border: 3px solid transparent;
-                border-color: var(--profileBorderColor);
+                border-color: colors.$aHover;
                 cursor: pointer;
                 object-fit: cover;
                 object-position: center;
 
                 &:hover {
-                    border-color: var(--profileBorderColorHover);
+                    border-color: colors.$aHoverWhite;
                 }
             }
 
@@ -90,7 +90,6 @@
             span {
                 cursor: pointer;
                 font-size: 14px;
-                color: var(--spanColor)
             }
 
             a {
@@ -115,23 +114,7 @@
                 align-items: center;
 
                 button:hover {
-                    background-color: var(--authBtnHover);
-                }
-
-                .auth-link {
-                    color: var(--authLinkHoverTextColor);
-                }
-            }
-
-            .theme-button {
-                padding: 5px;
-                width: 50px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                &:hover {
-                    background-color: var(--authBtnHover);
+                    background-color: colors.$aColor;
                 }
             }
         }
