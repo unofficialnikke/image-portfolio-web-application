@@ -24,7 +24,7 @@
         position: fixed;
 
         .custom-modal {
-            background-color: colors.$formColor;
+            background-color: var(--ModalColor);
             display: flex;
             align-items: center;
             border-radius: 2ch;
@@ -81,11 +81,11 @@
                                 font-size: 14px;
                                 text-decoration: underline;
                                 font-weight: 600;
-                                color: colors.$brightColor;
+                                color: var(--brightColor);
                             }
 
                             a:hover {
-                                color: rgba(255, 255, 255, 0.87);
+                                color: var(--ModalAColor);
                                 cursor: pointer;
                             }
 
@@ -96,7 +96,7 @@
                             }
 
                             button:hover {
-                                color: rgba(255, 255, 255, 0.87);
+                                color: var(--ModalAColor);
                             }
 
                             select {
@@ -104,12 +104,12 @@
                                 font-size: 15px;
                                 border-radius: 4px;
                                 border: 1px solid #636363;
-                                background-color: colors.$inputColor;
+                                background-color: var(--inputColor);
                                 cursor: pointer;
                                 outline: none;
 
                                 &:hover {
-                                    border-color: colors.$aHover
+                                    border-color: var(--aHover)
                                 }
                             }
                         }
@@ -134,7 +134,7 @@
                     padding: 12px;
                     border: none;
                     border-radius: 1ch;
-                    background-color: colors.$inputColor;
+                    background-color: var(--inputColor);
                     width: 100%;
                     max-width: 28rem;
                 }
@@ -150,7 +150,7 @@
                 padding: 10px 12px;
 
                 &:hover {
-                    color: rgba(255, 255, 255, 0.87);
+                    color: var(--ModalAColor);
                 }
             }
 
@@ -173,7 +173,7 @@
 
                 img {
                     max-height: 300px;
-                    border: 2px solid rgb(223, 223, 223);
+                    border: 2px solid var(--imgContainerBorder);
                     max-width: 100%;
                     object-fit: contain;
                 }
@@ -181,22 +181,22 @@
                 .grey-box {
                     min-height: 300px;
                     min-width: 450px;
-                    background-color: rgb(48, 48, 48);
+                    background-color: var(--imgContainerColor);
                     display: flex;
                     flex-direction: column;
                     text-align: center;
                     justify-content: center;
-                    border: 2px solid #424242;
+                    border: 2px solid var(--imgContainerBgColor);
 
                     label {
                         font-size: 18px;
                         text-decoration: underline;
                         font-weight: 800;
-                        color: colors.$aColor;
+                        color: var(--aColor);
                     }
 
                     label:hover {
-                        color: rgba(255, 255, 255, 0.87);
+                        color: var(--imgContainerHover);
                         cursor: pointer;
                     }
                 }
@@ -212,22 +212,22 @@
                 label {
                     text-decoration: underline;
                     font-weight: 800;
-                    color: colors.$aColor;
+                    color: var(--aColor);
                 }
 
                 label:hover {
-                    color: rgba(255, 255, 255, 0.87);
+                    color: var(--ModalAColor);
                     cursor: pointer;
                 }
 
                 a {
                     text-decoration: underline;
                     font-weight: 800;
-                    color: colors.$brightColor;
+                    color: var(--brightColor);
                 }
 
                 a:hover {
-                    color: rgba(255, 255, 255, 0.87);
+                    color: var(--ModalAColor);
                     cursor: pointer;
                 }
 
@@ -250,11 +250,13 @@
                 position: absolute;
 
                 button {
-                    background-color: colors.$btnColor;
+                    background-color: var(--backBtnColor);
+                    color: var(--pTextColor)
                 }
 
                 button:hover {
-                    background-color: colors.$aColor;
+                    background-color: var(--aColor);
+                    color: var(--btnHoverColor)
                 }
             }
 
@@ -288,7 +290,7 @@
                             font-size: 14px;
                             text-decoration: underline;
                             font-weight: 600;
-                            color: colors.$brightColor;
+                            color: var(--brightColor);
                         }
 
                         a:hover {
@@ -311,12 +313,12 @@
                             font-size: 15px;
                             border-radius: 4px;
                             border: 1px solid #636363;
-                            background-color: colors.$inputColor;
+                            background-color: var(--inputColor);
                             cursor: pointer;
                             outline: none;
 
                             &:hover {
-                                border-color: colors.$aHover
+                                border-color: var(--aHover)
                             }
                         }
 

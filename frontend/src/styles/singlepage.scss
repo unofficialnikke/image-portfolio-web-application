@@ -5,7 +5,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background-color: colors.$deepBlack;
+    background-color: var(--containerColor);
     min-height: 100vh;
     padding: 25px 0px;
 
@@ -56,10 +56,12 @@
 
             .back-button {
                 align-items: flex-start;
-                background-color: colors.$btnColor;
+                background-color: var(--btnColor);
+                color: var(--pTextColor);
 
                 &:hover {
-                    background-color: colors.$aColor;
+                    background-color: var(--btnBgColor);
+                    color: var(--btnHoverColor);
                 }
             }
         }
@@ -78,10 +80,11 @@
                 font-size: 2rem;
                 padding: 0.5rem;
                 cursor: pointer;
-                transition: background-color 100ms ease-in-out;
+                color: var(--slideBtnColor);
+                transition: var(--slideBtnHover) 100ms ease-in-out;
 
                 &:hover {
-                    background-color: rgba(1, 0, 0, 0.4);
+                    background-color: var(--slideBtnHover);
                 }
             }
 
@@ -128,24 +131,26 @@
                             z-index: 2;
                             border-radius: 8px;
                             text-decoration: none;
-                            background-color: rgba(0, 0, 0, 0.5);
+                            background-color: var(--imgBtnHover);
                         }
 
                         .favorite-button {
                             @extend .button-base;
                             left: 10px;
-
-                            color: colors.$brightColor;
+                            color: var(--brightColor);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
 
                             &:hover {
-                                background-color: colors.$brightColor;
-                                color: colors.$aHoverWhite;
+                                background-color: var(--brightColor);
+                                color: white;
                             }
                         }
 
                         .favorite_active {
-                            background-color: colors.$brightColor;
-                            color: colors.$aHoverWhite;
+                            background-color: var(--brightColor);
+                            color: var(--btnTextColor);
                         }
 
                         .delete-button {
@@ -155,7 +160,7 @@
 
                             &:hover {
                                 background-color: rgb(223, 16, 16);
-                                color: colors.$aHoverWhite;
+                                color: white;
                             }
                         }
 
@@ -174,7 +179,7 @@
                 justify-content: center;
 
                 button {
-                    background-color: colors.$deepBlack;
+                    background-color: black;
                     border: 2px solid white;
                     color: white;
                     font-size: 1rem;
@@ -196,10 +201,6 @@
                     &.active::before {
                         opacity: 1;
                     }
-
-                    &:hover {
-                        background-color: lighten(colors.$deepBlack, 10%);
-                    }
                 }
             }
         }
@@ -208,7 +209,7 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            background-color: colors.$formColor;
+            background-color: var(--formColor);
             border-radius: 1ch;
             gap: 25px;
             padding: 20px;
@@ -221,12 +222,12 @@
         a {
             font-size: 14px;
             font-weight: 600;
-            color: colors.$aHover;
+            color: var(--aHover);
             text-decoration: underline;
         }
 
         a:hover {
-            color: colors.$aHoverWhite;
+            color: var(--pTextColor);
             text-decoration: underline;
             cursor: pointer;
         }
@@ -235,7 +236,7 @@
             display: flex;
             flex-direction: column;
             flex: 4;
-            background-color: colors.$innerFormColor;
+            background-color: var(--innerFormColor);
             border-radius: 1ch;
             padding: 25px;
 
@@ -254,11 +255,11 @@
                     font-weight: 600;
                     font-size: 18px;
                     text-decoration: none;
-                    color: colors.$brightColor;
+                    color: var(--brightColor);
                 }
 
                 a:hover {
-                    color: colors.$aHoverWhite;
+                    color: var(--pTextColor);
                 }
             }
 
@@ -287,11 +288,11 @@
                     gap: 15px;
 
                     a {
-                        color: colors.$brightColor;
+                        color: var(--brightColor);
                     }
 
                     a:hover {
-                        color: colors.$aHoverWhite;
+                        color: var(--pTextColor);
                     }
                 }
             }
@@ -300,7 +301,7 @@
         .rightcontent {
             flex-direction: column;
             flex: 6;
-            background-color: colors.$innerFormColor;
+            background-color: var(--innerFormColor);
             border-radius: 1ch;
             padding: 25px;
             min-width: 65%;
@@ -319,11 +320,11 @@
                     font-weight: 600;
                     font-size: 18px;
                     text-decoration: none;
-                    color: colors.$brightColor;
+                    color: var(--brightColor);
                 }
 
                 a:hover {
-                    color: colors.$aHoverWhite;
+                    color: var(--pTextColor);
                 }
             }
 

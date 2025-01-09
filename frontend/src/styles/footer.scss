@@ -2,7 +2,7 @@
 
 .footer {
     padding: 20px;
-    background-color: colors.$darkGrey;
+    background-color: var(--navbarColor);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -10,5 +10,9 @@
 
     img {
         height: 70px;
+    }
+
+    span {
+        color: var(--spanColor);
     }
 }

@@ -23,7 +23,8 @@ const Home = () => {
                                 return (
                                     <div key={user.id}>
                                         <div className="header">
-                                            <Link className='link' to={`/profile/${user.id}`}><h2>{user.firstname} {user.lastname}</h2></Link>
+                                            <Link className='link' to={`/profile/${user.id}`}>
+                                                <h2>{user.firstname} {user.lastname}</h2></Link>
                                             <h4>{user.city}</h4>
                                         </div>
                                         <div className='category'>

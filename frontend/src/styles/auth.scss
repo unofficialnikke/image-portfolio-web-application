@@ -7,7 +7,7 @@
     flex-direction: column;
     min-height: 100vh;
     font-size: 16px;
-    background-color: colors.$deepBlack;
+    background-color: var(--containerColor);
 
     h1 {
         font-size: 26px;
@@ -28,7 +28,7 @@
             flex-direction: column;
             padding: 10px;
             justify-content: center;
-            background-color: colors.$formColor;
+            background-color: var(--formColor);
             border-radius: 2ch;
             min-width: 550px;
             min-height: 550px;
@@ -42,7 +42,7 @@
             padding: 12px;
             border: none;
             border-radius: 1ch;
-            background-color: colors.$inputColor;
+            background-color: var(--inputColor);
             width: 300px;
         }
 
@@ -55,12 +55,12 @@
         a {
             font-size: 12px;
             font-weight: 500;
-            color: colors.$aColor;
+            color: var(--aColor);
             text-decoration: inherit;
         }
 
         a:hover {
-            color: colors.$aHover;
+            color: var(--aHover);
             text-decoration: underline;
             cursor: pointer;
         }

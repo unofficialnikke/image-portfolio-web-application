@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: colors.$deepBlack;
+    background-color: var(--containerColor);
     min-height: 100vh;
     padding: 25px 0;
 
@@ -16,11 +16,11 @@
 
     a {
         text-decoration: none;
-        color: colors.$aColor;
+        color: var(--aColor);
     }
 
     a:hover {
-        color: colors.$aHoverWhite;
+        color: var(--pTextColor);
         text-decoration: underline;
         cursor: pointer;
     }
@@ -40,7 +40,7 @@
 
         hr {
             border: none;
-            border-top: 2px solid colors.$aColor;
+            border-top: 2px solid var(--lineColor);
             width: 1267px;
             display: flex;
             justify-content: center;
@@ -57,7 +57,7 @@
             min-height: 400px;
             gap: 10px;
             text-align: center;
-            background-color: colors.$formColor;
+            background-color: var(--formColor);
 
         }
 
@@ -175,7 +175,7 @@
 
             hr {
                 margin-bottom: 5px;
-                border-top: 1px solid colors.$aColor;
+                border-top: 1px solid var(--aColor);
             }
 
             button {
@@ -224,7 +224,6 @@
             }
 
             .header {
-
                 h2 {
                     font-size: 20px;
                 }
@@ -247,7 +246,6 @@
                 }
             }
         }
-
     }
 
     @media screen and (max-width: 384px) {
@@ -259,7 +257,7 @@
             hr {
                 width: 57%;
                 margin-bottom: 3px;
-                border-top: 1.3px solid colors.$aColor;
+                border-top: 1.3px solid var(--aColor);
             }
 
             .image {

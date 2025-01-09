@@ -5,7 +5,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background-color: colors.$deepBlack;
+    background-color: var(--containerColor);
     min-height: 100vh;
 
     .content {
@@ -35,9 +35,9 @@
         form {
             justify-content: center;
             flex: 10;
-            background-color: colors.$innerFormColor;
+            background-color: var(--innerFormColor);
             border-radius: 2ch;
-            border: solid 25px colors.$formColor;
+            border: solid 25px var(--formColor);
             padding: 30px;
             line-height: 1.5;
 
@@ -108,7 +108,7 @@
         .content {
 
             form {
-                border: solid 20px colors.$formColor;
+                border: solid 20px var(--formColor);
 
             }
         }
@@ -151,7 +151,7 @@
             }
 
             form {
-                border: solid 14px colors.$formColor;
+                border: solid 14px var(--formColor);
             }
         }
     }

@@ -4,6 +4,8 @@ import useCarousel from '../hooks/useCarousel'
 import { User, Image } from '../type'
 import { UserContext } from '../context/userContext'
 import { AuthContext } from '../context/authContext'
+import { BsFillTrash3Fill, BsHeartFill, BsHeart } from 'react-icons/bs'
+
 
 type SliderProps = {
     fetchUserData: (userId: number) => Promise<void>
@@ -65,10 +67,10 @@ export const ImageSlider = ({ fetchUserData, userId, user }: SliderProps) => {
                                 {currentUser?.id === Number(userId) &&
                                     <div>
                                         <a onClick={() => updateSelectedImage(image.id, image.is_favorite)}
-                                            className={`favorite-button ${image.is_favorite ? 'favorite_active' : ''}`}>
-                                            {image.is_favorite ? 'Unfavorite' : 'Favorite'}
+                                            className={`favorite-button`}>
+                                            {image.is_favorite ? <BsHeartFill style={{ fontSize: '1.4rem' }} /> : <BsHeart style={{ fontSize: '1.4rem' }} />}
                                         </a>
-                                        <a onClick={() => deleteSelectedImage(image.id)} className='delete-button'>Delete</a>
+                                        <a onClick={() => deleteSelectedImage(image.id)} className='delete-button'><BsFillTrash3Fill style={{ fontSize: '1.4rem' }} /></a>
                                     </div>}
 
                                 <img src={image.image_url} alt={`Slide ${index}`} />

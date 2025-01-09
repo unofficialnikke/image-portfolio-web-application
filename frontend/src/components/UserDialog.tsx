@@ -5,6 +5,7 @@ import { addNewUserCategory, deleteUserCategory, getCategoryById } from '../requ
 import { UserContext } from '../context/userContext';
 import { AuthContext } from '../context/authContext'
 import { addSocialMedia } from '../requests/SocialMedia';
+import { updateUser } from '../requests/User';
 
 type FilterProps = {
     setUserDialog: React.Dispatch<React.SetStateAction<boolean>>
@@ -30,21 +31,30 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
     const [error, setError] = useState<string | null>(null)
     const [message, setMessage] = useState<string | null>(null)
     const { setUserFetch } = useContext(UserContext)
-
+    const [userPhone, setUserPhone] = useState<Partial<User>>({
+        phone: ''
+    })
 
     useEffect(() => {
-        if (socialMedias && isOpen) {
+        if (socialMedias && currentUser && isOpen) {
             setSocialMediaInputs({
                 user_id: socialMedias.user_id,
                 instagram_url: socialMedias.instagram_url,
                 linkedin_url: socialMedias.linkedin_url,
                 portfolio_url: socialMedias.portfolio_url
             })
+            setUserPhone({
+                phone: currentUser?.phone
+            })
         }
-    }, [socialMedias, isOpen])
+    }, [socialMedias, currentUser, isOpen])
 
     const handleSocialMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSocialMediaInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserPhone(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
     const handleAddSocialMedia = async (e: React.FormEvent, inputs: NewSocialMedia, id: number | null) => {
@@ -118,6 +128,30 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
         }
     }
 
+    const handleUpdateUser = async (e: React.FormEvent, inputs: Partial<User>, id: number | null) => {
+        e.preventDefault()
+        if (inputs && id) {
+            try {
+                const result = await updateUser(id, inputs)
+                if (!result.success) {
+                    console.log(result.data)
+                } else {
+                    setUserFetch(true)
+                    fetchUserData(Number(userId))
+                }
+
+            } catch (err) {
+                console.error('Error updating image:', err);
+            }
+        }
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        await handleUpdateUser(e, userPhone, currentUser?.id || null)
+        await handleAddSocialMedia(e, socialMediaInputs, currentUser?.id || null)
+    }
+
     const onClose = () => {
         setUserDialog(false)
         setUserFetch(true)
@@ -176,7 +210,9 @@ const UserDialog = ({ isOpen, setUserDialog, user, socialMedias, fetchUserData, 
                                         </div>
                                     </div>
                                 </form>
-                                <form onSubmit={(e) => handleAddSocialMedia(e, socialMediaInputs, currentUser?.id || null)}>
+                                <form onSubmit={handleSubmit}>
+                                    <h3>Phone number</h3>
+                                    <input value={userPhone.phone || ''} name='phone' onChange={handlePhoneChange}></input>
                                     <h3>Instagram URL:</h3>
                                     <input value={socialMediaInputs.instagram_url} name='instagram_url' onChange={handleSocialMediaChange}></input>
                                     <h3>LinkedIn URL:</h3>

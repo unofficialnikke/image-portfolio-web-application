@@ -2,10 +2,8 @@
 
 :root {
     font-family: Verdana, Geneva, Tahoma, sans-serif, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: colors.$bgColor;
-    color: colors.$aHoverWhite;
+    background-color: var(--bgColor);
+    color: var(--pTextColor);
 
     button {
         border-radius: 10px;
@@ -14,22 +12,23 @@
         font-weight: 500;
         font-family: inherit;
         padding: 8px 12px;
-        background-color: colors.$aColor;
+        background-color: var(--btnBgColor);
         cursor: pointer;
-        border-color: colors.$aColor;
-        color: colors.$aHoverWhite;
+        border-color: var(--btnBgColor);
+        color: var(--btnTextColor);
     }
 
     button:hover {
-        background-color: colors.$btnColor;
+        background-color: var(--btnColor);
+        color: var(--btnHover);
     }
 
     input {
-        color: colors.$aHoverWhite;
+        color: var(--pTextColor);
     }
 
     select {
-        color: colors.$aHoverWhite;
+        color: var(--pTextColor);
     }
 
     textarea {
@@ -38,8 +37,8 @@
         min-height: 250px;
         padding: 10px;
         border-radius: 4px;
-        background-color: colors.$formColor;
-        color: colors.$aHoverWhite;
+        background-color: var(--formColor);
+        color: var(--pTextColor);
         resize: vertical;
         box-sizing: border-box;
         font-size: 16px;
