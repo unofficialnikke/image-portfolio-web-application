@@ -7,7 +7,8 @@ export const createUserQuery =
             password VARCHAR(100) NOT NULL,
             city VARCHAR(50) NOT NULL,
             phone VARCHAR(20),
-            introduction_text TEXT
+            introduction_text TEXT,
+            is_admin BOOLEAN
     );`
 
 export const createSocialMediaQuery =

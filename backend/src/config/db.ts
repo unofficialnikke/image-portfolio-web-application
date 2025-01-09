@@ -13,9 +13,6 @@ const pool = new Pool({
     host: process.env.API_HOST,
     port: Number(process.env.API_PORT),
     database: process.env.API_DATABASE,
-    ssl: {
-        rejectUnauthorized: false
-    }
 })
 
 export const dialect = new PostgresDialect({
