@@ -54,8 +54,8 @@ const Home = () => {
                 ) : (
                     <div className="profiles">
                         <form>
-                            <h1>Oh no!</h1>
-                            <h4>Profiles cannot be loaded...</h4>
+                            <h1>Database is currently down.</h1>
+                            <h4>I need to save money</h4>
                         </form>
                     </div>
                 )
